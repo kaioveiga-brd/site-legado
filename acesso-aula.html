@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acesso à Aula | Legado Branding</title>
+    <link rel="icon" href="https://proposta-legado.vercel.app/logo%20legado.png" type="image/png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rokkitt:wght@300;400;500;600;700;900&family=Petrona:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+        @font-face {
+            font-family: 'Bianca';
+            src: url('https://proposta-legado.vercel.app/BiancaScript.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        :root {
+            --preto: #111111;
+            --cinza-escuro: rgba(26, 26, 26, 0.65);
+            --cinza-card: #222222;
+            --cinza-borda: #2C2C2C;
+            --laranja: #E05A1C;
+            --laranja-hover: #F47340;
+            --branco: #F5F1EB;
+            --branco-suave: rgba(245,241,235,0.6);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--preto);
+            color: var(--branco);
+            font-family: 'Petrona', serif;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* Background Noise/Grid effects matching site */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.025;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        #grid-bg {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: -2;
+            background-color: var(--preto);
+            background-image: 
+                linear-gradient(to right, rgba(224, 90, 28, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(224, 90, 28, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 24px;
+        }
+
+        .capture-box {
+            background-color: var(--cinza-card);
+            border: 1px solid var(--cinza-borda);
+            border-radius: 8px;
+            padding: 48px;
+            max-width: 540px;
+            width: 100%;
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+        }
+
+        .logo-wrapper {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo-wrapper img {
+            height: 48px;
+        }
+
+        .copy-title {
+            font-family: 'Rokkitt', serif;
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .copy-title span {
+            color: var(--laranja);
+        }
+
+        .copy-subtitle {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            color: var(--branco-suave);
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13px;
+            color: var(--branco-suave);
+            margin-bottom: 8px;
+        }
+
+        .form-control {
+            width: 100%;
+            background-color: var(--preto);
+            border: 1px solid var(--cinza-borda);
+            border-radius: 4px;
+            padding: 16px;
+            color: var(--branco);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--laranja);
+            box-shadow: 0 0 0 3px rgba(224,90,28,0.15);
+        }
+
+        select.form-control {
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23F5F1EB' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            background-size: 16px;
+            padding-right: 48px;
+            color: var(--branco);
+        }
+
+        select.form-control option {
+            background-color: var(--cinza-card);
+            color: var(--branco);
+        }
+
+        select.form-control option[value=""][disabled] {
+            color: var(--branco-suave);
+        }
+
+        .btn-submit {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 18px 32px;
+            background-color: var(--laranja);
+            color: var(--preto);
+            border: 1px solid var(--laranja);
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin-top: 12px;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--laranja-hover);
+            border-color: var(--laranja-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(224, 90, 28, 0.3);
+        }
+
+        @media (max-width: 600px) {
+            .capture-box {
+                padding: 32px 24px;
+            }
+            .copy-title {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="grid-bg"></div>
+    
+    <div class="container">
+        <div class="capture-box">
+            <div class="logo-wrapper">
+                <a href="index.html">
+                    <img src="https://proposta-legado.vercel.app/logo%20legado.png" alt="Legado Branding">
+                </a>
+            </div>
+
+            <h1 class="copy-title">
+                6 decisões que fazem empresas boas pararem de perder para concorrentes mais fracos.
+            </h1>
+            <p class="copy-subtitle">
+                Acesso imediato após o cadastro.
+            </p>
+
+            <form id="acessoAulaForm">
+                <div class="form-group">
+                    <label class="form-label" for="nome">Nome completo</label>
+                    <input type="text" id="nome" name="nome" class="form-control" required placeholder="Ex: João da Silva">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="email">E-mail de trabalho</label>
+                    <input type="email" id="email" name="email" class="form-control" required placeholder="joao@suaempresa.com.br">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="whatsapp">WhatsApp</label>
+                    <input type="tel" id="whatsapp" name="whatsapp" class="form-control" required placeholder="(00) 00000-0000">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="representacao">Você representa:</label>
+                    <select id="representacao" name="representacao" class="form-control" required>
+                        <option value="" disabled selected>[ Selecione ]</option>
+                        <option value="Minha empresa / negócio próprio">Minha empresa / negócio próprio</option>
+                        <option value="Trabalho como autônomo / freelancer">Trabalho como autônomo / freelancer</option>
+                        <option value="Estou começando agora">Estou começando agora</option>
+                        <option value="Outro">Outro</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-submit">Acessar Aula Agora</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('acessoAulaForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Aqui seria a integração com Formspree, RD Station, ActiveCampaign, etc.
+            // Exemplo de como os dados estariam estruturados:
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+            console.log('Dados do lead:', data);
+            
+            // Redirecionamento para a aula
+            window.location.href = 'marca-que-vende.html';
+        });
+    </script>
+</body>
+</html>
