@@ -264,8 +264,16 @@
             // Adiciona a data e hora do cadastro
             formData.append('Data', new Date().toLocaleString('pt-BR'));
 
+            // Converte os dados para o formato que o Google Sheets entende nativamente
+            const urlEncodedData = new URLSearchParams(formData).toString();
+
             // Dispara os dados para o Google Sheets em segundo plano
-            fetch(scriptURL, { method: 'POST', body: formData, mode: 'no-cors' })
+            fetch(scriptURL, { 
+                method: 'POST', 
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: urlEncodedData, 
+                mode: 'no-cors' 
+            })
                 .then(() => {
                     // Assim que envia, manda o cara pra aula
                     window.location.href = 'marca-que-vende.html';
