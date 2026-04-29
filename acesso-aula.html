@@ -245,17 +245,36 @@
     </div>
 
     <script>
+        // Quando você criar a planilha, cole o link dela aqui dentro destas aspas simples:
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbw6Z2DEGP2LuEykO0Qf48DtRak2mtAfhddzvHdZaSTJy6ltRldmIXfwwtya6cooumkB3Q/exec'; 
+
         document.getElementById('acessoAulaForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Aqui seria a integração com Formspree, RD Station, ActiveCampaign, etc.
-            // Exemplo de como os dados estariam estruturados:
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData.entries());
-            console.log('Dados do lead:', data);
+            const form = this;
+            const btnSubmit = form.querySelector('.btn-submit');
             
-            // Redirecionamento para a aula
-            window.location.href = 'marca-que-vende.html';
+            // Muda o visual do botão para mostrar que está carregando
+            btnSubmit.innerHTML = 'Acessando...';
+            btnSubmit.style.opacity = '0.8';
+            btnSubmit.disabled = true;
+
+            const formData = new FormData(form);
+            
+            // Adiciona a data e hora do cadastro
+            formData.append('Data', new Date().toLocaleString('pt-BR'));
+
+            // Dispara os dados para o Google Sheets em segundo plano
+            fetch(scriptURL, { method: 'POST', body: formData, mode: 'no-cors' })
+                .then(() => {
+                    // Assim que envia, manda o cara pra aula
+                    window.location.href = 'marca-que-vende.html';
+                })
+                .catch(error => {
+                    console.error('Erro ao enviar:', error);
+                    // Em caso de falha de internet, deixa o cara ver a aula mesmo assim
+                    window.location.href = 'marca-que-vende.html';
+                });
         });
     </script>
 </body>
