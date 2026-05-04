@@ -713,8 +713,7 @@ document.addEventListener('DOMContentLoaded', () => {
       try {
         if(FORM_ENDPOINT_ISCA !== 'SEU_ENDPOINT_AQUI') {
           const data = Object.fromEntries(new FormData(form).entries());
-          const res = await fetch(FORM_ENDPOINT_ISCA, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data)});
-          if(!res.ok) throw new Error();
+          await fetch(FORM_ENDPOINT_ISCA, {method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain'}, body:JSON.stringify(data)});
         } else { await new Promise(r => setTimeout(r, 800)); }
         form.style.display = 'none';
         success.style.display = 'block';

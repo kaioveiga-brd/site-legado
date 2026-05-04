@@ -196,12 +196,12 @@ form.addEventListener('submit', async e => {
   try {
     const data = Object.fromEntries(new FormData(form).entries());
     if(FORM_ENDPOINT_CAPTACAO !== 'SEU_ENDPOINT_AQUI'){
-      const res = await fetch(FORM_ENDPOINT_CAPTACAO, {
+      await fetch(FORM_ENDPOINT_CAPTACAO, {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
+        mode: 'no-cors',
+        headers: {'Content-Type': 'text/plain'},
         body: JSON.stringify(data)
       });
-      if(!res.ok) throw new Error();
     } else {
       await new Promise(r => setTimeout(r, 700));
     }

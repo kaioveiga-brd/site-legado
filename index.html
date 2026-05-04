@@ -1870,17 +1870,13 @@
                     try {
                         // Se houver um endpoint configurado diferente do placeholder
                         if(FORM_ENDPOINT !== 'SEU_ENDPOINT_AQUI') {
-                            const response = await fetch(FORM_ENDPOINT, {
+                            await fetch(FORM_ENDPOINT, {
                                 method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                },
+                                mode: 'no-cors',
+                                headers: {'Content-Type': 'text/plain'},
                                 body: JSON.stringify(data)
                             });
-                            
-                            if(!response.ok) throw new Error('Erro na requisição');
                         } else {
-                            // Simula requisição se não tiver endpoint configurado
                             await new Promise(resolve => setTimeout(resolve, 1000));
                         }
 
