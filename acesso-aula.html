@@ -1,289 +1,693 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acesso à Aula | Legado Branding</title>
-    <link rel="icon" href="https://proposta-legado.vercel.app/logo%20legado.png" type="image/png">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Rokkitt:wght@300;400;500;600;700;900&family=Petrona:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>10 Caminhos para sua Marca Vender Sozinha | Legado Branding</title>
+<meta name="description" content="O guia prático para founders que entregam mais do que o mercado enxerga.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rokkitt:wght@300;400;700;900&family=Petrona:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--preto:#111111;--cinza-escuro:#1A1A1A;--cinza-card:#222222;--cinza-borda:#2C2C2C;--laranja:#E05A1C;--laranja-hover:#F47340;--branco:#F5F1EB;--branco-suave:rgba(245,241,235,0.6);--branco-fraco:rgba(245,241,235,0.3)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--preto);color:var(--branco);font-family:'Petrona',serif;line-height:1.6;overflow-x:hidden}
+h1,h2,h3,h4{font-family:'Rokkitt',serif;line-height:1.1}
+a{text-decoration:none;color:inherit}
+.tag{font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--laranja)}
+.container{max-width:860px;margin:0 auto;padding:0 24px}
+.container-wide{max-width:1100px;margin:0 auto;padding:0 24px}
+.btn{display:inline-flex;align-items:center;padding:16px 32px;font-family:'DM Sans',sans-serif;font-weight:500;font-size:15px;border-radius:4px;transition:all .3s ease;cursor:pointer;border:none}
+.btn-laranja{background:var(--laranja);color:#111}
+.btn-laranja:hover{background:var(--laranja-hover)}
+.animate{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.animate.visible{opacity:1;transform:translateY(0)}
+.d150{transition-delay:150ms}
+.d300{transition-delay:300ms}
+.d450{transition-delay:450ms}
 
-        @font-face {
-            font-family: 'Bianca';
-            src: url('https://proposta-legado.vercel.app/BiancaScript.otf') format('opentype');
-            font-weight: normal;
-            font-style: normal;
-        }
+/* PROGRESS BAR */
+#progress-bar{position:fixed;right:24px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:12px;z-index:100}
+.pb-dot{width:8px;height:8px;border-radius:50%;background:var(--cinza-borda);cursor:pointer;transition:all .3s ease;position:relative}
+.pb-dot.active{background:var(--laranja);transform:scale(1.4)}
+.pb-dot.visited{background:rgba(224,90,28,.4)}
+.pb-dot .pb-label{position:absolute;right:16px;top:50%;transform:translateY(-50%);background:var(--cinza-card);border:1px solid var(--cinza-borda);padding:4px 10px;border-radius:4px;font-family:'DM Sans',sans-serif;font-size:11px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s}
+.pb-dot:hover .pb-label{opacity:1}
 
-        :root {
-            --preto: #111111;
-            --cinza-escuro: rgba(26, 26, 26, 0.65);
-            --cinza-card: #222222;
-            --cinza-borda: #2C2C2C;
-            --laranja: #E05A1C;
-            --laranja-hover: #F47340;
-            --branco: #F5F1EB;
-            --branco-suave: rgba(245,241,235,0.6);
-        }
+/* FLOATING BTN */
+#float-btn{position:fixed;bottom:32px;right:32px;z-index:200;display:none;opacity:0;transition:opacity .4s ease}
+#float-btn.show{display:flex;opacity:1}
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+/* HERO */
+#capa{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:80px 24px;position:relative;overflow:hidden}
+.hero-tag{margin-bottom:32px}
+.hero-title{font-size:clamp(48px,8vw,80px);font-weight:900;line-height:1.0;margin-bottom:28px}
+.hero-sub{font-weight:300;font-size:18px;color:var(--branco-suave);max-width:520px;margin:0 auto 16px}
+.hero-meta{font-family:'DM Sans',sans-serif;font-size:14px;color:var(--branco-fraco);margin-bottom:40px}
+.deco{position:absolute;right:-60px;top:50%;transform:translateY(-50%);font-size:300px;opacity:.04;line-height:1;user-select:none;pointer-events:none;font-family:'Rokkitt',serif}
 
-        body {
-            background-color: var(--preto);
-            color: var(--branco);
-            font-family: 'Petrona', serif;
-            line-height: 1.6;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-        }
+/* ABOUT */
+#antes{padding:120px 0;border-top:1px solid var(--cinza-borda)}
+.about-grid{display:grid;grid-template-columns:200px 1fr;gap:60px;align-items:start}
+.about-foto{width:160px;height:160px;border-radius:50%;object-fit:cover;border:2px solid var(--cinza-borda)}
+.about-title{font-size:28px;font-weight:700;margin-bottom:24px}
+.about-text p{font-size:16px;font-weight:300;color:var(--branco-suave);margin-bottom:16px}
+.box-laranja{background:rgba(224,90,28,.08);border-left:3px solid var(--laranja);padding:20px 24px;border-radius:4px;margin-top:24px;font-style:italic;font-size:16px}
 
-        /* Background Noise/Grid effects matching site */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            pointer-events: none;
-            z-index: 9999;
-            opacity: 0.025;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-        }
+/* CAMINHOS */
+.caminho{padding:100px 0;border-top:1px solid rgba(44,44,44,.4)}
+.caminho-tag{margin-bottom:20px}
+.caminho-title{font-size:clamp(28px,4vw,44px);font-weight:700;margin-bottom:40px;color:var(--branco)}
+.box-dor{background:var(--cinza-card);border-left:3px solid var(--laranja);padding:24px 28px;border-radius:4px;margin-bottom:24px}
+.box-dor .label,.box-framework .label,.box-muda .label{font-family:'DM Sans',sans-serif;font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--laranja);margin-bottom:12px;display:block}
+.box-dor p{font-size:15px;color:var(--branco-suave);font-weight:300;line-height:1.7;font-style:italic}
+.box-framework{background:var(--cinza-escuro);border-left:3px solid var(--cinza-borda);padding:24px 28px;border-radius:4px;margin-bottom:24px}
+.box-framework pre{font-family:'DM Sans',sans-serif;font-size:13px;color:var(--branco-suave);line-height:1.8;white-space:pre-wrap;margin-top:8px}
+.box-muda{margin-bottom:24px}
+.box-muda p{font-size:15px;color:var(--branco-suave);font-weight:300}
+.cta-inline{font-family:'DM Sans',sans-serif;font-size:14px;color:var(--laranja);font-weight:500;transition:color .3s}
+.cta-inline:hover{color:var(--laranja-hover);text-decoration:underline}
+.sep{display:block;height:1px;background:var(--cinza-borda);opacity:.4;margin:0}
 
-        #grid-bg {
-            position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: -2;
-            background-color: var(--preto);
-            background-image: 
-                linear-gradient(to right, rgba(224, 90, 28, 0.05) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(224, 90, 28, 0.05) 1px, transparent 1px);
-            background-size: 40px 40px;
-        }
+/* CTA FINAL */
+#aplicar{padding:120px 0;background:var(--preto);border-top:1px solid var(--cinza-borda)}
+.aplicar-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.aplicar-title{font-size:clamp(36px,5vw,52px);font-weight:900;margin-bottom:24px}
+.aplicar-sub{font-size:17px;font-weight:300;color:var(--branco-suave);margin-bottom:40px}
+.mini-cases{display:flex;flex-direction:column;gap:12px}
+.mini-case{background:var(--cinza-escuro);border:1px solid var(--cinza-borda);padding:16px 20px;border-radius:4px}
+.mini-case strong{font-family:'Rokkitt',serif;font-size:16px;display:block;margin-bottom:4px}
+.mini-case span{font-family:'DM Sans',sans-serif;font-size:11px;color:var(--laranja);letter-spacing:.05em}
+.mini-case p{font-size:13px;color:var(--branco-suave);margin-top:4px}
+.form-box{background:var(--cinza-escuro);border:1px solid var(--cinza-borda);border-radius:8px;padding:40px}
+.form-group{margin-bottom:20px}
+.form-label{display:block;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--branco-suave);margin-bottom:6px}
+.form-control{width:100%;background:var(--preto);border:1px solid var(--cinza-borda);border-radius:4px;padding:14px 16px;color:var(--branco);font-family:'DM Sans',sans-serif;font-size:14px;transition:border-color .3s}
+.form-control:focus{outline:none;border-color:var(--laranja)}
+.btn-submit{width:100%;margin-top:8px;font-size:15px;justify-content:center}
+.form-nota{text-align:center;font-family:'DM Sans',sans-serif;font-size:11px;color:var(--branco-fraco);margin-top:12px}
+.form-success{display:none;background:rgba(224,90,28,.1);border:1px solid var(--laranja);padding:20px;border-radius:4px;text-align:center;margin-top:16px;font-family:'DM Sans',sans-serif;font-size:14px}
 
-        .container {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 24px;
-        }
+/* FOOTER */
+footer{background:#0D0D0D;padding:60px 0 40px;border-top:1px solid var(--cinza-borda);text-align:center}
+.footer-logo{font-family:'Rokkitt',serif;font-size:22px;font-weight:700;margin-bottom:8px}
+.footer-tag{font-style:italic;color:var(--branco-suave);font-size:14px;margin-bottom:24px}
+.footer-back{font-family:'DM Sans',sans-serif;font-size:14px;color:var(--laranja);transition:color .3s}
+.footer-back:hover{color:var(--laranja-hover)}
+.footer-copy{font-family:'DM Sans',sans-serif;font-size:12px;color:var(--branco-fraco);margin-top:24px}
 
-        .capture-box {
-            background-color: var(--cinza-card);
-            border: 1px solid var(--cinza-borda);
-            border-radius: 8px;
-            padding: 48px;
-            max-width: 540px;
-            width: 100%;
-            position: relative;
-            z-index: 10;
-            box-shadow: 0 24px 64px rgba(0,0,0,0.5);
-        }
-
-        .logo-wrapper {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .logo-wrapper img {
-            height: 48px;
-        }
-
-        .copy-title {
-            font-family: 'Rokkitt', serif;
-            font-size: 32px;
-            font-weight: 700;
-            line-height: 1.1;
-            margin-bottom: 16px;
-            text-align: center;
-        }
-
-        .copy-title span {
-            color: var(--laranja);
-        }
-
-        .copy-subtitle {
-            font-family: 'DM Sans', sans-serif;
-            font-size: 14px;
-            color: var(--branco-suave);
-            text-align: center;
-            margin-bottom: 32px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-label {
-            display: block;
-            font-family: 'DM Sans', sans-serif;
-            font-size: 13px;
-            color: var(--branco-suave);
-            margin-bottom: 8px;
-        }
-
-        .form-control {
-            width: 100%;
-            background-color: var(--preto);
-            border: 1px solid var(--cinza-borda);
-            border-radius: 4px;
-            padding: 16px;
-            color: var(--branco);
-            font-family: 'DM Sans', sans-serif;
-            font-size: 15px;
-            transition: all 0.3s ease;
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: var(--laranja);
-            box-shadow: 0 0 0 3px rgba(224,90,28,0.15);
-        }
-
-        select.form-control {
-            appearance: none;
-            -webkit-appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23F5F1EB' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 16px center;
-            background-size: 16px;
-            padding-right: 48px;
-            color: var(--branco);
-        }
-
-        select.form-control option {
-            background-color: var(--cinza-card);
-            color: var(--branco);
-        }
-
-        select.form-control option[value=""][disabled] {
-            color: var(--branco-suave);
-        }
-
-        .btn-submit {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            padding: 18px 32px;
-            background-color: var(--laranja);
-            color: var(--preto);
-            border: 1px solid var(--laranja);
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 600;
-            font-size: 16px;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            margin-top: 12px;
-        }
-
-        .btn-submit:hover {
-            background-color: var(--laranja-hover);
-            border-color: var(--laranja-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 12px 28px rgba(224, 90, 28, 0.3);
-        }
-
-        @media (max-width: 600px) {
-            .capture-box {
-                padding: 32px 24px;
-            }
-            .copy-title {
-                font-size: 28px;
-            }
-        }
-    </style>
+/* RESPONSIVE */
+@media(max-width:768px){
+  #progress-bar{display:none}
+  #float-btn{right:50%;transform:translateX(50%)}
+  .about-grid{grid-template-columns:1fr;text-align:center}
+  .about-foto{margin:0 auto}
+  .aplicar-grid{grid-template-columns:1fr;gap:48px}
+}
+</style>
 </head>
 <body>
-    <div id="grid-bg"></div>
-    
-    <div class="container">
-        <div class="capture-box">
-            <div class="logo-wrapper">
-                <a href="index.html">
-                    <img src="https://proposta-legado.vercel.app/logo%20legado.png" alt="Legado Branding">
-                </a>
-            </div>
 
-            <h1 class="copy-title">
-                6 decisões que fazem empresas boas pararem de perder para concorrentes mais fracos.
-            </h1>
-            <p class="copy-subtitle">
-                Acesso imediato após o cadastro.
-            </p>
+<!-- PROGRESS BAR -->
+<nav id="progress-bar">
+  <div class="pb-dot" data-target="caminho-1"><span class="pb-label">01 · Posicionamento</span></div>
+  <div class="pb-dot" data-target="caminho-2"><span class="pb-label">02 · Categoria</span></div>
+  <div class="pb-dot" data-target="caminho-3"><span class="pb-label">03 · Discurso</span></div>
+  <div class="pb-dot" data-target="caminho-4"><span class="pb-label">04 · Identidade</span></div>
+  <div class="pb-dot" data-target="caminho-5"><span class="pb-label">05 · Cliente certo</span></div>
+  <div class="pb-dot" data-target="caminho-6"><span class="pb-label">06 · Prova</span></div>
+  <div class="pb-dot" data-target="caminho-7"><span class="pb-label">07 · Plano</span></div>
+  <div class="pb-dot" data-target="caminho-8"><span class="pb-label">08 · Evento</span></div>
+  <div class="pb-dot" data-target="caminho-9"><span class="pb-label">09 · Time</span></div>
+  <div class="pb-dot" data-target="caminho-10"><span class="pb-label">10 · Indicação</span></div>
+</nav>
 
-            <form id="acessoAulaForm">
-                <div class="form-group">
-                    <label class="form-label" for="nome">Nome completo</label>
-                    <input type="text" id="nome" name="nome" class="form-control" required placeholder="Ex: João da Silva">
-                </div>
+<!-- FLOATING BTN -->
+<a href="#aplicar" id="float-btn" class="btn btn-laranja">Aplicar à minha marca →</a>
 
-                <div class="form-group">
-                    <label class="form-label" for="email">E-mail de trabalho</label>
-                    <input type="email" id="email" name="email" class="form-control" required placeholder="joao@suaempresa.com.br">
-                </div>
+<!-- SEÇÃO 1: CAPA -->
+<section id="capa">
+  <div class="deco">L</div>
+  <div class="container" style="position:relative;z-index:1">
+    <div class="tag hero-tag animate">LEGADO BRANDING · MATERIAL EXCLUSIVO E GRATUITO</div>
+    <h1 class="hero-title animate d150">10 Caminhos para<br>sua Marca Vender<br>Sozinha.</h1>
+    <p class="hero-sub animate d300">O guia prático para founders de empresa que entregam mais do que o mercado consegue enxergar — e querem mudar isso.</p>
+    <p class="hero-meta animate d450">Leitura: ~15 minutos · Aplicação imediata · 10 frameworks práticos</p>
+    <a href="#caminho-1" class="btn btn-laranja animate d450">Começar agora →</a>
+  </div>
+</section>
 
-                <div class="form-group">
-                    <label class="form-label" for="whatsapp">WhatsApp</label>
-                    <input type="tel" id="whatsapp" name="whatsapp" class="form-control" required placeholder="(00) 00000-0000">
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label" for="representacao">Você representa:</label>
-                    <select id="representacao" name="representacao" class="form-control" required>
-                        <option value="" disabled selected>[ Selecione ]</option>
-                        <option value="Minha empresa / negócio próprio">Minha empresa / negócio próprio</option>
-                        <option value="Trabalho como autônomo / freelancer">Trabalho como autônomo / freelancer</option>
-                        <option value="Estou começando agora">Estou começando agora</option>
-                        <option value="Outro">Outro</option>
-                    </select>
-                </div>
-
-                <button type="submit" class="btn-submit">Acessar Aula Agora</button>
-            </form>
+<!-- SEÇÃO 2: ANTES DE COMEÇAR -->
+<section id="antes">
+  <div class="container">
+    <div class="tag animate">QUEM ESTÁ FALANDO COM VOCÊ</div>
+    <div class="about-grid" style="margin-top:40px">
+      <div class="animate">
+        <img src="https://proposta-legado.vercel.app/foto%20kaio.png" alt="Kaio Veiga" class="about-foto">
+      </div>
+      <div>
+        <h2 class="about-title animate">Esse guia nasceu de um padrão<br>que eu vi em mais de 100 empresas.</h2>
+        <div class="about-text animate d150">
+          <p>O problema nunca era o produto.<br>Era a distância entre o que a empresa entregava e o que o mercado conseguia enxergar.</p>
+          <p>Cada um dos 10 caminhos abaixo resolve uma parte dessa distância. Você pode aplicar qualquer um hoje. Ou pode aplicar todos — e fazer a sua marca trabalhar por você enquanto você foca no negócio.</p>
         </div>
+        <div class="box-laranja animate d300">
+          "Sua empresa é boa. O mercado ainda não sabe disso.<br>Esse guia muda isso."<br>
+          <span style="font-family:'DM Sans',sans-serif;font-size:12px;opacity:.6;font-style:normal;">— Kaio Veiga, fundador da Legado Branding</span>
+        </div>
+      </div>
     </div>
+  </div>
+</section>
 
-    <script>
-        // Quando você criar a planilha, cole o link dela aqui dentro destas aspas simples:
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbw6Z2DEGP2LuEykO0Qf48DtRak2mtAfhddzvHdZaSTJy6ltRldmIXfwwtya6cooumkB3Q/exec'; 
+<!-- CAMINHO 01 -->
+<section id="caminho-1" class="caminho">
+  <div class="container">
+    <div class="tag caminho-tag animate">CAMINHO 01 DE 10</div>
+    <h2 class="caminho-title animate d150">"Defina o espaço que só você pode ocupar."</h2>
+    <div class="box-dor animate d150">
+      <span class="label">A DOR</span>
+      <p>"Você já foi em uma reunião de proposta, apresentou tudo certinho, e o cliente disse que ia pensar — e foi para o concorrente mais barato? Se você abrir o site desse concorrente agora, os valores dele são: qualidade, comprometimento e inovação. Os seus também são, né?"</p>
+    </div>
+    <div class="box-framework animate d300">
+      <span class="label">O FRAMEWORK</span>
+      <pre>Os 3 círculos do posicionamento único:
 
-        document.getElementById('acessoAulaForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const form = this;
-            const btnSubmit = form.querySelector('.btn-submit');
-            
-            // Muda o visual do botão para mostrar que está carregando
-            btnSubmit.innerHTML = 'Acessando...';
-            btnSubmit.style.opacity = '0.8';
-            btnSubmit.disabled = true;
+① VOCÊ / MARCA
+   Sua história, seu método, sua trajetória.
+   O que você viveu que ninguém mais viveu.
 
-            const formData = new FormData(form);
-            
-            // Adiciona a data e hora do cadastro
-            formData.append('Data', new Date().toLocaleString('pt-BR'));
+② MERCADO
+   O que falta, o que sobra, quem está competindo
+   e pelo que estão competindo.
 
-            // Converte os dados para o formato que o Google Sheets entende nativamente
-            const urlEncodedData = new URLSearchParams(formData).toString();
+③ SOCIEDADE
+   O que está acontecendo culturalmente agora.
+   O que o seu cliente está sentindo e desejando.
 
-            // Dispara os dados para o Google Sheets em segundo plano
-            fetch(scriptURL, { 
-                method: 'POST', 
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: urlEncodedData, 
-                mode: 'no-cors' 
-            })
-                .then(() => {
-                    // Assim que envia, manda o cara pra aula
-                    window.location.href = 'marca-que-vende.html';
-                })
-                .catch(error => {
-                    console.error('Erro ao enviar:', error);
-                    // Em caso de falha de internet, deixa o cara ver a aula mesmo assim
-                    window.location.href = 'marca-que-vende.html';
-                });
-        });
-    </script>
+→ O centro dos 3 círculos é a sua lacuna única.
+  O espaço que só você pode ocupar.</pre>
+    </div>
+    <div class="box-muda animate d300">
+      <span class="label">O QUE MUDA</span>
+      <p>"Com posicionamento claro, você para de perder para concorrentes mais baratos. O cliente entende seu diferencial antes da primeira reunião."</p>
+    </div>
+    <a href="#aplicar" class="cta-inline animate d450">Quer que a gente execute esse caminho pela sua marca? →</a>
+  </div>
+</section>
+<span class="sep"></span>
+
+<!-- CAMINHO 02 -->
+<section id="caminho-2" class="caminho">
+  <div class="container">
+    <div class="tag caminho-tag animate">CAMINHO 02 DE 10</div>
+    <h2 class="caminho-title animate d150">"Pare de competir. Comece a liderar."</h2>
+    <div class="box-dor animate d150">
+      <span class="label">A DOR</span>
+      <p>"Quando todos do seu setor se descrevem da mesma forma, o cliente não tem motivo para te escolher — a não ser pelo preço. E aí quem ganha é sempre o mais barato, não o melhor."</p>
+    </div>
+    <div class="box-framework animate d300">
+      <span class="label">O FRAMEWORK</span>
+      <pre>Como criar sua categoria própria:
+
+Passo 1: Liste como você se descreve hoje.
+         Ex: "agência de marketing"
+
+Passo 2: Liste o que você faz que ninguém mais faz.
+         Ex: "revelamos o diferencial de marcas invisíveis"
+
+Passo 3: Crie o nome da categoria que só você ocupa.
+         Ex: "estúdio de diferenciação de marca"
+
+→ Regra: se o concorrente pode usar o mesmo nome,
+  não é uma categoria sua. Reformula.</pre>
+    </div>
+    <div class="box-muda animate d300">
+      <span class="label">O QUE MUDA</span>
+      <p>"Líderes de categoria capturam 76% do valor do mercado. Você não precisa ser o maior — precisa ser o único."</p>
+    </div>
+    <a href="#aplicar" class="cta-inline animate d450">Quer que a gente execute esse caminho pela sua marca? →</a>
+  </div>
+</section>
+<span class="sep"></span>
+
+<!-- CAMINHO 03 -->
+<section id="caminho-3" class="caminho">
+  <div class="container">
+    <div class="tag caminho-tag animate">CAMINHO 03 DE 10</div>
+    <h2 class="caminho-title animate d150">"Seu diferencial existe. O problema é que só você sabe."</h2>
+    <div class="box-dor animate d150">
+      <span class="label">A DOR</span>
+      <p>"Quando alguém te pergunta o que você faz de diferente, quanto tempo você leva para responder? Se você precisou pensar — o diferencial está preso na sua cabeça. E cliente que não entende o diferencial, decide pelo preço."</p>
+    </div>
+    <div class="box-framework animate d300">
+      <span class="label">O FRAMEWORK</span>
+      <pre>A fórmula do discurso em 3 partes:
+
+① PARA QUEM
+   O cliente específico que você atende melhor.
+   Não "qualquer empresa" — o founder exato.
+
+② O QUE RESOLVE
+   A dor específica que você elimina.
+   Não "branding" — o que muda na vida dele.
+
+③ POR QUE SÓ VOCÊ
+   O diferencial que nenhum concorrente tem.
+   Uma frase. Sem usar "qualidade".
+
+→ Junte os 3 em 30 segundos.
+  Esse é seu elevator pitch.</pre>
+    </div>
+    <div class="box-muda animate d300">
+      <span class="label">O QUE MUDA</span>
+      <p>"Discurso claro reduz o ciclo de vendas. O cliente chega sabendo que quer comprar — você só confirma."</p>
+    </div>
+    <a href="#aplicar" class="cta-inline animate d450">Quer que a gente execute esse caminho pela sua marca? →</a>
+  </div>
+</section>
+<span class="sep"></span>
+
+<!-- CAMINHO 04 -->
+<section id="caminho-4" class="caminho">
+  <div class="container">
+    <div class="tag caminho-tag animate">CAMINHO 04 DE 10</div>
+    <h2 class="caminho-title animate d150">"Sua marca parece do tamanho que você é?"</h2>
+    <div class="box-dor animate d150">
+      <span class="label">A DOR</span>
+      <p>"Você manda a proposta. O cliente abre o material. Em 3 segundos ele já formou uma opinião sobre o nível do que você entrega — antes de ler uma palavra. Se a identidade visual não reflete o nível da entrega, a reunião começa perdida."</p>
+    </div>
+    <div class="box-framework animate d300">
+      <span class="label">O FRAMEWORK</span>
+      <pre>O teste do espelho — 3 perguntas:
+
+① Sua identidade visual comunica
+  o mesmo nível que sua entrega?
+  (Sim / Não / Talvez)
+
+② Se um desconhecido olhasse para seu material
+  sem saber o que você faz, ele diria
+  "parece premium" ou "parece genérico"?
+
+③ Sua identidade é consistente em todos
+  os pontos de contato — site, Instagram,
+  proposta, cartão, apresentação?
+
+→ Uma resposta negativa já justifica
+  um refresh visual alinhado ao posicionamento.</pre>
+    </div>
+    <div class="box-muda animate d300">
+      <span class="label">O QUE MUDA</span>
+      <p>"Identidade visual alinhada ao posicionamento aumenta o ticket percebido antes da proposta chegar."</p>
+    </div>
+    <a href="#aplicar" class="cta-inline animate d450">Quer que a gente execute esse caminho pela sua marca? →</a>
+  </div>
+</section>
+<span class="sep"></span>
+
+<!-- CAMINHO 05 -->
+<section id="caminho-5" class="caminho">
+  <div class="container">
+    <div class="tag caminho-tag animate">CAMINHO 05 DE 10</div>
+    <h2 class="caminho-title animate d150">"Você está atraindo quem paga bem — ou quem dá trabalho?"</h2>
+    <div class="box-dor animate d150">
+      <span class="label">A DOR</span>
+      <p>"Todo empresário tem um cliente que ele adora atender: paga bem, respeita o processo, ainda te indica. E tem o outro tipo. A diferença entre os dois quase nunca é sorte — é posicionamento. Comunicação vaga atrai prospect vago."</p>
+    </div>
+    <div class="box-framework animate d300">
+      <span class="label">O FRAMEWORK</span>
+      <pre>O filtro de ICP em 4 critérios:
+
+① Paga o ticket que você quer cobrar?
+② Valoriza o processo sem questionar cada etapa?
+③ Tem o problema que você resolve melhor?
+④ Tem potencial de indicar ou voltar?
+
+→ Descreva o cliente que responde SIM
+  para todos os 4.
+  Esse é seu ICP.
+  Seu posicionamento deve falar só com ele.</pre>
+    </div>
+    <div class="box-muda animate d300">
+      <span class="label">O QUE MUDA</span>
+      <p>"ICP claro triplica o faturamento sem triplicar o trabalho. Você para de gastar energia com quem nunca ia fechar."</p>
+    </div>
+    <a href="#aplicar" class="cta-inline animate d450">Quer que a gente execute esse caminho pela sua marca? →</a>
+  </div>
+</section>
+<span class="sep"></span>
+
+<!-- CAMINHO 06 -->
+<section id="caminho-6" class="caminho">
+  <div class="container">
+    <div class="tag caminho-tag animate">CAMINHO 06 DE 10</div>
+    <h2 class="caminho-title animate d150">"Você tem resultado. O problema é que ninguém sabe."</h2>
+    <div class="box-dor animate d150">
+      <span class="label">A DOR</span>
+      <p>"Seus clientes ficam satisfeitos. Alguns até indicam. Mas quando um prospect novo chega, ele não sente isso — porque você não transformou resultado em prova visível. Depoimento técnico convence a cabeça. Só história de transformação convence o coração — e fecha ticket alto."</p>
+    </div>
+    <div class="box-framework animate d300">
+      <span class="label">O FRAMEWORK</span>
+      <pre>Os 3 níveis de prova:
+
+① TÉCNICA (convence a cabeça)
+   Certificados, anos de mercado, metodologia,
+   processos. Ticket baixo a médio.
+
+② REPUTACIONAL (convence o ego)
+   Cases, clientes conhecidos, mídia, avaliações.
+   Ticket médio.
+
+③ EMOCIONAL (convence o coração)
+   História de transformação real.
+   Antes e depois. O que mudou na vida do cliente.
+   Ticket alto — sem resistência de preço.
+
+→ Qual nível a sua empresa está usando hoje?</pre>
+    </div>
+    <div class="box-muda animate d300">
+      <span class="label">O QUE MUDA</span>
+      <p>"Prova emocional é o único tipo que fecha cliente que não questiona preço."</p>
+    </div>
+    <a href="#aplicar" class="cta-inline animate d450">Quer que a gente execute esse caminho pela sua marca? →</a>
+  </div>
+</section>
+<span class="sep"></span>
+
+<!-- CAMINHO 07 -->
+<section id="caminho-7" class="caminho">
+  <div class="container">
+    <div class="tag caminho-tag animate">CAMINHO 07 DE 10</div>
+    <h2 class="caminho-title animate d150">"Estratégia sem data é intenção. Plano com data é execução."</h2>
+    <div class="box-dor animate d150">
+      <span class="label">A DOR</span>
+      <p>"Você sabe o que precisa fazer para a marca crescer. Só que semanas passam e as coisas ficam no mesmo lugar. Não é falta de disciplina — é falta de sistema. Intenção não tem data. Plano tem."</p>
+    </div>
+    <div class="box-framework animate d300">
+      <span class="label">O FRAMEWORK</span>
+      <pre>O ciclo de 90 dias:
+
+MÊS 1 — ATIVAÇÃO DE BASE
+Foco: colocar o posicionamento para funcionar
+nos canais que já existem.
+Projeto âncora: definir qual.
+Métrica: o que mede o sucesso desse mês.
+
+MÊS 2 — CAPTAÇÃO COM META
+Foco: gerar demanda qualificada.
+Projeto âncora: evento, lançamento ou campanha.
+Métrica: leads qualificados gerados.
+
+MÊS 3 — CONSOLIDAÇÃO
+Foco: reter, medir e preparar o próximo ciclo.
+Projeto âncora: análise + próximo planejamento.
+Métrica: receita gerada vs meta.
+
+→ Cada ciclo alimenta o próximo.
+  Crescimento vira previsível.</pre>
+    </div>
+    <div class="box-muda animate d300">
+      <span class="label">O QUE MUDA</span>
+      <p>"Com roadmap definido, você para de acordar sem saber o que fazer e começa a executar com direção."</p>
+    </div>
+    <a href="#aplicar" class="cta-inline animate d450">Quer que a gente execute esse caminho pela sua marca? →</a>
+  </div>
+</section>
+<span class="sep"></span>
+
+<!-- CAMINHO 08 -->
+<section id="caminho-8" class="caminho">
+  <div class="container">
+    <div class="tag caminho-tag animate">CAMINHO 08 DE 10</div>
+    <h2 class="caminho-title animate d150">"Um dia bem estruturado pode gerar mais do que 3 meses de conteúdo."</h2>
+    <div class="box-dor animate d150">
+      <span class="label">A DOR</span>
+      <p>"Você tem audiência — seguidores, contatos, clientes antigos. Mas não tem um momento claro onde essa audiência vira receita. Sem esse momento, você fica esperando o cliente chegar sozinho."</p>
+    </div>
+    <div class="box-framework animate d300">
+      <span class="label">O FRAMEWORK</span>
+      <pre>Os 3 elementos do evento âncora:
+
+① POSICIONAMENTO CLARO
+   O prospect sabe exatamente quem você é
+   e o que está sendo oferecido antes de chegar.
+
+② FORMATO CERTO
+   Presencial ou online — mas com estrutura
+   de conversão, não só de apresentação.
+
+③ OFERTA DE CONVERSÃO
+   Um próximo passo claro e de baixa fricção
+   ao final do evento. Não "entrar em contato" —
+   uma ação específica com condição definida.
+
+→ A Ohmori fechou 18 matrículas em 1 tarde
+  com essa estrutura.</pre>
+    </div>
+    <div class="box-muda animate d300">
+      <span class="label">O QUE MUDA</span>
+      <p>"Evento âncora comprime o ciclo de vendas. Em vez de meses esperando, você cria o momento onde a decisão acontece."</p>
+    </div>
+    <a href="#aplicar" class="cta-inline animate d450">Quer que a gente execute esse caminho pela sua marca? →</a>
+  </div>
+</section>
+<span class="sep"></span>
+
+<!-- CAMINHO 09 -->
+<section id="caminho-9" class="caminho">
+  <div class="container">
+    <div class="tag caminho-tag animate">CAMINHO 09 DE 10</div>
+    <h2 class="caminho-title animate d150">"Seu time está vendendo a mesma empresa que você?"</h2>
+    <div class="box-dor animate d150">
+      <span class="label">A DOR</span>
+      <p>"Você treina o time. Uma semana depois, cada um fala uma coisa diferente sobre o que a empresa faz. O cliente que fala com três pessoas da sua empresa recebe três marcas diferentes — e não fecha porque não sabe o que está comprando."</p>
+    </div>
+    <div class="box-framework animate d300">
+      <span class="label">O FRAMEWORK</span>
+      <pre>O ritual de alinhamento de 30 minutos:
+
+① REVISÃO (10 min)
+   Todo time lê o posicionamento da semana.
+   Quem somos, para quem, por que nos escolher.
+
+② SIMULAÇÃO (15 min)
+   Dois integrantes simulam uma conversa
+   com um prospect. Os outros observam.
+
+③ FEEDBACK (5 min)
+   O que ficou alinhado. O que saiu do script.
+   O que ajustar para a semana seguinte.
+
+→ Repetir toda semana.
+  Em 30 dias o discurso já está internalizado.</pre>
+    </div>
+    <div class="box-muda animate d300">
+      <span class="label">O QUE MUDA</span>
+      <p>"Time alinhado no discurso fecha mais sem precisar de mais leads. A marca para de depender só do founder para vender."</p>
+    </div>
+    <a href="#aplicar" class="cta-inline animate d450">Quer que a gente execute esse caminho pela sua marca? →</a>
+  </div>
+</section>
+<span class="sep"></span>
+
+<!-- CAMINHO 10 -->
+<section id="caminho-10" class="caminho">
+  <div class="container">
+    <div class="tag caminho-tag animate">CAMINHO 10 DE 10</div>
+    <h2 class="caminho-title animate d150">"Seu melhor vendedor já trabalha para você. De graça."</h2>
+    <div class="box-dor animate d150">
+      <span class="label">A DOR</span>
+      <p>"Você tem clientes satisfeitos que nunca indicaram. Não porque não querem — porque você nunca criou um sistema para isso. Indicação que depende de lembrar não é canal. É sorte."</p>
+    </div>
+    <div class="box-framework animate d300">
+      <span class="label">O FRAMEWORK</span>
+      <pre>O sistema de indicação em 3 momentos:
+
+① O MOMENTO CERTO
+   Não no encerramento formal — no pico emocional.
+   Quando o cliente expressa satisfação máxima
+   com a entrega. Esse é o momento de pedir.
+
+② A PERGUNTA CERTA
+   "Quem você conhece que tem o mesmo desafio
+   que você tinha antes de nos contratar?"
+   Específica. Contextual. Fácil de responder.
+
+③ O RITUAL FIXO
+   Uma vez por mês: lista de clientes ativos,
+   um contato por cliente. Sistematizado —
+   não quando lembrar.
+
+→ Indicação tem custo de aquisição quase zero
+  e taxa de fechamento 3x maior que lead frio.</pre>
+    </div>
+    <div class="box-muda animate d300">
+      <span class="label">O QUE MUDA</span>
+      <p>"Cliente satisfeito sem sistema de indicação é receita que você está deixando na mesa toda semana."</p>
+    </div>
+    <a href="#aplicar" class="cta-inline animate d450">Quer que a gente execute esse caminho pela sua marca? →</a>
+  </div>
+</section>
+
+<!-- SEÇÃO 13: CTA FINAL -->
+<section id="aplicar">
+  <div class="container-wide">
+    <div class="aplicar-grid">
+      <div>
+        <div class="tag animate" style="margin-bottom:20px">PRÓXIMO PASSO</div>
+        <h2 class="aplicar-title animate d150">Quer que a gente execute esses caminhos pela sua marca?</h2>
+        <p class="aplicar-sub animate d300">Já fizemos isso com mais de 100 marcas. O processo se chama Revelação de Marca — e começa com uma conversa de 1 hora, sem compromisso.</p>
+        <div class="mini-cases animate d300">
+          <div class="mini-case">
+            <strong>Ohmori Vestibulares</strong>
+            <p>"18 matrículas fechadas em 1 único evento."</p>
+            <span>→ Educação</span>
+          </div>
+          <div class="mini-case">
+            <strong>ForWays</strong>
+            <p>"Do zero ao lançamento em menos de 90 dias."</p>
+            <span>→ Assessoria Esportiva</span>
+          </div>
+          <div class="mini-case">
+            <strong>Reserva Agostini</strong>
+            <p>"80 anos de história transformados em identidade."</p>
+            <span>→ Produto Premium</span>
+          </div>
+        </div>
+      </div>
+      <div class="form-box animate d150">
+        <form id="iscaForm">
+          <div class="form-group">
+            <label class="form-label" for="i_nome">Nome completo *</label>
+            <input type="text" id="i_nome" name="nome" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="i_email">E-mail *</label>
+            <input type="email" id="i_email" name="email" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="i_whatsapp">WhatsApp *</label>
+            <input type="tel" id="i_whatsapp" name="whatsapp" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="i_empresa">Nome da empresa *</label>
+            <input type="text" id="i_empresa" name="empresa" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="i_segmento">Segmento / Nicho *</label>
+            <input type="text" id="i_segmento" name="segmento" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="i_representa">Você representa *</label>
+            <select id="i_representa" name="representa" class="form-control" required>
+              <option value="">Selecione</option>
+              <option>Minha empresa / negócio próprio</option>
+              <option>Trabalho como autônomo / freelancer</option>
+              <option>Estou começando agora</option>
+              <option>Outro</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="i_caminho">Qual caminho mais se aplica à sua empresa hoje?</label>
+            <select id="i_caminho" name="caminho" class="form-control">
+              <option value="">Selecione</option>
+              <option>Caminho 01 — Posicionamento único</option>
+              <option>Caminho 02 — Categoria própria</option>
+              <option>Caminho 03 — Discurso claro</option>
+              <option>Caminho 04 — Identidade visual</option>
+              <option>Caminho 05 — Cliente certo</option>
+              <option>Caminho 06 — Prova e cases</option>
+              <option>Caminho 07 — Plano e roadmap</option>
+              <option>Caminho 08 — Evento âncora</option>
+              <option>Caminho 09 — Alinhamento de time</option>
+              <option>Caminho 10 — Sistema de indicação</option>
+              <option>Vários — preciso de tudo</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-laranja btn-submit">Quero aplicar esses caminhos na minha marca →</button>
+          <p class="form-nota">Sem compromisso. Kaio responde em até 48h úteis.<br>Atendemos no máximo 3 empresas por mês.</p>
+          <div class="form-success" id="formSuccessIsca">Candidatura recebida. Kaio entra em contato em até 48h úteis.</div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RODAPÉ -->
+<footer>
+  <div class="container">
+    <div class="footer-logo">legado. BRANDING</div>
+    <p class="footer-tag">"Your Brand, Your Legacy."</p>
+    <a href="index.html" class="footer-back">← Voltar para o site principal · legadobranding.com.br</a>
+    <p class="footer-copy">© 2026 Legado Branding. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+
+<script>
+const FORM_ENDPOINT_ISCA = 'SEU_ENDPOINT_AQUI';
+
+document.addEventListener('DOMContentLoaded', () => {
+  // ANIMATIONS
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, {threshold: 0.1});
+  document.querySelectorAll('.animate').forEach(el => observer.observe(el));
+
+  // PROGRESS BAR
+  const dots = document.querySelectorAll('.pb-dot');
+  const sections = Array.from({length:10}, (_,i) => document.getElementById(`caminho-${i+1}`));
+  const updateProgress = () => {
+    const mid = window.innerHeight / 2;
+    sections.forEach((sec, i) => {
+      if(!sec) return;
+      const r = sec.getBoundingClientRect();
+      dots[i].classList.remove('active','visited');
+      if(r.top <= mid && r.bottom >= mid) dots[i].classList.add('active');
+      else if(r.bottom < mid) dots[i].classList.add('visited');
+    });
+  };
+  dots.forEach(d => d.addEventListener('click', () => {
+    const t = document.getElementById(d.dataset.target);
+    if(t) t.scrollIntoView({behavior:'smooth'});
+  }));
+  window.addEventListener('scroll', updateProgress);
+  updateProgress();
+
+  // FLOATING BUTTON
+  const floatBtn = document.getElementById('float-btn');
+  const trigger = document.getElementById('caminho-5');
+  const watchFloat = () => {
+    if(!trigger) return;
+    const r = trigger.getBoundingClientRect();
+    if(r.bottom < window.innerHeight) floatBtn.classList.add('show');
+    else floatBtn.classList.remove('show');
+  };
+  window.addEventListener('scroll', watchFloat);
+  watchFloat();
+
+  // FORM
+  const form = document.getElementById('iscaForm');
+  if(form) {
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      const btn = form.querySelector('.btn-submit');
+      const success = document.getElementById('formSuccessIsca');
+      const orig = btn.textContent;
+      btn.textContent = 'Enviando...'; btn.disabled = true;
+      try {
+        if(FORM_ENDPOINT_ISCA !== 'SEU_ENDPOINT_AQUI') {
+          const data = Object.fromEntries(new FormData(form).entries());
+          const res = await fetch(FORM_ENDPOINT_ISCA, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data)});
+          if(!res.ok) throw new Error();
+        } else { await new Promise(r => setTimeout(r, 800)); }
+        form.style.display = 'none';
+        success.style.display = 'block';
+      } catch { alert('Erro ao enviar. Tente novamente.'); }
+      finally { btn.textContent = orig; btn.disabled = false; }
+    });
+  }
+});
+</script>
 </body>
 </html>
