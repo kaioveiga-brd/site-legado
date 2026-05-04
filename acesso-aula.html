@@ -27,37 +27,46 @@ a{text-decoration:none;color:inherit}
 .d450{transition-delay:450ms}
 
 /* PROGRESS BAR */
-#progress-bar{position:fixed;right:24px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:12px;z-index:100}
-.pb-dot{width:8px;height:8px;border-radius:50%;background:var(--cinza-borda);cursor:pointer;transition:all .3s ease;position:relative}
-.pb-dot.active{background:var(--laranja);transform:scale(1.4)}
-.pb-dot.visited{background:rgba(224,90,28,.4)}
-.pb-dot .pb-label{position:absolute;right:16px;top:50%;transform:translateY(-50%);background:var(--cinza-card);border:1px solid var(--cinza-borda);padding:4px 10px;border-radius:4px;font-family:'DM Sans',sans-serif;font-size:11px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s}
-.pb-dot:hover .pb-label{opacity:1}
+#progress-bar{position:fixed;right:20px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:10px;z-index:100;align-items:center}
+.pb-dot{width:32px;height:32px;border-radius:50%;background:var(--cinza-card);border:1px solid var(--cinza-borda);cursor:pointer;transition:all .3s ease;position:relative;display:flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif;font-size:9px;font-weight:600;color:var(--branco-fraco);letter-spacing:.02em}
+.pb-dot.active{background:var(--laranja);border-color:var(--laranja);color:#111;transform:scale(1.15);box-shadow:0 0 12px rgba(224,90,28,.4)}
+.pb-dot.visited{background:rgba(224,90,28,.15);border-color:rgba(224,90,28,.3);color:var(--laranja)}
+.pb-dot:hover:not(.active){border-color:var(--laranja);color:var(--laranja)}
+
+/* FLARE DO CAMINHO */
+.caminho-badge{display:inline-flex;align-items:center;gap:10px;margin-bottom:20px;position:relative}
+.caminho-badge-num{font-family:'DM Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--laranja);background:rgba(224,90,28,.08);border:1px solid rgba(224,90,28,.2);padding:6px 14px;border-radius:3px;position:relative;overflow:hidden}
+.caminho-badge-num::before{content:'';position:absolute;top:-10px;left:-10px;width:60px;height:60px;background:radial-gradient(circle,rgba(224,90,28,.25) 0%,transparent 70%);pointer-events:none}
+.caminho-badge-sep{font-family:'DM Sans',sans-serif;font-size:10px;color:var(--cinza-borda);font-weight:400;letter-spacing:.05em}
 
 /* FLOATING BTN */
 #float-btn{position:fixed;bottom:32px;right:32px;z-index:200;display:none;opacity:0;transition:opacity .4s ease}
 #float-btn.show{display:flex;opacity:1}
 
 /* HERO */
-#capa{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:80px 24px;position:relative;overflow:hidden}
-.hero-tag{margin-bottom:32px}
-.hero-title{font-size:clamp(48px,8vw,80px);font-weight:900;line-height:1.0;margin-bottom:28px}
-.hero-sub{font-weight:300;font-size:18px;color:var(--branco-suave);max-width:520px;margin:0 auto 16px}
-.hero-meta{font-family:'DM Sans',sans-serif;font-size:14px;color:var(--branco-fraco);margin-bottom:40px}
-.deco{position:absolute;right:-60px;top:50%;transform:translateY(-50%);font-size:300px;opacity:.04;line-height:1;user-select:none;pointer-events:none;font-family:'Rokkitt',serif}
+#capa{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:80px 24px;position:relative;overflow:hidden}
+.hero-inner{display:flex;align-items:center;justify-content:center;gap:64px;flex-wrap:wrap;max-width:960px;margin:0 auto}
+.hero-logo-wrap{flex:0 0 380px;min-width:280px}
+.hero-logo-wrap img{width:100%;height:auto;filter:drop-shadow(0 24px 48px rgba(224,90,28,.15))}
+.hero-text-wrap{flex:1;min-width:260px;max-width:380px}
+.hero-tag{margin-bottom:20px}
+.hero-sub{font-weight:300;font-size:17px;color:var(--branco-suave);margin-bottom:12px}
+.hero-meta{font-family:'DM Sans',sans-serif;font-size:13px;color:var(--branco-fraco);margin-bottom:32px}
+.deco{position:absolute;right:-60px;top:50%;transform:translateY(-50%);font-size:300px;opacity:.03;line-height:1;user-select:none;pointer-events:none;font-family:'Rokkitt',serif}
 
 /* ABOUT */
 #antes{padding:120px 0;border-top:1px solid var(--cinza-borda)}
-.about-grid{display:grid;grid-template-columns:200px 1fr;gap:60px;align-items:start}
-.about-foto{width:160px;height:160px;border-radius:50%;object-fit:cover;border:2px solid var(--cinza-borda)}
-.about-title{font-size:28px;font-weight:700;margin-bottom:24px}
+.about-grid{display:grid;grid-template-columns:280px 1fr;gap:64px;align-items:start}
+.about-foto{width:240px;height:240px;border-radius:50%;object-fit:cover;border:2px solid rgba(224,90,28,.3);box-shadow:0 0 40px rgba(224,90,28,.1)}
+.about-title{font-size:30px;font-weight:700;margin-bottom:24px}
 .about-text p{font-size:16px;font-weight:300;color:var(--branco-suave);margin-bottom:16px}
 .box-laranja{background:rgba(224,90,28,.08);border-left:3px solid var(--laranja);padding:20px 24px;border-radius:4px;margin-top:24px;font-style:italic;font-size:16px}
 
 /* CAMINHOS */
 .caminho{padding:100px 0;border-top:1px solid rgba(44,44,44,.4)}
-.caminho-tag{margin-bottom:20px}
-.caminho-title{font-size:clamp(28px,4vw,44px);font-weight:700;margin-bottom:40px;color:var(--branco)}
+.caminho-title{font-size:clamp(26px,3.5vw,42px);font-weight:700;margin-bottom:40px;color:var(--branco);line-height:1.15}
+.caminho-title em{font-style:normal;color:var(--laranja);font-weight:900}
+.caminho-title strong{font-weight:900}
 .box-dor{background:var(--cinza-card);border-left:3px solid var(--laranja);padding:24px 28px;border-radius:4px;margin-bottom:24px}
 .box-dor .label,.box-framework .label,.box-muda .label{font-family:'DM Sans',sans-serif;font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--laranja);margin-bottom:12px;display:block}
 .box-dor p{font-size:15px;color:var(--branco-suave);font-weight:300;line-height:1.7;font-style:italic}
@@ -101,8 +110,10 @@ footer{background:#0D0D0D;padding:60px 0 40px;border-top:1px solid var(--cinza-b
   #progress-bar{display:none}
   #float-btn{right:50%;transform:translateX(50%)}
   .about-grid{grid-template-columns:1fr;text-align:center}
-  .about-foto{margin:0 auto}
+  .about-foto{margin:0 auto;width:180px;height:180px}
   .aplicar-grid{grid-template-columns:1fr;gap:48px}
+  .hero-inner{flex-direction:column;text-align:center;gap:32px}
+  .hero-logo-wrap{flex:none;width:80%;max-width:320px;margin:0 auto}
 }
 </style>
 </head>
@@ -110,16 +121,16 @@ footer{background:#0D0D0D;padding:60px 0 40px;border-top:1px solid var(--cinza-b
 
 <!-- PROGRESS BAR -->
 <nav id="progress-bar">
-  <div class="pb-dot" data-target="caminho-1"><span class="pb-label">01 · Posicionamento</span></div>
-  <div class="pb-dot" data-target="caminho-2"><span class="pb-label">02 · Categoria</span></div>
-  <div class="pb-dot" data-target="caminho-3"><span class="pb-label">03 · Discurso</span></div>
-  <div class="pb-dot" data-target="caminho-4"><span class="pb-label">04 · Identidade</span></div>
-  <div class="pb-dot" data-target="caminho-5"><span class="pb-label">05 · Cliente certo</span></div>
-  <div class="pb-dot" data-target="caminho-6"><span class="pb-label">06 · Prova</span></div>
-  <div class="pb-dot" data-target="caminho-7"><span class="pb-label">07 · Plano</span></div>
-  <div class="pb-dot" data-target="caminho-8"><span class="pb-label">08 · Evento</span></div>
-  <div class="pb-dot" data-target="caminho-9"><span class="pb-label">09 · Time</span></div>
-  <div class="pb-dot" data-target="caminho-10"><span class="pb-label">10 · Indicação</span></div>
+  <div class="pb-dot" data-target="caminho-1">C1</div>
+  <div class="pb-dot" data-target="caminho-2">C2</div>
+  <div class="pb-dot" data-target="caminho-3">C3</div>
+  <div class="pb-dot" data-target="caminho-4">C4</div>
+  <div class="pb-dot" data-target="caminho-5">C5</div>
+  <div class="pb-dot" data-target="caminho-6">C6</div>
+  <div class="pb-dot" data-target="caminho-7">C7</div>
+  <div class="pb-dot" data-target="caminho-8">C8</div>
+  <div class="pb-dot" data-target="caminho-9">C9</div>
+  <div class="pb-dot" data-target="caminho-10">C10</div>
 </nav>
 
 <!-- FLOATING BTN -->
@@ -128,12 +139,16 @@ footer{background:#0D0D0D;padding:60px 0 40px;border-top:1px solid var(--cinza-b
 <!-- SEÇÃO 1: CAPA -->
 <section id="capa">
   <div class="deco">L</div>
-  <div class="container" style="position:relative;z-index:1">
-    <div class="tag hero-tag animate">LEGADO BRANDING · MATERIAL EXCLUSIVO E GRATUITO</div>
-    <h1 class="hero-title animate d150">10 Caminhos para<br>sua Marca Vender<br>Sozinha.</h1>
-    <p class="hero-sub animate d300">O guia prático para founders de empresa que entregam mais do que o mercado consegue enxergar — e querem mudar isso.</p>
-    <p class="hero-meta animate d450">Leitura: ~15 minutos · Aplicação imediata · 10 frameworks práticos</p>
-    <a href="#caminho-1" class="btn btn-laranja animate d450">Começar agora →</a>
+  <div class="hero-inner">
+    <div class="hero-logo-wrap animate">
+      <img src="LOGO-10CAMINHOS.png" alt="10 Caminhos para sua Marca Vender Sozinha">
+    </div>
+    <div class="hero-text-wrap">
+      <div class="tag hero-tag animate d150">LEGADO BRANDING · MATERIAL EXCLUSIVO E GRATUITO</div>
+      <p class="hero-sub animate d300">O guia prático para founders que entregam mais do que o mercado enxerga — e querem mudar isso.</p>
+      <p class="hero-meta animate d300">~15 min de leitura · 10 frameworks práticos</p>
+      <a href="#caminho-1" class="btn btn-laranja animate d450">Começar agora →</a>
+    </div>
   </div>
 </section>
 
@@ -142,7 +157,7 @@ footer{background:#0D0D0D;padding:60px 0 40px;border-top:1px solid var(--cinza-b
   <div class="container">
     <div class="tag animate">QUEM ESTÁ FALANDO COM VOCÊ</div>
     <div class="about-grid" style="margin-top:40px">
-      <div class="animate">
+      <div class="animate" style="display:flex;justify-content:center">
         <img src="https://proposta-legado.vercel.app/foto%20kaio.png" alt="Kaio Veiga" class="about-foto">
       </div>
       <div>
@@ -163,8 +178,10 @@ footer{background:#0D0D0D;padding:60px 0 40px;border-top:1px solid var(--cinza-b
 <!-- CAMINHO 01 -->
 <section id="caminho-1" class="caminho">
   <div class="container">
-    <div class="tag caminho-tag animate">CAMINHO 01 DE 10</div>
-    <h2 class="caminho-title animate d150">"Defina o espaço que só você pode ocupar."</h2>
+    <div class="caminho-badge animate">
+      <span class="caminho-badge-num">CAMINHO 01 DE 10</span>
+    </div>
+    <h2 class="caminho-title animate d150">"Defina o <em>espaço</em> que <strong>só você</strong> pode ocupar."</h2>
     <div class="box-dor animate d150">
       <span class="label">A DOR</span>
       <p>"Você já foi em uma reunião de proposta, apresentou tudo certinho, e o cliente disse que ia pensar — e foi para o concorrente mais barato? Se você abrir o site desse concorrente agora, os valores dele são: qualidade, comprometimento e inovação. Os seus também são, né?"</p>
@@ -200,8 +217,10 @@ footer{background:#0D0D0D;padding:60px 0 40px;border-top:1px solid var(--cinza-b
 <!-- CAMINHO 02 -->
 <section id="caminho-2" class="caminho">
   <div class="container">
-    <div class="tag caminho-tag animate">CAMINHO 02 DE 10</div>
-    <h2 class="caminho-title animate d150">"Pare de competir. Comece a liderar."</h2>
+    <div class="caminho-badge animate">
+      <span class="caminho-badge-num">CAMINHO 02 DE 10</span>
+    </div>
+    <h2 class="caminho-title animate d150">"Pare de <em>competir.</em> Comece a <strong>liderar.</strong>"</h2>
     <div class="box-dor animate d150">
       <span class="label">A DOR</span>
       <p>"Quando todos do seu setor se descrevem da mesma forma, o cliente não tem motivo para te escolher — a não ser pelo preço. E aí quem ganha é sempre o mais barato, não o melhor."</p>
@@ -234,8 +253,10 @@ Passo 3: Crie o nome da categoria que só você ocupa.
 <!-- CAMINHO 03 -->
 <section id="caminho-3" class="caminho">
   <div class="container">
-    <div class="tag caminho-tag animate">CAMINHO 03 DE 10</div>
-    <h2 class="caminho-title animate d150">"Seu diferencial existe. O problema é que só você sabe."</h2>
+    <div class="caminho-badge animate">
+      <span class="caminho-badge-num">CAMINHO 03 DE 10</span>
+    </div>
+    <h2 class="caminho-title animate d150">"Seu <em>diferencial</em> existe. O problema é que <strong>só você sabe.</strong>"</h2>
     <div class="box-dor animate d150">
       <span class="label">A DOR</span>
       <p>"Quando alguém te pergunta o que você faz de diferente, quanto tempo você leva para responder? Se você precisou pensar — o diferencial está preso na sua cabeça. E cliente que não entende o diferencial, decide pelo preço."</p>
@@ -271,8 +292,10 @@ Passo 3: Crie o nome da categoria que só você ocupa.
 <!-- CAMINHO 04 -->
 <section id="caminho-4" class="caminho">
   <div class="container">
-    <div class="tag caminho-tag animate">CAMINHO 04 DE 10</div>
-    <h2 class="caminho-title animate d150">"Sua marca parece do tamanho que você é?"</h2>
+    <div class="caminho-badge animate">
+      <span class="caminho-badge-num">CAMINHO 04 DE 10</span>
+    </div>
+    <h2 class="caminho-title animate d150">"Sua marca parece do <em>tamanho</em> que você é?"</h2>
     <div class="box-dor animate d150">
       <span class="label">A DOR</span>
       <p>"Você manda a proposta. O cliente abre o material. Em 3 segundos ele já formou uma opinião sobre o nível do que você entrega — antes de ler uma palavra. Se a identidade visual não reflete o nível da entrega, a reunião começa perdida."</p>
@@ -308,8 +331,10 @@ Passo 3: Crie o nome da categoria que só você ocupa.
 <!-- CAMINHO 05 -->
 <section id="caminho-5" class="caminho">
   <div class="container">
-    <div class="tag caminho-tag animate">CAMINHO 05 DE 10</div>
-    <h2 class="caminho-title animate d150">"Você está atraindo quem paga bem — ou quem dá trabalho?"</h2>
+    <div class="caminho-badge animate">
+      <span class="caminho-badge-num">CAMINHO 05 DE 10</span>
+    </div>
+    <h2 class="caminho-title animate d150">"Você está atraindo quem <em>paga bem</em> — ou quem <strong>dá trabalho?</strong>"</h2>
     <div class="box-dor animate d150">
       <span class="label">A DOR</span>
       <p>"Todo empresário tem um cliente que ele adora atender: paga bem, respeita o processo, ainda te indica. E tem o outro tipo. A diferença entre os dois quase nunca é sorte — é posicionamento. Comunicação vaga atrai prospect vago."</p>
@@ -340,8 +365,10 @@ Passo 3: Crie o nome da categoria que só você ocupa.
 <!-- CAMINHO 06 -->
 <section id="caminho-6" class="caminho">
   <div class="container">
-    <div class="tag caminho-tag animate">CAMINHO 06 DE 10</div>
-    <h2 class="caminho-title animate d150">"Você tem resultado. O problema é que ninguém sabe."</h2>
+    <div class="caminho-badge animate">
+      <span class="caminho-badge-num">CAMINHO 06 DE 10</span>
+    </div>
+    <h2 class="caminho-title animate d150">"Você tem <em>resultado.</em> O problema é que <strong>ninguém sabe.</strong>"</h2>
     <div class="box-dor animate d150">
       <span class="label">A DOR</span>
       <p>"Seus clientes ficam satisfeitos. Alguns até indicam. Mas quando um prospect novo chega, ele não sente isso — porque você não transformou resultado em prova visível. Depoimento técnico convence a cabeça. Só história de transformação convence o coração — e fecha ticket alto."</p>
@@ -377,8 +404,10 @@ Passo 3: Crie o nome da categoria que só você ocupa.
 <!-- CAMINHO 07 -->
 <section id="caminho-7" class="caminho">
   <div class="container">
-    <div class="tag caminho-tag animate">CAMINHO 07 DE 10</div>
-    <h2 class="caminho-title animate d150">"Estratégia sem data é intenção. Plano com data é execução."</h2>
+    <div class="caminho-badge animate">
+      <span class="caminho-badge-num">CAMINHO 07 DE 10</span>
+    </div>
+    <h2 class="caminho-title animate d150">"Estratégia sem data é <em>intenção.</em> Plano com data é <strong>execução.</strong>"</h2>
     <div class="box-dor animate d150">
       <span class="label">A DOR</span>
       <p>"Você sabe o que precisa fazer para a marca crescer. Só que semanas passam e as coisas ficam no mesmo lugar. Não é falta de disciplina — é falta de sistema. Intenção não tem data. Plano tem."</p>
@@ -418,8 +447,10 @@ Métrica: receita gerada vs meta.
 <!-- CAMINHO 08 -->
 <section id="caminho-8" class="caminho">
   <div class="container">
-    <div class="tag caminho-tag animate">CAMINHO 08 DE 10</div>
-    <h2 class="caminho-title animate d150">"Um dia bem estruturado pode gerar mais do que 3 meses de conteúdo."</h2>
+    <div class="caminho-badge animate">
+      <span class="caminho-badge-num">CAMINHO 08 DE 10</span>
+    </div>
+    <h2 class="caminho-title animate d150">"Um dia bem estruturado pode gerar mais do que <em>3 meses de conteúdo.</em>"</h2>
     <div class="box-dor animate d150">
       <span class="label">A DOR</span>
       <p>"Você tem audiência — seguidores, contatos, clientes antigos. Mas não tem um momento claro onde essa audiência vira receita. Sem esse momento, você fica esperando o cliente chegar sozinho."</p>
@@ -456,8 +487,10 @@ Métrica: receita gerada vs meta.
 <!-- CAMINHO 09 -->
 <section id="caminho-9" class="caminho">
   <div class="container">
-    <div class="tag caminho-tag animate">CAMINHO 09 DE 10</div>
-    <h2 class="caminho-title animate d150">"Seu time está vendendo a mesma empresa que você?"</h2>
+    <div class="caminho-badge animate">
+      <span class="caminho-badge-num">CAMINHO 09 DE 10</span>
+    </div>
+    <h2 class="caminho-title animate d150">"Seu time está vendendo a <em>mesma empresa</em> que você?"</h2>
     <div class="box-dor animate d150">
       <span class="label">A DOR</span>
       <p>"Você treina o time. Uma semana depois, cada um fala uma coisa diferente sobre o que a empresa faz. O cliente que fala com três pessoas da sua empresa recebe três marcas diferentes — e não fecha porque não sabe o que está comprando."</p>
@@ -493,8 +526,10 @@ Métrica: receita gerada vs meta.
 <!-- CAMINHO 10 -->
 <section id="caminho-10" class="caminho">
   <div class="container">
-    <div class="tag caminho-tag animate">CAMINHO 10 DE 10</div>
-    <h2 class="caminho-title animate d150">"Seu melhor vendedor já trabalha para você. De graça."</h2>
+    <div class="caminho-badge animate">
+      <span class="caminho-badge-num">CAMINHO 10 DE 10</span>
+    </div>
+    <h2 class="caminho-title animate d150">"Seu melhor <em>vendedor</em> já trabalha para você. <strong>De graça.</strong>"</h2>
     <div class="box-dor animate d150">
       <span class="label">A DOR</span>
       <p>"Você tem clientes satisfeitos que nunca indicaram. Não porque não querem — porque você nunca criou um sistema para isso. Indicação que depende de lembrar não é canal. É sorte."</p>
