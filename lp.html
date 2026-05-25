@@ -1422,19 +1422,19 @@
             <div class="vsl-showcase animate-on-scroll" style="position: relative; width: 100%; max-width: 900px; margin: 60px auto 120px; aspect-ratio: 21/9; display: flex; align-items: center; justify-content: center;">
                 
                 <!-- Foto Esquerda -->
-                <div class="vsl-foto" style="position: absolute; left: 0; top: 50%; transform: translateY(-35%); width: 28%; aspect-ratio: 4/5; background-color: var(--branco); border-radius: 24px; z-index: 1; display: flex; align-items: center; justify-content: center; color: var(--preto); font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
-                    <span style="position: absolute;">foto</span>
+                <div class="vsl-foto" style="position: absolute; left: 0; top: 50%; transform: translateY(-35%); width: 28%; aspect-ratio: 4/5; background-color: var(--branco); border-radius: 24px; z-index: 1; display: flex; align-items: center; justify-content: center; color: var(--preto); font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); overflow: hidden;">
+                    <img src="_JVR0438.jpg" alt="Foto Esquerda" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
 
                 <!-- Foto Direita -->
-                <div class="vsl-foto" style="position: absolute; right: 0; top: 50%; transform: translateY(-65%); width: 28%; aspect-ratio: 4/5; background-color: var(--branco); border-radius: 24px; z-index: 1; display: flex; align-items: center; justify-content: center; color: var(--preto); font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
-                    <span style="position: absolute;">foto</span>
+                <div class="vsl-foto" style="position: absolute; right: 0; top: 50%; transform: translateY(-65%); width: 28%; aspect-ratio: 4/5; background-color: var(--branco); border-radius: 24px; z-index: 1; display: flex; align-items: center; justify-content: center; color: var(--preto); font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); overflow: hidden;">
+                    <img src="_JVR0493.jpg" alt="Foto Direita" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
 
                 <!-- Vídeo Central -->
-                <div class="vsl-video" style="position: relative; z-index: 2; width: 55%; aspect-ratio: 16/9; background-color: var(--laranja); border-radius: 24px; display: flex; align-items: center; justify-content: center; box-shadow: 0 20px 50px rgba(0,0,0,0.8);">
-                    <span style="color: var(--branco); font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 32px;">video</span>
+                <div class="vsl-video" style="position: relative; z-index: 2; width: 55%; aspect-ratio: 16/9; background-color: var(--laranja); border-radius: 24px; display: flex; align-items: center; justify-content: center; box-shadow: 0 20px 50px rgba(0,0,0,0.8); overflow: hidden;">
                     <!-- Aqui entra o iframe da VSL -->
+                    <iframe id="vsl-iframe" width="100%" height="100%" data-src="https://www.youtube.com/embed/VIDEO_ID_HERE?autoplay=1&mute=1" title="VSL - Depoimento Marco" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="border-radius: 24px; border: none; width: 100%; height: 100%;"></iframe>
                 </div>
             </div>
 
@@ -1868,6 +1868,24 @@
                 document.documentElement.style.setProperty('--mouse-x', e.clientX + 'px');
                 document.documentElement.style.setProperty('--mouse-y', e.clientY + 'px');
             });
+
+            // Autoplay VSL ao chegar na seção
+            const vslShowcase = document.querySelector('.vsl-showcase');
+            const vslIframe = document.getElementById('vsl-iframe');
+            if (vslShowcase && vslIframe) {
+                const vslObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const dataSrc = vslIframe.getAttribute('data-src');
+                            if (dataSrc && !vslIframe.src) {
+                                vslIframe.src = dataSrc;
+                            }
+                            vslObserver.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.15 });
+                vslObserver.observe(vslShowcase);
+            }
 
             // 5. MANIPULAÇÃO DO FORMULÁRIO
             const leadForm = document.getElementById('leadForm');
