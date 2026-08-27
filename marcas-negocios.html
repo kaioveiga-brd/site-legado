@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Marcas & Negócios by Legado — Canal exclusivo de conteúdo para empresários pragmáticos.">
+  <title>Marcas & Negócios by Legado</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Petrona:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+
+  <style>
+    /* ----------------------------------------------------
+       DESIGN SYSTEM & TOKENS (TEMA ESCURO NOTURNO)
+       ---------------------------------------------------- */
+    :root {
+      --grafite: #F5F1EB;        /* Textos principais em branco-quente */
+      --laranja: #E05A1C;        /* Laranja vibrante para acentos */
+      --branco-quente: #151413;  /* Fundo da página escuro/grafite escuro */
+      --linha: #332E2A;          /* Divisórias e bordas sutis escuras */
+      --cinza-texto: #99938B;    /* Textos secundários e apoios em cinza claro */
+    }
+
+    /* CSS Reset */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--branco-quente);
+      color: var(--grafite);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ----------------------------------------------------
+       LAYOUT, HEADER & STEP PROGRESS INDICATOR
+       ---------------------------------------------------- */
+    .progress-container {
+      width: 100%;
+      height: 2px;
+      background-color: var(--linha);
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+    }
+
+    .progress-bar {
+      width: 0%;
+      height: 100%;
+      background-color: var(--laranja);
+      transition: width 300ms ease;
+    }
+
+    .header {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      max-width: 560px;
+      padding: 24px 24px 12px 24px;
+      margin-top: 2px; /* Spacing for progress bar */
+      z-index: 10;
+      flex-shrink: 0;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      transition: transform 200ms ease;
+      transform: translateX(0);
+    }
+
+    .header.has-back .logo-container {
+      transform: translateX(36px);
+    }
+
+    .back-btn {
+      position: absolute;
+      left: 24px;
+      background: none;
+      border: none;
+      color: var(--grafite);
+      cursor: pointer;
+      padding: 4px;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 200ms ease, color 200ms ease;
+    }
+
+    .back-btn.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .back-btn:hover {
+      color: var(--laranja);
+    }
+
+    .back-btn:focus-visible {
+      outline: 2px solid var(--laranja);
+      outline-offset: 2px;
+    }
+
+    .logo {
+      height: 88px; /* Aumentado conforme feedback (dobro do tamanho) */
+      width: auto;
+      max-width: 100%;
+      object-fit: contain;
+      transition: max-width 200ms ease;
+    }
+
+    .header.has-back .logo {
+      max-width: calc(100% - 36px);
+    }
+
+    /* Indicador de passos em bolinhas */
+    .steps-container {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 560px;
+      margin: 0 auto 16px auto;
+      padding: 0 24px;
+      box-sizing: border-box;
+      flex-shrink: 0;
+    }
+
+    .step-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .step-dot {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 1px solid var(--linha);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      color: var(--cinza-texto);
+      transition: all 200ms ease;
+      background-color: transparent;
+      flex-shrink: 0;
+    }
+
+    .step-item.active .step-dot {
+      border-color: var(--laranja);
+      color: var(--laranja);
+      border-width: 2px;
+    }
+
+    .step-item.completed .step-dot {
+      background-color: var(--laranja);
+      border-color: var(--laranja);
+      color: var(--branco-quente); /* Mostra em grafite escuro */
+    }
+
+    .step-label {
+      font-size: 11px;
+      font-family: 'Inter', sans-serif;
+      color: var(--cinza-texto);
+      font-weight: 500;
+      transition: color 200ms ease;
+    }
+
+    .step-item.active .step-label {
+      color: var(--grafite);
+    }
+
+    .step-line {
+      flex: 1;
+      height: 1px;
+      background-color: var(--linha);
+      margin: 0 8px;
+      min-width: 8px;
+      transition: background-color 200ms ease;
+    }
+
+    .step-line.completed {
+      background-color: var(--laranja);
+    }
+
+    @media (max-width: 480px) {
+      .step-label {
+        display: none;
+      }
+      .step-line {
+        min-width: 16px;
+      }
+    }
+
+    .app-container {
+      flex: 1;
+      display: flex;
+      width: 100%;
+      max-width: 560px;
+      padding: 12px 24px 32px 24px;
+      align-items: center; /* Center screens vertically */
+    }
+
+    /* ----------------------------------------------------
+       SCREENS & TRANSITIONS WITH STAGGERED ANIMATIONS
+       ---------------------------------------------------- */
+    .screen {
+      display: none;
+      opacity: 0;
+      width: 100%;
+      flex-direction: column;
+    }
+
+    .screen.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    /* Elementos animados ao entrar no slide ativo */
+    .screen.active .question-title,
+    .screen.active .abertura-title,
+    .screen.active .confirmation-title,
+    .screen.active .abertura-description,
+    .screen.active .divider,
+    .screen.active .abertura-info,
+    .screen.active .action-container,
+    .screen.active .options-stack > *,
+    .screen.active .form-group,
+    .screen.active .btn-group-row,
+    .screen.active .quote-container,
+    .screen.active .confirmation-support,
+    .screen.active .sub-input-container {
+      opacity: 0;
+      transform: translateY(12px);
+      animation: fadeInUp 350ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* Animação de fade + deslocamento vertical de baixo para cima */
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Atrasos em cascata (Staggering) */
+    .screen.active .question-title,
+    .screen.active .abertura-title,
+    .screen.active .confirmation-title {
+      animation-delay: 40ms;
+    }
+
+    .screen.active .abertura-description,
+    .screen.active .helper-label {
+      animation-delay: 80ms;
+    }
+
+    .screen.active .divider,
+    .screen.active .form-group:nth-of-type(1),
+    .screen.active .quote-container {
+      animation-delay: 120ms;
+    }
+
+    .screen.active .abertura-info,
+    .screen.active .form-group:nth-of-type(2),
+    .screen.active .confirmation-support {
+      animation-delay: 160ms;
+    }
+
+    .screen.active .form-group:nth-of-type(3) {
+      animation-delay: 200ms;
+    }
+
+    .screen.active .action-container,
+    .screen.active .btn-group-row {
+      animation-delay: 240ms;
+    }
+
+    /* Stagger de atraso nos cards de opções da lista */
+    .screen.active .options-stack > *:nth-child(1) { animation-delay: 100ms; }
+    .screen.active .options-stack > *:nth-child(2) { animation-delay: 140ms; }
+    .screen.active .options-stack > *:nth-child(3) { animation-delay: 180ms; }
+    .screen.active .options-stack > *:nth-child(4) { animation-delay: 220ms; }
+    .screen.active .options-stack > *:nth-child(5) { animation-delay: 260ms; }
+    .screen.active .options-stack > *:nth-child(6) { animation-delay: 300ms; }
+
+    /* ----------------------------------------------------
+       TYPOGRAPHY & ACCENTS
+       ---------------------------------------------------- */
+    .abertura-title, .question-title, .confirmation-title {
+      font-family: 'Petrona', serif; /* Fonte oficial Petrona */
+      font-size: 28px;
+      line-height: 1.25;
+      font-weight: 700; /* Bold */
+      color: var(--grafite);
+      margin-bottom: 20px;
+      text-transform: none;
+    }
+
+    .accent-orange {
+      color: var(--laranja);
+      font-style: normal;
+    }
+
+    .abertura-description {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--cinza-texto);
+      margin-bottom: 24px;
+    }
+
+    .highlight-text {
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--grafite);
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+
+    .support-text {
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--cinza-texto);
+      margin-bottom: 24px;
+    }
+
+    .helper-label {
+      font-size: 13px;
+      color: var(--cinza-texto);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .btn-caption {
+      font-size: 12px;
+      color: var(--cinza-texto);
+      margin-top: 8px;
+      display: block;
+      line-height: 1.4;
+    }
+
+    /* ----------------------------------------------------
+       FORM ELEMENTS & INTERACTION
+       ---------------------------------------------------- */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--linha);
+      margin: 20px 0;
+      width: 100%;
+    }
+
+    .options-stack {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .option-card {
+      display: flex;
+      align-items: center;
+      min-height: 56px;
+      width: 100%;
+      border: 1px solid var(--linha);
+      background-color: transparent;
+      padding: 16px 20px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      border-radius: 6px; /* Bordinha arredondada */
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      color: var(--grafite);
+      text-align: left;
+      transition: border-color 200ms ease, background-color 200ms ease;
+      position: relative;
+    }
+
+    .option-card:hover {
+      border-color: var(--grafite);
+    }
+
+    .option-card:focus-visible {
+      outline: 2px solid var(--laranja);
+      outline-offset: -2px;
+    }
+
+    .option-indicator {
+      display: block;
+      width: 8px;
+      height: 8px;
+      background-color: var(--laranja);
+      margin-right: 12px;
+      opacity: 0;
+      transform: scale(0);
+      transition: opacity 200ms ease, transform 200ms ease;
+      flex-shrink: 0;
+    }
+
+    .option-card.selected {
+      border-color: var(--laranja);
+    }
+
+    .option-card.selected .option-indicator {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Double line card adjustments */
+    .option-card.double-line {
+      align-items: flex-start;
+      line-height: 1.4;
+    }
+
+    .option-card.double-line .option-indicator {
+      margin-top: 5px;
+    }
+
+    /* Text fields & textarea */
+    .form-group {
+      margin-bottom: 24px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .form-group label {
+      font-size: 13px;
+      color: var(--cinza-texto);
+      margin-bottom: 4px;
+    }
+
+    .text-input, .textarea-field {
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid var(--linha);
+      background-color: transparent;
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      color: var(--grafite);
+      padding: 8px 0;
+      outline: none;
+      transition: border-bottom-color 200ms ease;
+      border-radius: 0; /* iOS input reset */
+    }
+
+    .textarea-field {
+      resize: none;
+      line-height: 1.5;
+    }
+
+    .text-input:focus, .textarea-field:focus {
+      border-bottom-color: var(--laranja);
+    }
+
+    .text-input::placeholder, .textarea-field::placeholder {
+      color: var(--cinza-texto);
+      opacity: 0.5;
+    }
+
+    .form-group.invalid .text-input {
+      border-bottom-color: var(--laranja);
+    }
+
+    .error-msg {
+      font-size: 12px;
+      color: var(--laranja);
+      margin-top: 4px;
+      min-height: 16px;
+      opacity: 0;
+      transition: opacity 200ms ease;
+    }
+
+    .form-group.invalid .error-msg {
+      opacity: 1;
+    }
+
+    /* ----------------------------------------------------
+       BUTTONS
+       ---------------------------------------------------- */
+    .action-container {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      align-items: flex-start;
+    }
+
+    .btn-solid {
+      background-color: var(--grafite);
+      color: var(--branco-quente); /* Fundo branco-quente invertido para texto */
+      border: none;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+      padding: 16px 24px;
+      cursor: pointer;
+      border-radius: 2px;
+      text-align: center;
+      transition: background-color 200ms ease, color 200ms ease;
+      display: inline-block;
+      text-decoration: none;
+      width: auto;
+    }
+
+    .btn-solid:hover {
+      background-color: var(--laranja);
+      color: var(--grafite); /* Altera o texto para acompanhar */
+    }
+
+    .btn-solid:focus-visible {
+      outline: 2px solid var(--laranja);
+      outline-offset: 2px;
+    }
+
+    .btn-group-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-top: 8px;
+    }
+
+    .btn-text {
+      background: none;
+      border: none;
+      color: var(--cinza-texto);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      text-decoration: underline;
+      cursor: pointer;
+      padding: 8px 12px;
+      transition: color 200ms ease;
+    }
+
+    .btn-text:hover {
+      color: var(--grafite);
+    }
+
+    .btn-text:focus-visible {
+      outline: 2px solid var(--laranja);
+      outline-offset: 2px;
+    }
+
+    /* Special style for Outro sector input wrapper */
+    .sub-input-container {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--linha);
+      width: 100%;
+    }
+
+    /* ----------------------------------------------------
+       CONFIRMATION SCREEN SPECIALS
+       ---------------------------------------------------- */
+    .quote-container {
+      margin: 24px 0;
+      padding-left: 16px;
+      border-left: 2px solid var(--laranja);
+    }
+
+    .quote-label {
+      font-size: 13px;
+      color: var(--cinza-texto);
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .dynamic-quote {
+      font-family: 'Petrona', serif;
+      font-size: 24px;
+      line-height: 1.3;
+      color: var(--grafite);
+      font-weight: 500;
+    }
+
+    .confirmation-support {
+      font-size: 16px;
+      line-height: 1.5;
+      color: var(--grafite);
+    }
+
+    /* ----------------------------------------------------
+       RESPONSIVE & ADAPTIVE STYLES
+       ---------------------------------------------------- */
+    /* Desktop Overrides */
+    @media (min-width: 768px) {
+      .logo {
+        height: 112px; /* Aumentado conforme feedback (dobro do tamanho) */
+      }
+      .header {
+        padding: 32px 40px 16px 40px;
+      }
+      .back-btn {
+        left: 40px;
+      }
+      .app-container {
+        padding: 0 40px 40px 40px;
+      }
+      .abertura-title, .question-title, .confirmation-title {
+        font-size: 40px;
+      }
+      .option-card {
+        font-size: 17px;
+        padding: 18px 24px;
+        margin-bottom: 14px;
+      }
+      .abertura-description {
+        font-size: 16px;
+      }
+      .highlight-text {
+        font-size: 16px;
+      }
+      .support-text {
+        font-size: 15px;
+      }
+    }
+
+    /* Height-constrained mobile screens override to prevent scroll */
+    @media (max-height: 680px) {
+      .header {
+        padding: 16px 24px 8px 24px;
+      }
+      .abertura-title, .question-title, .confirmation-title {
+        font-size: 24px;
+        margin-bottom: 12px;
+      }
+      .abertura-description {
+        font-size: 14px;
+        margin-bottom: 16px;
+      }
+      .option-card {
+        min-height: 48px;
+        padding: 12px 16px;
+        margin-bottom: 8px;
+        font-size: 15px;
+      }
+      .form-group {
+        margin-bottom: 16px;
+      }
+      .divider {
+        margin: 16px 0;
+      }
+      .btn-solid {
+        padding: 12px 20px;
+        font-size: 15px;
+      }
+    }
+
+    /* Prefers-reduced-motion compatibility */
+    @media (prefers-reduced-motion: reduce) {
+      .screen.active .question-title,
+      .screen.active .abertura-title,
+      .screen.active .confirmation-title,
+      .screen.active .abertura-description,
+      .screen.active .divider,
+      .screen.active .abertura-info,
+      .screen.active .action-container,
+      .screen.active .options-stack > *,
+      .screen.active .form-group,
+      .screen.active .btn-group-row,
+      .screen.active .quote-container,
+      .screen.active .confirmation-support,
+      .screen.active .sub-input-container {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+      }
+      .screen {
+        transition: none !important;
+        transform: none !important;
+      }
+      .progress-bar {
+        transition: none !important;
+      }
+      .logo-container {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Linha de Progresso (Invisível mas mantida em background para conformidade de estado) -->
+  <div class="progress-container" style="opacity: 0; pointer-events: none;">
+    <div class="progress-bar" id="progress-bar"></div>
+  </div>
+
+  <!-- Cabeçalho Fixo -->
+  <header class="header" id="app-header">
+    <button type="button" id="back-btn" class="back-btn" aria-label="Voltar à tela anterior">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="19" y1="12" x2="5" y2="12"></line>
+        <polyline points="12 19 5 12 12 5"></polyline>
+      </svg>
+    </button>
+    <div class="logo-container">
+      <!-- Logo branca (negativa) no tema escuro -->
+      <img src="logo-marcas-negocios-branco.png" alt="Marcas & Negócios by Legado" class="logo">
+    </div>
+  </header>
+
+  <!-- Indicador de Passos por Bolinhas (Padrão visual v-form-8) -->
+  <div class="steps-container" id="steps-indicator"></div>
+
+  <!-- Container Geral da Aplicação -->
+  <main class="app-container">
+
+    <!-- TELA 0 — Abertura -->
+    <section class="screen" id="screen-0">
+      <div class="screen-content">
+        <h1 class="abertura-title">Toda segunda-feira, um guia prático sobre <span class="accent-orange">marca e negócio</span>.</h1>
+        <p class="abertura-description">
+          Pegamos o que os melhores nomes do mercado ensinam e traduzimos em passo a passo aplicável — para empresa do seu tamanho, não para o Vale do Silício. Mais o radar da semana: o que aconteceu e o que muda para você.
+        </p>
+        <hr class="divider">
+        <div class="abertura-info">
+          <p class="highlight-text">Grupo fechado, só leitura. Você recebe o material e ninguém enche seu WhatsApp.</p>
+          <p class="support-text">Para donos, sócios e CEOs de empresa com time.</p>
+        </div>
+        <div class="action-container">
+          <button type="button" class="btn-solid" onclick="nextScreen()">Entrar no grupo</button>
+          <span class="btn-caption">Leva menos de um minuto.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- TELA 1 — Papel -->
+    <section class="screen" id="screen-1">
+      <div class="screen-content">
+        <h2 class="question-title">Qual é o seu <span class="accent-orange">papel</span> na empresa?</h2>
+        <div class="options-stack">
+          <button type="button" class="option-card" onclick="selectOption(1, 'Dono ou sócio')">
+            <span class="option-indicator"></span>
+            <span class="option-text">Dono ou sócio</span>
+          </button>
+          <button type="button" class="option-card" onclick="selectOption(1, 'CEO ou diretor')">
+            <span class="option-indicator"></span>
+            <span class="option-text">CEO ou diretor</span>
+          </button>
+          <button type="button" class="option-card" onclick="selectOption(1, 'Gestão ou coordenação')">
+            <span class="option-indicator"></span>
+            <span class="option-text">Gestão ou coordenação</span>
+          </button>
+          <button type="button" class="option-card" onclick="selectOption(1, 'Outro')">
+            <span class="option-indicator"></span>
+            <span class="option-text">Outro</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- TELA 2 — Tamanho do time -->
+    <section class="screen" id="screen-2">
+      <div class="screen-content">
+        <h2 class="question-title">Quantas <span class="accent-orange">pessoas</span> trabalham com você hoje?</h2>
+        <div class="options-stack">
+          <button type="button" class="option-card" onclick="selectOption(2, 'Só eu')">
+            <span class="option-indicator"></span>
+            <span class="option-text">Só eu</span>
+          </button>
+          <button type="button" class="option-card" onclick="selectOption(2, '2 a 4')">
+            <span class="option-indicator"></span>
+            <span class="option-text">2 a 4</span>
+          </button>
+          <button type="button" class="option-card" onclick="selectOption(2, '5 a 20')">
+            <span class="option-indicator"></span>
+            <span class="option-text">5 a 20</span>
+          </button>
+          <button type="button" class="option-card" onclick="selectOption(2, 'Mais de 20')">
+            <span class="option-indicator"></span>
+            <span class="option-text">Mais de 20</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- TELA 3 — Setor -->
+    <section class="screen" id="screen-3">
+      <div class="screen-content">
+        <h2 class="question-title">Em que <span class="accent-orange">setor</span> a empresa atua?</h2>
+        <div class="options-stack">
+          <button type="button" class="option-card" onclick="selectSectorOption(this, 'Tecnologia')">
+            <span class="option-indicator"></span>
+            <span class="option-text">Tecnologia</span>
+          </button>
+          <button type="button" class="option-card" onclick="selectSectorOption(this, 'Indústria')">
+            <span class="option-indicator"></span>
+            <span class="option-text">Indústria</span>
+          </button>
+          <button type="button" class="option-card" onclick="selectSectorOption(this, 'Franquia')">
+            <span class="option-indicator"></span>
+            <span class="option-text">Franquia</span>
+          </button>
+          <button type="button" class="option-card" onclick="selectSectorOption(this, 'Serviço B2B')">
+            <span class="option-indicator"></span>
+            <span class="option-text">Serviço B2B</span>
+          </button>
+          <button type="button" class="option-card" onclick="selectSectorOption(this, 'Produto ou varejo premium')">
+            <span class="option-indicator"></span>
+            <span class="option-text">Produto ou varejo premium</span>
+          </button>
+          <button type="button" class="option-card" onclick="selectSectorOption(this, 'Outro')">
+            <span class="option-indicator"></span>
+            <span class="option-text">Outro</span>
+          </button>
+        </div>
+        
+        <div id="outro-setor-container" class="sub-input-container" style="display: none;">
+          <div class="form-group" style="margin-bottom: 16px;">
+            <input type="text" id="input-setor-outro" class="text-input" placeholder="Qual?">
+          </div>
+          <button type="button" class="btn-solid" onclick="submitSectorOutro()">Continuar</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- TELA 4 — A trava -->
+    <section class="screen" id="screen-4">
+      <div class="screen-content">
+        <h2 class="question-title" style="margin-bottom: 8px;">O que mais <span class="accent-orange">trava</span> o crescimento da empresa hoje?</h2>
+        <span class="helper-label" style="display: block; margin-bottom: 16px;">Escolha a que mais pesa.</span>
+        <div class="options-stack">
+          <button type="button" class="option-card double-line" onclick="selectOption(4, 'Pouca gente conhece a marca')">
+            <span class="option-indicator"></span>
+            <span class="option-text">Pouca gente conhece a marca</span>
+          </button>
+          <button type="button" class="option-card double-line" onclick="selectOption(4, 'Conhecem, mas escolhem o concorrente mais barato')">
+            <span class="option-indicator"></span>
+            <span class="option-text">Conhecem, mas escolhem o concorrente mais barato</span>
+          </button>
+          <button type="button" class="option-card double-line" onclick="selectOption(4, 'Vendemos, mas depende de mim estar na sala')">
+            <span class="option-indicator"></span>
+            <span class="option-text">Vendemos, mas depende de mim estar na sala</span>
+          </button>
+          <button type="button" class="option-card double-line" onclick="selectOption(4, 'O time não fala a mesma língua da marca')">
+            <span class="option-indicator"></span>
+            <span class="option-text">O time não fala a mesma língua da marca</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- TELA 5 — Os 90 dias -->
+    <section class="screen" id="screen-5">
+      <div class="screen-content">
+        <h2 class="question-title">Se desse para resolver uma coisa da sua marca nos próximos <span class="accent-orange">90 dias</span>, qual seria?</h2>
+        <div class="form-group" style="margin-bottom: 24px;">
+          <span class="helper-label">Opcional. Escreva do seu jeito.</span>
+          <textarea id="input-noventa-dias" class="textarea-field" rows="3" placeholder="Escreva aqui..."></textarea>
+        </div>
+        <div class="btn-group-row">
+          <button type="button" class="btn-solid" onclick="submitNoventaDias()">Continuar</button>
+          <button type="button" class="btn-text" onclick="skipNoventaDias()">Pular</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- TELA 6 — Contato -->
+    <section class="screen" id="screen-6">
+      <div class="screen-content">
+        <h2 class="question-title">Só falta saber <span class="accent-orange">quem é você</span>.</h2>
+        
+        <div class="form-group" id="group-nome">
+          <label for="input-nome">Nome</label>
+          <input type="text" id="input-nome" class="text-input" placeholder="Seu nome completo">
+          <span class="error-msg" id="error-nome"></span>
+        </div>
+        
+        <div class="form-group" id="group-empresa">
+          <label for="input-empresa">Empresa</label>
+          <input type="text" id="input-empresa" class="text-input" placeholder="Nome da sua empresa">
+          <span class="error-msg" id="error-empresa"></span>
+        </div>
+        
+        <div class="form-group" id="group-whatsapp">
+          <label for="input-whatsapp">WhatsApp</label>
+          <input type="tel" id="input-whatsapp" class="text-input" placeholder="(00) 00000-0000" inputmode="numeric">
+          <span class="error-msg" id="error-whatsapp"></span>
+        </div>
+        
+        <div class="action-container" style="margin-top: 12px;">
+          <button type="button" class="btn-solid" onclick="submitContato()">Entrar no grupo</button>
+          <span class="btn-caption" style="margin-top: 12px;">Usamos seu WhatsApp só para o grupo e para falar com você. Nada de disparo em massa.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- TELA 7 — Confirmação -->
+    <section class="screen" id="screen-7">
+      <div class="screen-content">
+        <h2 class="confirmation-title">Você está <span class="accent-orange">dentro</span>.</h2>
+        
+        <div class="quote-container">
+          <span class="quote-label">Você marcou:</span>
+          <blockquote class="dynamic-quote" id="dynamic-quote-text">
+            "Conhecem, mas escolhem o concorrente mais barato."
+          </blockquote>
+        </div>
+        
+        <p class="confirmation-support">O material de segunda é sobre exatamente isso.</p>
+        
+        <div class="action-container" style="margin-top: 24px;">
+          <a href="#" id="whatsapp-link" target="_blank" class="btn-solid" rel="noopener noreferrer">Abrir o grupo no WhatsApp</a>
+          <span class="btn-caption" style="margin-top: 12px;">
+            Toda segunda chega o guia da semana.<br>
+            Fora isso, o grupo fica quieto.
+          </span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ----------------------------------------------------
+       JAVASCRIPT LOGIC
+       ---------------------------------------------------- -->
+  <script>
+    // URLs CONFIGURÁVEIS (Conforme item 4 do brief)
+    // Insira aqui a URL do seu webhook (Google Apps Script, Make, n8n, etc.)
+    const ENDPOINT_URL = ""; 
+    // Link final de acesso ao grupo do WhatsApp
+    const WHATSAPP_URL = "https://chat.whatsapp.com/KJsUH6EaHdsDIMR26JgLV2"; 
+
+    // Estado Geral da Página (Apenas na memória, sem localStorage)
+    const state = {
+      nome: '',
+      empresa: '',
+      whatsapp: '',
+      papel: '',
+      tamanho_time: '',
+      setor: '',
+      setor_outro: '',
+      trava: '',
+      noventa_dias: '',
+      origem: 'direto',
+      timestamp: ''
+    };
+
+    let currentScreenIndex = 0;
+    const totalScreens = 8;
+
+    // Detecta origem via URL (?origem=...)
+    function parseOrigem() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const originalParam = urlParams.get('origem');
+      if (originalParam) {
+        const allowed = ['instagram', 'linkedin', 'evento', 'indicacao', 'pipe'];
+        const val = originalParam.toLowerCase().trim();
+        if (allowed.includes(val)) {
+          state.origem = val;
+        }
+      }
+    }
+
+    // Inicialização da Página
+    document.addEventListener('DOMContentLoaded', () => {
+      parseOrigem();
+      setupWhatsAppMask();
+      setupInputErrorClearing();
+      setupBackBtn();
+      
+      // Inicia na Tela 0
+      goToScreen(0);
+    });
+
+    // Mascaramento em tempo real do campo WhatsApp
+    function setupWhatsAppMask() {
+      const whatsappInput = document.getElementById('input-whatsapp');
+      if (!whatsappInput) return;
+
+      whatsappInput.addEventListener('input', (e) => {
+        let value = e.target.value;
+        // Remove tudo que não for dígito
+        let clean = value.replace(/\D/g, '');
+        
+        if (clean.length > 11) {
+          clean = clean.substring(0, 11);
+        }
+
+        // Formata em tempo real (XX) XXXXX-XXXX
+        let formatted = '';
+        if (clean.length > 0) {
+          formatted = `(${clean.substring(0, 2)}`;
+        }
+        if (clean.length > 2) {
+          formatted += `) ${clean.substring(2, 7)}`;
+        }
+        if (clean.length > 7) {
+          formatted += `-${clean.substring(7, 11)}`;
+        }
+        
+        e.target.value = formatted;
+      });
+    }
+
+    // Limpa estado de erro ao digitar nos campos
+    function setupInputErrorClearing() {
+      const inputs = ['input-nome', 'input-empresa', 'input-whatsapp'];
+      inputs.forEach(id => {
+        const input = document.getElementById(id);
+        if (input) {
+          input.addEventListener('input', () => {
+            const group = input.closest('.form-group');
+            if (group) {
+              group.classList.remove('invalid');
+            }
+          });
+        }
+      });
+    }
+
+    // Configura evento do botão Voltar
+    function setupBackBtn() {
+      const backBtn = document.getElementById('back-btn');
+      backBtn.addEventListener('click', () => {
+        if (currentScreenIndex > 0) {
+          goToScreen(currentScreenIndex - 1);
+        }
+      });
+    }
+
+    // Gerencia o preenchimento da barra de progresso no topo (Invisível, mas mantida)
+    function updateProgressBar(index) {
+      const progressBar = document.getElementById('progress-bar');
+      const progress = (index / (totalScreens - 1)) * 100;
+      if (progressBar) progressBar.style.width = `${progress}%`;
+    }
+
+    // Atualiza o indicador de passos em bolinhas na tela
+    function updateStepsIndicator(screenIndex) {
+      const container = document.getElementById('steps-indicator');
+      if (!container) return;
+      
+      // Apenas exibe de Screen 1 (Papel) até 6 (Contato)
+      if (screenIndex >= 1 && screenIndex <= 6) {
+        container.style.display = 'flex';
+      } else {
+        container.style.display = 'none';
+        return;
+      }
+      
+      // Mapeia index da tela para índice do passo (0 a 4)
+      let stepIndex = 0;
+      if (screenIndex === 1) stepIndex = 0;
+      else if (screenIndex === 2) stepIndex = 1;
+      else if (screenIndex === 3) stepIndex = 2;
+      else if (screenIndex === 4 || screenIndex === 5) stepIndex = 3;
+      else if (screenIndex === 6) stepIndex = 4;
+      
+      const steps = ["Papel", "Time", "Setor", "Marca", "Contato"];
+      container.innerHTML = '';
+      
+      steps.forEach((label, i) => {
+        // Elemento do Passo
+        const stepItem = document.createElement('div');
+        stepItem.className = 'step-item';
+        if (i === stepIndex) {
+          stepItem.classList.add('active');
+        } else if (i < stepIndex) {
+          stepItem.classList.add('completed');
+        }
+        
+        // Círculo com o número ou checkmark
+        const stepDot = document.createElement('div');
+        stepDot.className = 'step-dot';
+        if (i < stepIndex) {
+          stepDot.innerHTML = '✓';
+        } else {
+          stepDot.innerText = i + 1;
+        }
+        
+        // Rótulo de texto
+        const stepLabel = document.createElement('span');
+        stepLabel.className = 'step-label';
+        stepLabel.innerText = label;
+        
+        stepItem.appendChild(stepDot);
+        stepItem.appendChild(stepLabel);
+        container.appendChild(stepItem);
+        
+        // Divisor conectando os círculos
+        if (i < steps.length - 1) {
+          const stepLine = document.createElement('div');
+          stepLine.className = 'step-line';
+          if (i < stepIndex) {
+            stepLine.classList.add('completed');
+          }
+          container.appendChild(stepLine);
+        }
+      });
+    }
+
+    // Atualiza estado visual do cabeçalho (Botão voltar e recuo do logotipo)
+    function updateHeader(index) {
+      const header = document.getElementById('app-header');
+      const backBtn = document.getElementById('back-btn');
+      
+      // Botão voltar fica ativo da Tela 1 até a Tela 6 (Contato)
+      if (index >= 1 && index <= 6) {
+        backBtn.classList.add('visible');
+        header.classList.add('has-back');
+      } else {
+        backBtn.classList.remove('visible');
+        header.classList.remove('has-back');
+      }
+    }
+
+    // Sincroniza os dados do estado com os elementos na tela ao voltar/avançar
+    function syncUIWithState(index) {
+      if (index === 1) {
+        markSelectedCard(1, state.papel);
+      } else if (index === 2) {
+        markSelectedCard(2, state.tamanho_time);
+      } else if (index === 3) {
+        markSelectedCard(3, state.setor);
+        const outroContainer = document.getElementById('outro-setor-container');
+        const inputOutro = document.getElementById('input-setor-outro');
+        if (state.setor === 'Outro') {
+          outroContainer.style.display = 'block';
+          inputOutro.value = state.setor_outro;
+        } else {
+          outroContainer.style.display = 'none';
+          inputOutro.value = '';
+        }
+      } else if (index === 4) {
+        markSelectedCard(4, state.trava);
+      } else if (index === 5) {
+        document.getElementById('input-noventa-dias').value = state.noventa_dias;
+      } else if (index === 6) {
+        document.getElementById('input-nome').value = state.nome;
+        document.getElementById('input-empresa').value = state.empresa;
+        document.getElementById('input-whatsapp').value = state.whatsapp;
+      } else if (index === 7) {
+        // Alimenta o texto dinâmico da tela de confirmação com a trava selecionada na Tela 4
+        const quoteText = document.getElementById('dynamic-quote-text');
+        quoteText.innerText = `"${state.trava}"`;
+        // Ajusta link do WhatsApp no botão
+        document.getElementById('whatsapp-link').href = WHATSAPP_URL;
+      }
+    }
+
+    // Coloca a classe 'selected' no card correspondente ao valor no estado
+    function markSelectedCard(screenIndex, value) {
+      const screen = document.getElementById(`screen-${screenIndex}`);
+      if (!screen) return;
+      const cards = screen.querySelectorAll('.option-card');
+      cards.forEach(card => {
+        const textNode = card.querySelector('.option-text');
+        if (textNode && textNode.innerText.trim() === value) {
+          card.classList.add('selected');
+        } else {
+          card.classList.remove('selected');
+        }
+      });
+    }
+
+    // Transição de Telas
+    function goToScreen(index) {
+      if (index < 0 || index >= totalScreens) return;
+      
+      const screens = document.querySelectorAll('.screen');
+      const currentScreen = screens[currentScreenIndex];
+      const nextScreen = screens[index];
+      
+      const isReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const duration = isReduced ? 0 : 200;
+      const goingForward = index > currentScreenIndex;
+      
+      // Sincroniza valores do estado antes de exibir
+      syncUIWithState(index);
+      
+      // Atualiza progresso e cabeçalho
+      updateHeader(index);
+      updateProgressBar(index);
+      updateStepsIndicator(index);
+      
+      if (currentScreen && currentScreen !== nextScreen) {
+        // Deslocamento e fade-out da tela atual
+        currentScreen.style.opacity = '0';
+        currentScreen.style.transform = isReduced 
+          ? 'none' 
+          : (goingForward ? 'translateY(-8px)' : 'translateY(8px)');
+        
+        setTimeout(() => {
+          currentScreen.style.display = 'none';
+          currentScreen.classList.remove('active');
+          
+          // Configura o ponto inicial da nova tela
+          nextScreen.style.display = 'flex';
+          nextScreen.style.opacity = '0';
+          nextScreen.style.transform = isReduced 
+            ? 'none' 
+            : (goingForward ? 'translateY(8px)' : 'translateY(-8px)');
+          
+          // Force layout reflow
+          nextScreen.offsetHeight;
+          
+          // Anima entrada da nova tela
+          nextScreen.style.opacity = '1';
+          nextScreen.style.transform = 'translateY(0)';
+          nextScreen.classList.add('active');
+          
+          currentScreenIndex = index;
+        }, duration);
+      } else {
+        // Entrada inicial sem animação de saída
+        nextScreen.style.display = 'flex';
+        nextScreen.offsetHeight;
+        nextScreen.style.opacity = '1';
+        nextScreen.style.transform = 'translateY(0)';
+        nextScreen.classList.add('active');
+        currentScreenIndex = index;
+      }
+    }
+
+    function nextScreen() {
+      goToScreen(currentScreenIndex + 1);
+    }
+
+    // Seleção de opções (Telas 1, 2 e 4)
+    function selectOption(screenNum, value) {
+      if (screenNum === 1) state.papel = value;
+      else if (screenNum === 2) state.tamanho_time = value;
+      else if (screenNum === 4) state.trava = value;
+      
+      // Destaca visualmente a selecionada
+      markSelectedCard(screenNum, value);
+      
+      // Avança sozinho após 250ms
+      setTimeout(() => {
+        goToScreen(currentScreenIndex + 1);
+      }, 250);
+    }
+
+    // Seleção na Tela 3 (Setor) - Comporta expansão se "Outro"
+    function selectSectorOption(element, value) {
+      const cards = document.querySelectorAll('#screen-3 .option-card');
+      cards.forEach(c => c.classList.remove('selected'));
+      
+      element.classList.add('selected');
+      state.setor = value;
+      
+      const outroContainer = document.getElementById('outro-setor-container');
+      const inputOutro = document.getElementById('input-setor-outro');
+      
+      if (value === 'Outro') {
+        outroContainer.style.display = 'block';
+        inputOutro.focus();
+      } else {
+        outroContainer.style.display = 'none';
+        state.setor_outro = '';
+        inputOutro.value = '';
+        setTimeout(() => {
+          goToScreen(currentScreenIndex + 1);
+        }, 250);
+      }
+    }
+
+    // Avanço manual no setor "Outro"
+    function submitSectorOutro() {
+      const inputOutro = document.getElementById('input-setor-outro');
+      const val = inputOutro.value.trim();
+      if (val === '') {
+        inputOutro.focus();
+        return;
+      }
+      state.setor_outro = val;
+      goToScreen(currentScreenIndex + 1);
+    }
+
+    // Ações da Tela 5 (Os 90 dias)
+    function submitNoventaDias() {
+      state.noventa_dias = document.getElementById('input-noventa-dias').value.trim();
+      goToScreen(currentScreenIndex + 1);
+    }
+
+    // Função de Pular para Tela 5
+    function skipNoventaDias() {
+      state.noventa_dias = '';
+      document.getElementById('input-noventa-dias').value = '';
+      goToScreen(currentScreenIndex + 1);
+    }
+
+    // Validação e Envio da Tela 6 (Contato)
+    function submitContato() {
+      const nomeInput = document.getElementById('input-nome');
+      const empresaInput = document.getElementById('input-empresa');
+      const whatsappInput = document.getElementById('input-whatsapp');
+      
+      const nomeVal = nomeInput.value.trim();
+      const empresaVal = empresaInput.value.trim();
+      const whatsappVal = whatsappInput.value.trim();
+      const whatsappDigits = whatsappVal.replace(/\D/g, '');
+      
+      let isValid = true;
+      
+      // Limpa validações anteriores
+      document.querySelectorAll('.form-group').forEach(g => {
+        g.classList.remove('invalid');
+      });
+      
+      // Valida Nome
+      if (nomeVal === '') {
+        const group = document.getElementById('group-nome');
+        group.classList.add('invalid');
+        document.getElementById('error-nome').innerText = 'Falta preencher seu nome.';
+        isValid = false;
+      }
+      
+      // Valida Empresa
+      if (empresaVal === '') {
+        const group = document.getElementById('group-empresa');
+        group.classList.add('invalid');
+        document.getElementById('error-empresa').innerText = 'Falta preencher sua empresa.';
+        isValid = false;
+      }
+      
+      // Valida WhatsApp
+      if (whatsappDigits === '') {
+        const group = document.getElementById('group-whatsapp');
+        group.classList.add('invalid');
+        document.getElementById('error-whatsapp').innerText = 'Falta preencher seu WhatsApp.';
+        isValid = false;
+      } else if (whatsappDigits.length < 9) {
+        const group = document.getElementById('group-whatsapp');
+        group.classList.add('invalid');
+        document.getElementById('error-whatsapp').innerText = 'Falta o DDD ou número incompleto.';
+        isValid = false;
+      } else if (whatsappDigits.length === 9) {
+        const group = document.getElementById('group-whatsapp');
+        group.classList.add('invalid');
+        document.getElementById('error-whatsapp').innerText = 'Falta o DDD.';
+        isValid = false;
+      } else if (whatsappDigits.length < 11) {
+        const group = document.getElementById('group-whatsapp');
+        group.classList.add('invalid');
+        document.getElementById('error-whatsapp').innerText = 'Número incompleto.';
+        isValid = false;
+      }
+      
+      if (!isValid) {
+        // Foca no primeiro elemento inválido
+        const firstInvalid = document.querySelector('.form-group.invalid input');
+        if (firstInvalid) firstInvalid.focus();
+        return;
+      }
+      
+      // Alimenta estado com valores válidos
+      state.nome = nomeVal;
+      state.empresa = empresaVal;
+      state.whatsapp = whatsappVal;
+      
+      // Efetua disparo dos dados
+      sendDataPayload();
+    }
+
+    // Envio POST JSON
+    async function sendDataPayload() {
+      state.timestamp = new Date().toISOString();
+      
+      console.log('Payload disparado:', state);
+      
+      if (ENDPOINT_URL) {
+        try {
+          const response = await fetch(ENDPOINT_URL, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(state)
+          });
+          
+          if (!response.ok) {
+            console.warn('Servidor retornou erro no recebimento do payload:', response.statusText);
+          }
+        } catch (err) {
+          console.error('Falha crítica de rede ao enviar payload para endpoint:', err);
+        }
+      }
+      
+      // Prossegue para a confirmação de qualquer forma para não reter a experiência do lead
+      goToScreen(7);
+    }
+  </script>
+</body>
+</html>

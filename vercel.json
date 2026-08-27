@@ -1,0 +1,21 @@
+{
+  "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/marcas-e-negocios-grupo",
+      "destination": "https://chat.whatsapp.com/KJsUH6EaHdsDIMR26JgLV2",
+      "permanent": false
+    },
+    {
+      "source": "/marcas-e-negocios-whatsapp",
+      "destination": "https://chat.whatsapp.com/KJsUH6EaHdsDIMR26JgLV2",
+      "permanent": false
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/marcas-e-negocios-formulario",
+      "destination": "/marcas-negocios"
+    }
+  ]
+}
