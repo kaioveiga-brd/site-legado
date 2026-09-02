@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editor Árvore de Links | Legado Branding</title>
+  <link rel="icon" href="../favicon.png" type="image/png">
+  <script>
+    if (location.pathname === '/links' || location.pathname === '/links/admin') {
+      const b = document.createElement('base');
+      b.href = '/links/';
+      document.head.appendChild(b);
+    }
+  </script>
+  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- AUTHENTICATION OVERLAY (SENHA DE ACESSO) -->
+  <div class="auth-overlay" id="authOverlay">
+    <div class="auth-modal">
+      <div class="auth-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+      </div>
+      <h2 class="auth-title">Editor Legado</h2>
+      <p class="auth-desc">Digite a senha de administrador para gerenciar a árvore de links.</p>
+      
+      <div class="auth-input-group">
+        <input type="password" id="authPassword" class="auth-input" placeholder="••••••••" autofocus>
+        <div class="auth-error" id="authError"></div>
+        <button id="authSubmit" class="btn btn-primary" style="padding: 12px;">Entrar no Painel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADMIN NAVBAR -->
+  <header class="admin-navbar">
+    <div class="admin-nav-left">
+      <a href="index.html" class="admin-logo" target="_blank" title="Ver árvore pública">
+        <img src="assets/logo-legado.png" alt="Legado Branding" style="height: 28px; width: auto; object-fit: contain;">
+      </a>
+      <span class="admin-badge-role">Editor Drag-and-Drop</span>
+    </div>
+
+    <div class="admin-nav-actions">
+      <a href="index.html" target="_blank" class="btn btn-secondary" title="Abrir página pública em nova aba">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        <span>Ver Site</span>
+      </a>
+
+      <button onclick="downloadConfigJson()" class="btn btn-secondary" title="Baixar arquivo links-data.json para deploy">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+        <span>Baixar JSON</span>
+      </button>
+
+      <button onclick="copyConfigJson()" class="btn btn-ghost" title="Copiar código JSON">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+        <span>Copiar</span>
+      </button>
+
+      <button onclick="resetConfig()" class="btn btn-ghost" title="Restaurar configurações de fábrica">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
+        <span>Restaurar</span>
+      </button>
+
+      <button onclick="saveConfig()" class="btn btn-primary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+        <span>Salvar Alterações</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- MOBILE TABS -->
+  <div class="mobile-tab-bar" id="mobileTabBar">
+    <button class="mobile-tab-btn active" id="tabEditor" onclick="switchTab('editor')">Editar Conteúdo</button>
+    <button class="mobile-tab-btn" id="tabPreview" onclick="switchTab('preview')">Preview Mobile</button>
+  </div>
+
+  <!-- WORKSPACE -->
+  <main class="admin-workspace">
+    <!-- LEFT COLUMN: EDITOR -->
+    <div class="editor-pane" id="editorPane">
+      
+      <!-- HERO CONFIGURATION SECTION -->
+      <section class="section-card">
+        <div class="section-header">
+          <h2 class="section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            Seção Hero (Topo)
+          </h2>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group full-width">
+            <label class="form-label">Título Principal (Prefixo)</label>
+            <input type="text" id="heroPrefix" class="form-input" placeholder="Branding estratégico para marcas com ">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Palavra em Destaque (Laranja)</label>
+            <input type="text" id="heroHighlight" class="form-input" placeholder="direção">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Sufixo do Título</label>
+            <input type="text" id="heroSuffix" class="form-input" placeholder=".">
+          </div>
+
+          <div class="form-group full-width">
+            <label class="form-label">Subtítulo / Posicionamento</label>
+            <textarea id="heroSubtitle" class="form-textarea" placeholder="Revelamos o posicionamento que faz a marca vender..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Tags (separadas por vírgula)</label>
+            <input type="text" id="heroTags" class="form-input" placeholder="Estratégia, Design, Identidade">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Caminho da Foto do Kaio</label>
+            <input type="text" id="heroPhotoUrl" class="form-input" placeholder="assets/kaio-photo.png">
+          </div>
+        </div>
+      </section>
+
+      <!-- BLOCKS MANAGEMENT SECTION (DRAG-AND-DROP) -->
+      <section class="section-card">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+              Blocos da Árvore de Links
+            </h2>
+            <p style="font-size: 12px; color: var(--branco-mutado); margin-top: 4px;">
+              Arraste o ícone <strong style="color: #fff;">⋮⋮</strong> para reordenar a prioridade dos botões.
+            </p>
+          </div>
+
+          <button onclick="addNewBlock()" class="btn btn-secondary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            <span>Adicionar Bloco</span>
+          </button>
+        </div>
+
+        <!-- DRAGGABLE BLOCKS LIST -->
+        <div class="blocks-list" id="blocksEditorList">
+          <!-- Populated by admin.js -->
+        </div>
+      </section>
+
+      <!-- FOOTER & SOCIAL LINKS SECTION -->
+      <section class="section-card">
+        <div class="section-header">
+          <h2 class="section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+            Rodapé & Redes Sociais
+          </h2>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group full-width">
+            <label class="form-label">Texto de Direitos Autorais</label>
+            <input type="text" id="footerCopyright" class="form-input" placeholder="© 2026 Legado Studio. Todos os direitos reservados.">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Instagram Link</label>
+            <input type="text" id="socialInstagram" class="form-input" placeholder="https://instagram.com/studio.legado">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">LinkedIn Link</label>
+            <input type="text" id="socialLinkedin" class="form-input" placeholder="https://www.linkedin.com/company/legadobranding/">
+          </div>
+
+          <div class="form-group full-width">
+            <label class="form-label">E-mail de Contato</label>
+            <input type="text" id="socialEmail" class="form-input" placeholder="mailto:contato@legadobranding.com.br">
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- RIGHT COLUMN: LIVE MOBILE PREVIEW -->
+    <div class="preview-pane" id="previewPane">
+      <div class="preview-top-bar">
+        <div class="preview-title">
+          <span class="preview-title-dot"></span>
+          <span>Live Mobile Preview</span>
+        </div>
+        <button onclick="syncLivePreview()" class="btn btn-ghost" style="padding: 4px 8px; font-size: 11px;" title="Recarregar preview">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 12px; height: 12px;"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
+          <span>Atualizar</span>
+        </button>
+      </div>
+
+      <div class="phone-mockup-frame">
+        <div class="phone-island"></div>
+        <iframe src="index.html" class="preview-iframe" id="previewIframe"></iframe>
+      </div>
+    </div>
+  </main>
+
+  <script src="admin.js"></script>
+</body>
+</html>

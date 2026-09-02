@@ -1,0 +1,98 @@
+{
+  "hero": {
+    "titlePrefix": "Branding estratégico para marcas com ",
+    "titleHighlight": "direção",
+    "titleSuffix": ".",
+    "subtitle": "Revelamos o posicionamento que faz a marca vender — e traduzimos isso em estratégia, identidade e ativação.",
+    "tags": ["Estratégia", "Design", "Identidade"],
+    "photoUrl": "assets/kaio-photo.png"
+  },
+  "blocks": [
+    {
+      "id": "block-site",
+      "active": true,
+      "featured": true,
+      "badge": "★ DESTAQUE",
+      "icon": "globe",
+      "title": "Nosso site",
+      "description": "Conheça o método da Legado: como transformamos empresas em marcas que vendem, do posicionamento à ativação.",
+      "buttonText": "Acesse o site",
+      "buttonType": "circle-arrow",
+      "url": "https://legadobranding.com.br",
+      "bgImage": "assets/3d-destaque.jpg"
+    },
+    {
+      "id": "block-contato",
+      "active": true,
+      "featured": false,
+      "badge": "",
+      "icon": "message-circle",
+      "title": "Fale com a gente",
+      "description": "Vamos entender onde sua marca pode chegar. Chame no WhatsApp.",
+      "buttonText": "Enviar mensagem",
+      "buttonType": "arrow",
+      "url": "https://wa.me/5519989808383",
+      "bgImage": "assets/3d-card-contact.jpg"
+    },
+    {
+      "id": "block-grupo",
+      "active": true,
+      "featured": false,
+      "badge": "COMUNIDADE",
+      "icon": "users",
+      "logoImg": "assets/logo-marcas-negocios.png",
+      "title": "Grupo Marcas e Negócios",
+      "description": "Conteúdo de marca e negócio para empresários que querem crescer, cobrar mais e sair da guerra de preço.",
+      "buttonText": "Entrar no grupo",
+      "buttonType": "arrow",
+      "url": "https://legadobranding.com.br/marcas-negocios",
+      "bgImage": "assets/3d-card-community.jpg"
+    },
+    {
+      "id": "block-artigos",
+      "active": true,
+      "featured": false,
+      "badge": "CONTEÚDO",
+      "icon": "book-open",
+      "title": "Artigos",
+      "description": "Ideias sobre marca, posicionamento e crescimento — para quem constrói negócio de verdade.",
+      "buttonText": "Acessar artigos",
+      "buttonType": "arrow",
+      "url": "https://www.linkedin.com/company/legadobranding/",
+      "bgImage": "assets/3d-card-articles.jpg"
+    },
+    {
+      "id": "block-agenda",
+      "active": true,
+      "featured": false,
+      "badge": "",
+      "icon": "calendar",
+      "title": "Agendar conversa",
+      "description": "Marque um horário pra gente falar sobre a sua marca e o seu próximo passo.",
+      "buttonText": "Agendar",
+      "buttonType": "arrow",
+      "url": "https://calendar.app.google/TMKVBqm6VCWdFixg6",
+      "bgImage": "assets/3d-card-agenda.jpg"
+    }
+  ],
+  "footer": {
+    "copyright": "© 2026 Legado Studio. Todos os direitos reservados.",
+    "social": [
+      {
+        "name": "Instagram",
+        "url": "https://instagram.com/studio.legado",
+        "icon": "instagram"
+      },
+      {
+        "name": "LinkedIn",
+        "url": "https://www.linkedin.com/company/legadobranding/",
+        "icon": "linkedin"
+      },
+      {
+        "name": "E-mail",
+        "url": "mailto:contato@legadobranding.com.br",
+        "icon": "mail"
+      }
+    ]
+  }
+}
