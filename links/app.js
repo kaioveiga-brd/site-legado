@@ -9,15 +9,42 @@ const DEFAULT_CONFIG = {
     titlePrefix: "Branding estratégico para marcas com ",
     titleHighlight: "direção",
     titleSuffix: ".",
-    subtitle: "Revelamos o posicionamento que faz a marca vender — e traduzimos isso em estratégia, identidade e ativação.",
+    subtitle: "Revelamos o posicionamento que faz a marca vender, e traduzimos isso em estratégia, identidade e ativação.",
     tags: ["Estratégia", "Design", "Identidade"],
     photoUrl: "assets/kaio-photo.png"
   },
   blocks: [
     {
-      id: "block-site",
+      id: "block-agenda",
       active: true,
       featured: true,
+      badge: "VAGAS GRATUITAS LIMITADAS",
+      icon: "calendar",
+      title: "Agendar conversa",
+      description: "Marque um horário pra gente falar sobre a sua marca e o seu próximo passo.",
+      buttonText: "Agendar",
+      buttonType: "arrow",
+      url: "https://calendar.app.google/TMKVBqm6VCWdFixg6",
+      bgImage: "assets/3d-card-community.jpg"
+    },
+    {
+      id: "block-grupo",
+      active: true,
+      featured: true,
+      badge: "COMUNIDADE",
+      icon: "users",
+      title: "Grupo Marcas e Negócios",
+      description: "Conteúdo de marca e negócio para empresários que querem crescer, cobrar mais e sair da guerra de preço.",
+      buttonText: "Preencha o formulário",
+      buttonType: "arrow",
+      url: "https://legadobranding.com.br/marcas-negocios",
+      bgImage: "assets/3d-card-articles.jpg",
+      logoImg: "assets/logo-marcas-negocios.png"
+    },
+    {
+      id: "block-site",
+      active: true,
+      featured: false,
       badge: "★ DESTAQUE",
       icon: "globe",
       title: "Nosso site",
@@ -31,7 +58,7 @@ const DEFAULT_CONFIG = {
       id: "block-contato",
       active: true,
       featured: false,
-      badge: "",
+      badge: "ORÇAMENTOS",
       icon: "message-circle",
       title: "Fale com a gente",
       description: "Vamos entender onde sua marca pode chegar. Chame no WhatsApp.",
@@ -39,20 +66,6 @@ const DEFAULT_CONFIG = {
       buttonType: "arrow",
       url: "https://wa.me/5519989808383",
       bgImage: "assets/3d-card-contact.jpg"
-    },
-    {
-      id: "block-grupo",
-      active: true,
-      featured: false,
-      badge: "COMUNIDADE",
-      icon: "users",
-      logoImg: "assets/logo-marcas-negocios.png",
-      title: "Grupo Marcas e Negócios",
-      description: "Conteúdo de marca e negócio para empresários que querem crescer, cobrar mais e sair da guerra de preço.",
-      buttonText: "Entrar no grupo",
-      buttonType: "arrow",
-      url: "https://legadobranding.com.br/marcas-negocios",
-      bgImage: "assets/3d-card-community.jpg"
     },
     {
       id: "block-artigos",
@@ -66,19 +79,6 @@ const DEFAULT_CONFIG = {
       buttonType: "arrow",
       url: "https://www.linkedin.com/company/legadobranding/",
       bgImage: "assets/3d-card-articles.jpg"
-    },
-    {
-      id: "block-agenda",
-      active: true,
-      featured: false,
-      badge: "",
-      icon: "calendar",
-      title: "Agendar conversa",
-      description: "Marque um horário pra gente falar sobre a sua marca e o seu próximo passo.",
-      buttonText: "Agendar",
-      buttonType: "arrow",
-      url: "https://calendar.app.google/TMKVBqm6VCWdFixg6",
-      bgImage: "assets/3d-card-agenda.jpg"
     }
   ],
   footer: {
@@ -109,39 +109,43 @@ const ICONS = {
  * Load configuration from localStorage or links-data.json
  */
 async function loadConfig() {
-  // 1. Check localStorage first (instant local preview of edits)
-  const localSaved = localStorage.getItem('legado_links_config');
-  if (localSaved) {
-    try {
-      const parsed = JSON.parse(localSaved);
-      if (parsed && parsed.blocks) {
-        const grupo = parsed.blocks.find(b => b.id === 'block-grupo');
-        if (grupo) {
-          grupo.logoImg = 'assets/logo-marcas-negocios.png';
+  const isPreview = window.self !== window.top || window.location.search.includes('preview=true');
+
+  // 1. If in preview mode (iframe inside admin or ?preview=true), load from localStorage immediately
+  if (isPreview) {
+    const localSaved = localStorage.getItem('legado_links_config');
+    if (localSaved) {
+      try {
+        const parsed = JSON.parse(localSaved);
+        if (parsed && parsed.blocks) {
+          return parsed;
         }
-        const agenda = parsed.blocks.find(b => b.id === 'block-agenda');
-        if (agenda && (!agenda.url || agenda.url === 'https://calendar.google.com')) {
-          agenda.url = 'https://calendar.app.google/TMKVBqm6VCWdFixg6';
-        }
-        return parsed;
+      } catch (e) {
+        console.warn("Could not parse preview local config:", e);
       }
-    } catch (e) {
-      console.warn("Could not parse local config:", e);
     }
   }
 
-  // 2. Try fetching links-data.json
+  // 2. Live page (Mobile / Public visitors): Always fetch fresh links-data.json from server
   try {
-    const res = await fetch('links-data.json?v=' + Date.now());
+    const res = await fetch('links-data.json?v=' + Date.now(), { cache: 'no-store' });
     if (res.ok) {
       const remoteData = await res.json();
       return remoteData;
     }
   } catch (err) {
-    console.info("Fetching links-data.json failed, falling back to embedded defaults:", err);
+    console.info("Fetching links-data.json failed, falling back to local/default:", err);
   }
 
-  // 3. Fallback to embedded default
+  // 3. Fallback to localStorage if offline, else DEFAULT_CONFIG
+  const localSaved = localStorage.getItem('legado_links_config');
+  if (localSaved) {
+    try {
+      const parsed = JSON.parse(localSaved);
+      if (parsed && parsed.blocks) return parsed;
+    } catch (e) {}
+  }
+
   return DEFAULT_CONFIG;
 }
 
@@ -252,7 +256,11 @@ function createFeaturedCard(block) {
       <div>
         ${block.badge ? `<div class="badge-destaque">${escapeHtml(block.badge)}</div>` : ''}
         <div class="featured-header-row" style="${block.badge ? 'margin-top: 10px;' : ''}">
-          <h2 class="featured-title">${escapeHtml(block.title)}</h2>
+          ${block.logoImg ? `
+            <img src="${escapeHtml(block.logoImg)}" alt="${escapeHtml(block.title)}" style="height: 32px; width: auto; max-width: 230px; object-fit: contain; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));">
+          ` : `
+            <h2 class="featured-title">${escapeHtml(block.title)}</h2>
+          `}
           <div class="circular-arrow-btn">
             ${ICONS['arrow-right']}
           </div>

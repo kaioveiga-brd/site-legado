@@ -3,15 +3,46 @@
     "titlePrefix": "Branding estratégico para marcas com ",
     "titleHighlight": "direção",
     "titleSuffix": ".",
-    "subtitle": "Revelamos o posicionamento que faz a marca vender — e traduzimos isso em estratégia, identidade e ativação.",
-    "tags": ["Estratégia", "Design", "Identidade"],
+    "subtitle": "Revelamos o posicionamento que faz a marca vender, e traduzimos isso em estratégia, identidade e ativação.",
+    "tags": [
+      "Estratégia",
+      "Design",
+      "Identidade"
+    ],
     "photoUrl": "assets/kaio-photo.png"
   },
   "blocks": [
     {
-      "id": "block-site",
+      "id": "block-agenda",
       "active": true,
       "featured": true,
+      "badge": "VAGAS GRATUITAS LIMITADAS",
+      "icon": "calendar",
+      "title": "Agendar conversa",
+      "description": "Marque um horário pra gente falar sobre a sua marca e o seu próximo passo.",
+      "buttonText": "Agendar",
+      "buttonType": "arrow",
+      "url": "https://calendar.app.google/TMKVBqm6VCWdFixg6",
+      "bgImage": "assets/3d-card-community.jpg"
+    },
+    {
+      "id": "block-grupo",
+      "active": true,
+      "featured": true,
+      "badge": "COMUNIDADE",
+      "icon": "users",
+      "title": "Grupo Marcas e Negócios",
+      "description": "Conteúdo de marca e negócio para empresários que querem crescer, cobrar mais e sair da guerra de preço.",
+      "buttonText": "Preencha o formulário",
+      "buttonType": "arrow",
+      "url": "https://legadobranding.com.br/marcas-negocios",
+      "bgImage": "assets/3d-card-articles.jpg",
+      "logoImg": "assets/logo-marcas-negocios.png"
+    },
+    {
+      "id": "block-site",
+      "active": true,
+      "featured": false,
       "badge": "★ DESTAQUE",
       "icon": "globe",
       "title": "Nosso site",
@@ -25,7 +56,7 @@
       "id": "block-contato",
       "active": true,
       "featured": false,
-      "badge": "",
+      "badge": "ORÇAMENTOS",
       "icon": "message-circle",
       "title": "Fale com a gente",
       "description": "Vamos entender onde sua marca pode chegar. Chame no WhatsApp.",
@@ -33,20 +64,6 @@
       "buttonType": "arrow",
       "url": "https://wa.me/5519989808383",
       "bgImage": "assets/3d-card-contact.jpg"
-    },
-    {
-      "id": "block-grupo",
-      "active": true,
-      "featured": false,
-      "badge": "COMUNIDADE",
-      "icon": "users",
-      "logoImg": "assets/logo-marcas-negocios.png",
-      "title": "Grupo Marcas e Negócios",
-      "description": "Conteúdo de marca e negócio para empresários que querem crescer, cobrar mais e sair da guerra de preço.",
-      "buttonText": "Entrar no grupo",
-      "buttonType": "arrow",
-      "url": "https://legadobranding.com.br/marcas-negocios",
-      "bgImage": "assets/3d-card-community.jpg"
     },
     {
       "id": "block-artigos",
@@ -60,19 +77,6 @@
       "buttonType": "arrow",
       "url": "https://www.linkedin.com/company/legadobranding/",
       "bgImage": "assets/3d-card-articles.jpg"
-    },
-    {
-      "id": "block-agenda",
-      "active": true,
-      "featured": false,
-      "badge": "",
-      "icon": "calendar",
-      "title": "Agendar conversa",
-      "description": "Marque um horário pra gente falar sobre a sua marca e o seu próximo passo.",
-      "buttonText": "Agendar",
-      "buttonType": "arrow",
-      "url": "https://calendar.app.google/TMKVBqm6VCWdFixg6",
-      "bgImage": "assets/3d-card-agenda.jpg"
     }
   ],
   "footer": {

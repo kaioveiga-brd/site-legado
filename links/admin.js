@@ -9,15 +9,42 @@ const DEFAULT_CONFIG = {
     titlePrefix: "Branding estratégico para marcas com ",
     titleHighlight: "direção",
     titleSuffix: ".",
-    subtitle: "Revelamos o posicionamento que faz a marca vender — e traduzimos isso em estratégia, identidade e ativação.",
+    subtitle: "Revelamos o posicionamento que faz a marca vender, e traduzimos isso em estratégia, identidade e ativação.",
     tags: ["Estratégia", "Design", "Identidade"],
     photoUrl: "assets/kaio-photo.png"
   },
   blocks: [
     {
-      id: "block-site",
+      id: "block-agenda",
       active: true,
       featured: true,
+      badge: "VAGAS GRATUITAS LIMITADAS",
+      icon: "calendar",
+      title: "Agendar conversa",
+      description: "Marque um horário pra gente falar sobre a sua marca e o seu próximo passo.",
+      buttonText: "Agendar",
+      buttonType: "arrow",
+      url: "https://calendar.app.google/TMKVBqm6VCWdFixg6",
+      bgImage: "assets/3d-card-community.jpg"
+    },
+    {
+      id: "block-grupo",
+      active: true,
+      featured: true,
+      badge: "COMUNIDADE",
+      icon: "users",
+      title: "Grupo Marcas e Negócios",
+      description: "Conteúdo de marca e negócio para empresários que querem crescer, cobrar mais e sair da guerra de preço.",
+      buttonText: "Preencha o formulário",
+      buttonType: "arrow",
+      url: "https://legadobranding.com.br/marcas-negocios",
+      bgImage: "assets/3d-card-articles.jpg",
+      logoImg: "assets/logo-marcas-negocios.png"
+    },
+    {
+      id: "block-site",
+      active: true,
+      featured: false,
       badge: "★ DESTAQUE",
       icon: "globe",
       title: "Nosso site",
@@ -31,7 +58,7 @@ const DEFAULT_CONFIG = {
       id: "block-contato",
       active: true,
       featured: false,
-      badge: "",
+      badge: "ORÇAMENTOS",
       icon: "message-circle",
       title: "Fale com a gente",
       description: "Vamos entender onde sua marca pode chegar. Chame no WhatsApp.",
@@ -39,20 +66,6 @@ const DEFAULT_CONFIG = {
       buttonType: "arrow",
       url: "https://wa.me/5519989808383",
       bgImage: "assets/3d-card-contact.jpg"
-    },
-    {
-      id: "block-grupo",
-      active: true,
-      featured: false,
-      badge: "COMUNIDADE",
-      icon: "users",
-      logoImg: "assets/logo-marcas-negocios.png",
-      title: "Grupo Marcas e Negócios",
-      description: "Conteúdo de marca e negócio para empresários que querem crescer, cobrar mais e sair da guerra de preço.",
-      buttonText: "Entrar no grupo",
-      buttonType: "arrow",
-      url: "https://legadobranding.com.br/marcas-negocios",
-      bgImage: "assets/3d-card-community.jpg"
     },
     {
       id: "block-artigos",
@@ -66,19 +79,6 @@ const DEFAULT_CONFIG = {
       buttonType: "arrow",
       url: "https://www.linkedin.com/company/legadobranding/",
       bgImage: "assets/3d-card-articles.jpg"
-    },
-    {
-      id: "block-agenda",
-      active: true,
-      featured: false,
-      badge: "",
-      icon: "calendar",
-      title: "Agendar conversa",
-      description: "Marque um horário pra gente falar sobre a sua marca e o seu próximo passo.",
-      buttonText: "Agendar",
-      buttonType: "arrow",
-      url: "https://calendar.app.google/TMKVBqm6VCWdFixg6",
-      bgImage: "assets/3d-card-agenda.jpg"
     }
   ],
   footer: {
@@ -530,12 +530,129 @@ function syncLivePreview() {
 }
 
 /**
- * Save Configuration Permanently
+ * Save Configuration Permanently to Browser LocalStorage
  */
 window.saveConfig = function() {
   localStorage.setItem('legado_links_config', JSON.stringify(currentConfig));
   syncLivePreview();
-  showToast("Alterações salvas com sucesso!");
+  showToast("Rascunho salvo no navegador! Clique em 'Publicar no Site' para colocar no ar.");
+};
+
+/**
+ * Open/Close GitHub Publish Modal
+ */
+window.publishToSite = function() {
+  const token = localStorage.getItem('legado_github_pat');
+  const modal = document.getElementById('githubModal');
+  const input = document.getElementById('githubTokenInput');
+  const status = document.getElementById('githubPublishStatus');
+  if (status) status.innerHTML = '';
+  
+  if (!token) {
+    if (modal) modal.style.display = 'flex';
+    if (input) input.focus();
+  } else {
+    executeGitHubPublish();
+  }
+};
+
+window.closeGitHubModal = function() {
+  const modal = document.getElementById('githubModal');
+  if (modal) modal.style.display = 'none';
+};
+
+/**
+ * Execute Direct Publish via GitHub API (Dispatches commit to main, which Vercel auto-deploys)
+ */
+window.executeGitHubPublish = async function() {
+  const input = document.getElementById('githubTokenInput');
+  let token = input ? input.value.trim() : '';
+  if (!token) {
+    token = localStorage.getItem('legado_github_pat') || '';
+  }
+
+  if (!token) {
+    const status = document.getElementById('githubPublishStatus');
+    if (status) status.innerHTML = '<span style="color:#FF6B6B;">Insira o seu token do GitHub.</span>';
+    return;
+  }
+
+  const btn = document.getElementById('btnConfirmPublish');
+  const btnTop = document.getElementById('btnPublish');
+  if (btn) btn.disabled = true;
+  if (btnTop) btnTop.disabled = true;
+
+  const status = document.getElementById('githubPublishStatus');
+  if (status) status.innerHTML = '<span style="color:var(--laranja);">Conectando ao GitHub e publicando...</span>';
+
+  try {
+    const repo = 'kaioveiga-brd/site-legado';
+    const path = 'links/links-data.json';
+    const getUrl = `https://api.github.com/repos/${repo}/contents/${path}`;
+
+    // 1. Get current file SHA
+    const getRes = await fetch(getUrl, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/vnd.github.v3+json'
+      }
+    });
+
+    if (getRes.status === 401 || getRes.status === 403) {
+      throw new Error('Token do GitHub inválido ou sem permissão de escrita no repositório.');
+    }
+
+    let sha = null;
+    if (getRes.ok) {
+      const data = await getRes.json();
+      sha = data.sha;
+    }
+
+    // 2. Prepare content Base64 (supporting Unicode UTF-8)
+    const jsonStr = JSON.stringify(currentConfig, null, 2);
+    const utf8Bytes = new TextEncoder().encode(jsonStr);
+    let binary = '';
+    for (let i = 0; i < utf8Bytes.length; i++) {
+      binary += String.fromCharCode(utf8Bytes[i]);
+    }
+    const b64 = btoa(binary);
+
+    // 3. Commit to GitHub
+    const putRes = await fetch(getUrl, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/vnd.github.v3+json'
+      },
+      body: JSON.stringify({
+        message: 'feat(links): update links tree configuration via admin editor',
+        content: b64,
+        sha: sha || undefined
+      })
+    });
+
+    if (!putRes.ok) {
+      const errData = await putRes.json().catch(() => ({}));
+      throw new Error(errData.message || 'Erro ao enviar commit ao GitHub.');
+    }
+
+    // Save token if successful
+    localStorage.setItem('legado_github_pat', token);
+    localStorage.setItem('legado_links_config', JSON.stringify(currentConfig));
+
+    closeGitHubModal();
+    showToast("🚀 Publicado no GitHub! A Vercel atualizará o site em ~15 segundos.");
+
+  } catch (err) {
+    if (status) {
+      status.innerHTML = `<span style="color:#FF6B6B;">${escapeHtml(err.message)}</span>`;
+    }
+    showToast("Erro ao publicar: " + err.message);
+  } finally {
+    if (btn) btn.disabled = false;
+    if (btnTop) btnTop.disabled = false;
+  }
 };
 
 /**

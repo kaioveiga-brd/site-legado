@@ -64,9 +64,14 @@
         <span>Restaurar</span>
       </button>
 
-      <button onclick="saveConfig()" class="btn btn-primary">
+      <button onclick="saveConfig()" class="btn btn-secondary" title="Salvar rascunho no navegador local">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
-        <span>Salvar Alterações</span>
+        <span>Salvar Rascunho</span>
+      </button>
+
+      <button onclick="publishToSite()" class="btn btn-primary" id="btnPublish" title="Publicar para todos os visitantes e mobile">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+        <span>Publicar no Site</span>
       </button>
     </div>
   </header>
@@ -202,6 +207,47 @@
       </div>
     </div>
   </main>
+
+  <!-- MODAL PUBLICAR / GITHUB INTEGRATION -->
+  <div class="auth-overlay" id="githubModal" style="display: none;">
+    <div class="auth-modal" style="max-width: 480px; text-align: left;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <div class="auth-icon" style="margin: 0; width: 40px; height: 40px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+          </div>
+          <h2 class="auth-title" style="margin: 0; font-size: 18px;">Publicar no Site Oficial</h2>
+        </div>
+        <button onclick="closeGitHubModal()" class="btn btn-ghost" style="padding: 4px;">✕</button>
+      </div>
+      
+      <p class="auth-desc" style="margin-bottom: 14px; font-size: 13px; line-height: 1.5;">
+        Para atualizar o site para <strong>todos os visitantes e no celular (Instagram)</strong> com 1 clique, você pode conectar o GitHub da Legado:
+      </p>
+
+      <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--borda); border-radius: 8px; padding: 12px; margin-bottom: 14px; font-size: 12px; color: var(--branco-mutado);">
+        <strong style="color: var(--branco);">Como obter o token (uma única vez):</strong><br>
+        1. Acesse <a href="https://github.com/settings/tokens?type=beta" target="_blank" style="color: var(--laranja);">GitHub &gt; Personal Access Tokens</a><br>
+        2. Crie um token com permissão de escrita em <code>site-legado</code>.<br>
+        3. Cole abaixo. O token fica salvo apenas no seu navegador.
+      </div>
+
+      <div class="form-group" style="margin-bottom: 14px;">
+        <label class="form-label" style="font-size: 12px;">GitHub Personal Access Token (PAT)</label>
+        <input type="password" id="githubTokenInput" class="form-input" placeholder="github_pat_...">
+        <div id="githubPublishStatus" style="font-size: 12px; margin-top: 6px;"></div>
+      </div>
+
+      <div style="display: flex; gap: 10px; justify-content: flex-end;">
+        <button onclick="downloadConfigJson(); closeGitHubModal();" class="btn btn-secondary" style="font-size: 13px;">
+          Baixar JSON Manual
+        </button>
+        <button onclick="executeGitHubPublish()" id="btnConfirmPublish" class="btn btn-primary" style="font-size: 13px;">
+          Conectar e Publicar
+        </button>
+      </div>
+    </div>
+  </div>
 
   <script src="admin.js"></script>
 </body>
