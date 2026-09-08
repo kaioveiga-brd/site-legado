@@ -1,0 +1,56 @@
+{
+  "comunidade": {
+    "nome": "Marcas & Negócios",
+    "subtitulo": "Biblioteca Oficial de Guias e Estudos Estratégicos",
+    "descricao": "Acervo exclusivo dos materiais semanais compartilhados na comunidade Marcas & Negócios por Legado Branding.",
+    "whatsappUrl": "https://chat.whatsapp.com/KJsUH6EaHdsDIMR26JgLV2",
+    "formularioUrl": "https://legadobranding.com.br/marcas-negocios"
+  },
+  "edicoes": [
+    {
+      "id": "edicao-03",
+      "numero": "03",
+      "destaque": true,
+      "badge": "NOVO • GUIA DA SEMANA",
+      "titulo": "Alfredo Soares — O canal é você",
+      "autor": "Alfredo Soares",
+      "tema": "Vendas & Posicionamento Pessoal",
+      "subtitulo": "Como transformar a voz do fundador no maior ativo de diferenciação, confiança e tração comercial da empresa.",
+      "capa": "assets/capa-edicao-03-alfredo-soares.png",
+      "pdf": "assets/edicao-03-alfredo-soares-o-canal-e-voce.pdf",
+      "data": "08 Set 2026",
+      "tempoLeitura": "6 min de leitura",
+      "paginas": 7
+    },
+    {
+      "id": "edicao-02",
+      "numero": "02",
+      "destaque": false,
+      "badge": "POSICIONAMENTO",
+      "titulo": "Cristina Junqueira — Inimigo comum",
+      "autor": "Cristina Junqueira",
+      "tema": "Branding de Ruptura & Narrativa",
+      "subtitulo": "O poder do contra-posicionamento: como unir seu público em torno de uma causa clara e sair da guerra de commodities.",
+      "capa": "assets/capa-edicao-02-cris-junqueira.png",
+      "pdf": "assets/edicao-02-cris-junqueira-inimigo-comum.pdf",
+      "data": "04 Set 2026",
+      "tempoLeitura": "7 min de leitura",
+      "paginas": 7
+    },
+    {
+      "id": "edicao-01",
+      "numero": "01",
+      "destaque": false,
+      "badge": "ESTRATÉGIA & GESTÃO",
+      "titulo": "Flávio Augusto — O custo invisível",
+      "autor": "Flávio Augusto",
+      "tema": "Decisão Executiva & Valor de Marca",
+      "subtitulo": "A matemática oculta do que você deixa na mesa ao adiar decisões difíceis e como construir relevância defensável.",
+      "capa": "assets/capa-edicao-01-flavio-augusto.png",
+      "pdf": "assets/edicao-01-flavio-augusto-o-custo-invisivel.pdf",
+      "data": "02 Set 2026",
+      "tempoLeitura": "6 min de leitura",
+      "paginas": 7
+    }
+  ]
+}

@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Acesso Exclusivo à Biblioteca de Guias | Marcas & Negócios</title>
+  <meta name="description" content="Desbloqueie acesso gratuito a todos os guias estratégicos da comunidade Marcas & Negócios.">
+  <link rel="icon" href="favicon.png" type="image/png">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-primary: #121212;
+      --bg-surface: #181818;
+      --bg-card: #161616;
+      --laranja: #E05A1C;
+      --laranja-hover: #F47340;
+      --laranja-glow: rgba(224, 90, 28, 0.35);
+      --branco: #F5F1EB;
+      --branco-suave: rgba(245, 241, 235, 0.85);
+      --branco-mutado: rgba(245, 241, 235, 0.55);
+      --linha: rgba(255, 255, 255, 0.08);
+      --linha-card: rgba(255, 255, 255, 0.07);
+      --font-serif: 'Petrona', Georgia, serif;
+      --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --radius-card: 18px;
+      --radius-badge: 100px;
+      --transition-smooth: all 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      background-color: var(--bg-primary);
+      color: var(--branco);
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      min-height: 100dvh;
+      background-color: var(--bg-primary);
+      background-image: 
+        radial-gradient(circle at 50% 8%, rgba(224, 90, 28, 0.2) 0%, transparent 45%),
+        radial-gradient(circle at 10% 85%, rgba(224, 90, 28, 0.12) 0%, transparent 40%),
+        linear-gradient(180deg, #101010 0%, #151515 50%, #0d0d0d 100%);
+      background-attachment: fixed;
+      display: flex;
+      justify-content: center;
+      padding: 20px 16px 60px;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 540px;
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* TOP HEADER */
+    .header {
+      text-align: center;
+      padding: 6px 0 2px;
+    }
+
+    .header-logo {
+      height: 40px;
+      width: auto;
+      max-width: 230px;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.7));
+    }
+
+    /* HERO INTRO */
+    .hero-box {
+      background: linear-gradient(180deg, rgba(28, 28, 28, 0.7) 0%, rgba(18, 18, 18, 0.9) 100%);
+      border: 1px solid var(--linha);
+      border-radius: var(--radius-card);
+      padding: 22px 20px 18px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.7);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-box::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 15%;
+      right: 15%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--laranja), transparent);
+    }
+
+    .pill-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(224, 90, 28, 0.12);
+      border: 1px solid rgba(224, 90, 28, 0.35);
+      color: var(--laranja);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      padding: 4px 12px;
+      border-radius: 100px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: 25px;
+      line-height: 1.25;
+      font-weight: 500;
+      color: var(--branco);
+      margin-bottom: 8px;
+    }
+
+    .hero-title .accent {
+      color: var(--laranja);
+      font-style: italic;
+    }
+
+    .hero-desc {
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--branco-suave);
+    }
+
+    /* ==========================================================================
+       CARROSSEL 3D EM CARTAS EMPILHADAS (ESTILO BARALHO)
+       ========================================================================== */
+    .cards-deck-section {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .cards-deck-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 4px;
+    }
+
+    .cards-deck-title {
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--branco-mutado);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .cards-deck-title svg {
+      color: var(--laranja);
+      width: 13px;
+      height: 13px;
+    }
+
+    .cards-deck-badge {
+      background: rgba(224, 90, 28, 0.15);
+      color: var(--laranja);
+      border: 1px solid rgba(224, 90, 28, 0.3);
+      font-size: 10.5px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: var(--radius-badge);
+    }
+
+    /* PALCO 3D */
+    .cards-deck-stage {
+      position: relative;
+      width: 100%;
+      height: 280px; /* Altura compacta para não empurrar o formulário */
+      perspective: 1100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+      touch-action: pan-y;
+    }
+
+    /* CADA CARTA INDIVIDUAL */
+    .deck-card {
+      position: absolute;
+      width: 88%;
+      max-width: 440px;
+      background: var(--bg-card);
+      border: 1px solid var(--linha-card);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      transition: 
+        transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.4s ease,
+        filter 0.4s ease,
+        box-shadow 0.45s ease;
+      cursor: pointer;
+    }
+
+    /* POSIÇÃO 1: CARTA ATIVA (NA FRENTE / DESTAQUE) */
+    .deck-card.is-active {
+      transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+      z-index: 10;
+      opacity: 1;
+      filter: blur(0px) brightness(1);
+      border-color: rgba(224, 90, 28, 0.5);
+      box-shadow: 0 18px 45px -8px rgba(0, 0, 0, 0.8), 0 0 24px rgba(224, 90, 28, 0.22);
+      pointer-events: auto;
+    }
+
+    /* POSIÇÃO 2: CARTA ANTERIOR (ATRÁS À ESQUERDA) */
+    .deck-card.is-prev {
+      transform: translate3d(-34px, 12px, -60px) scale(0.88) rotate(-4.5deg);
+      z-index: 5;
+      opacity: 0.62;
+      filter: blur(0.8px) brightness(0.68);
+      pointer-events: auto;
+    }
+
+    .deck-card.is-prev:hover {
+      opacity: 0.85;
+      transform: translate3d(-40px, 8px, -40px) scale(0.9) rotate(-3deg);
+    }
+
+    /* POSIÇÃO 3: CARTA PRÓXIMA (ATRÁS À DIREITA) */
+    .deck-card.is-next {
+      transform: translate3d(34px, 12px, -60px) scale(0.88) rotate(4.5deg);
+      z-index: 5;
+      opacity: 0.62;
+      filter: blur(0.8px) brightness(0.68);
+      pointer-events: auto;
+    }
+
+    .deck-card.is-next:hover {
+      opacity: 0.85;
+      transform: translate3d(40px, 8px, -40px) scale(0.9) rotate(3deg);
+    }
+
+    /* OUTRAS CARTAS (CASO HAJA MAIS) */
+    .deck-card.is-hidden {
+      transform: translate3d(0, 20px, -120px) scale(0.75);
+      z-index: 1;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* CAPA 2098 x 750 COM BLOQUEIO */
+    .deck-card-cover {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 2098 / 750;
+      overflow: hidden;
+      background: #141414;
+    }
+
+    .deck-card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: blur(1.5px) brightness(0.7);
+    }
+
+    .deck-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(16, 16, 16, 0.4) 0%, rgba(12, 12, 12, 0.82) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .deck-lock-pill {
+      background: rgba(18, 18, 18, 0.88);
+      border: 1px solid rgba(224, 90, 28, 0.55);
+      color: var(--branco);
+      padding: 6px 14px;
+      border-radius: var(--radius-badge);
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px);
+    }
+
+    .deck-lock-pill svg {
+      color: var(--laranja);
+      width: 12px;
+      height: 12px;
+    }
+
+    /* CONTEÚDO DO CARD */
+    .deck-card-body {
+      padding: 12px 14px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .deck-card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 10.5px;
+      color: var(--laranja);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    .deck-card-title {
+      font-family: var(--font-serif);
+      font-size: 16.5px;
+      line-height: 1.25;
+      font-weight: 600;
+      color: var(--branco);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .deck-card-desc {
+      font-size: 12px;
+      line-height: 1.45;
+      color: var(--branco-mutado);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .deck-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 6px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 11px;
+    }
+
+    .deck-card-pages {
+      color: var(--branco-mutado);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .deck-card-action-hint {
+      color: var(--laranja);
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      text-decoration: none;
+    }
+
+    /* CONTROLES DE NAVEGAÇÃO DO CARROSSEL (SETINHAS & INDICADORES) */
+    .deck-controls-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 2px;
+    }
+
+    .deck-nav-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(26, 26, 26, 0.9);
+      border: 1px solid var(--linha);
+      color: var(--branco-suave);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    .deck-nav-btn:hover {
+      background: rgba(224, 90, 28, 0.2);
+      border-color: var(--laranja);
+      color: #fff;
+      transform: scale(1.08);
+    }
+
+    .deck-dots-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .deck-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.18);
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    .deck-dot.active {
+      width: 22px;
+      border-radius: 10px;
+      background: var(--laranja);
+      box-shadow: 0 0 10px rgba(224, 90, 28, 0.5);
+    }
+
+    /* ==========================================================================
+       FORMULÁRIO DE DESBLOQUEIO IMEDIATO (COMPACTO E ACESSÍVEL)
+       ========================================================================== */
+    .form-anchor-card {
+      background: linear-gradient(180deg, rgba(30, 26, 24, 0.95) 0%, rgba(18, 18, 18, 0.98) 100%);
+      border: 1px solid rgba(224, 90, 28, 0.4);
+      border-radius: var(--radius-card);
+      padding: 24px 20px;
+      box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.8), 0 0 25px rgba(224, 90, 28, 0.12);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      position: relative;
+    }
+
+    .form-anchor-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 15%;
+      right: 15%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #E05A1C, transparent);
+    }
+
+    .form-header-title {
+      font-family: var(--font-serif);
+      font-size: 21px;
+      color: var(--branco);
+      text-align: center;
+      line-height: 1.3;
+    }
+
+    .form-header-subtitle {
+      font-size: 12.5px;
+      color: var(--branco-suave);
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    .capture-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .form-group label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--branco-suave);
+    }
+
+    .form-input {
+      width: 100%;
+      height: 46px;
+      background: rgba(22, 22, 22, 0.95);
+      border: 1px solid var(--linha);
+      border-radius: 12px;
+      padding: 0 16px;
+      color: var(--branco);
+      font-family: var(--font-sans);
+      font-size: 13.5px;
+      outline: none;
+      transition: var(--transition-smooth);
+    }
+
+    .form-input::placeholder {
+      color: rgba(245, 241, 235, 0.35);
+      font-size: 13px;
+    }
+
+    .form-input:focus {
+      border-color: var(--laranja);
+      background: #1c1c1c;
+      box-shadow: 0 0 0 3px rgba(224, 90, 28, 0.18);
+    }
+
+    .btn-submit {
+      width: 100%;
+      height: 48px;
+      background: linear-gradient(135deg, #E05A1C 0%, #C84910 100%);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      font-family: var(--font-sans);
+      font-size: 14.5px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(224, 90, 28, 0.35);
+      transition: var(--transition-smooth);
+      margin-top: 4px;
+    }
+
+    .btn-submit:hover {
+      background: linear-gradient(135deg, #F47340 0%, #E05A1C 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(224, 90, 28, 0.48);
+    }
+
+    .btn-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .form-caption {
+      font-size: 11.5px;
+      color: var(--branco-mutado);
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    /* FOOTER */
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      color: var(--branco-mutado);
+      padding-top: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header class="header">
+      <img src="links/assets/logo-marcas-negocios.png" alt="Marcas & Negócios by Legado" class="header-logo">
+    </header>
+
+    <section class="hero-box">
+      <div class="pill-badge">
+        <span>★ Acervo Exclusivo • Guias Semanais</span>
+      </div>
+
+      <h1 class="hero-title">
+        Biblioteca de <span class="accent">Guias Estratégicos</span>
+      </h1>
+
+      <p class="hero-desc">
+        Estudos semanais, análises e materiais práticos já compartilhados na comunidade fechada <strong>Marcas & Negócios</strong>.
+      </p>
+    </section>
+
+    <!-- CARROSSEL 3D ESTILO CARTAS EMPILHADAS -->
+    <section class="cards-deck-section">
+      <div class="cards-deck-header">
+        <span class="cards-deck-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          Materiais Disponíveis para Desbloqueio
+        </span>
+        <span class="cards-deck-badge" id="deckCounterBadge">1 / 3</span>
+      </div>
+
+      <!-- PALCO DAS CARTAS -->
+      <div class="cards-deck-stage" id="deckStage">
+        <!-- Carta 0: Alfredo Soares (Inicialmente ativa / topo) -->
+        <article class="deck-card is-active" data-index="0" onclick="handleCardClick(0)">
+          <div class="deck-card-cover">
+            <img src="biblioteca/assets/capa-edicao-03-alfredo-soares.png" alt="Alfredo Soares" class="deck-card-img">
+            <div class="deck-card-overlay">
+              <div class="deck-lock-pill">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                <span>BLOQUEADO • LIBERAÇÃO GRATUITA</span>
+              </div>
+            </div>
+          </div>
+          <div class="deck-card-body">
+            <div class="deck-card-meta">
+              <span>EDIÇÃO #03 • GUIA DA SEMANA</span>
+              <span>Vendas & Posicionamento</span>
+            </div>
+            <h2 class="deck-card-title">Alfredo Soares — O canal é você</h2>
+            <p class="deck-card-desc">Como transformar a voz do fundador no maior ativo de diferenciação e tração comercial da empresa.</p>
+            <div class="deck-card-footer">
+              <span class="deck-card-pages">📄 7 páginas • 6 min</span>
+              <span class="deck-card-action-hint">Liberar no form ↓</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Carta 1: Cristina Junqueira (Inicialmente à direita / next) -->
+        <article class="deck-card is-next" data-index="1" onclick="handleCardClick(1)">
+          <div class="deck-card-cover">
+            <img src="biblioteca/assets/capa-edicao-02-cris-junqueira.png" alt="Cristina Junqueira" class="deck-card-img">
+            <div class="deck-card-overlay">
+              <div class="deck-lock-pill">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                <span>BLOQUEADO • LIBERAÇÃO GRATUITA</span>
+              </div>
+            </div>
+          </div>
+          <div class="deck-card-body">
+            <div class="deck-card-meta">
+              <span>EDIÇÃO #02</span>
+              <span>Branding & Narrativa</span>
+            </div>
+            <h2 class="deck-card-title">Cristina Junqueira — Inimigo comum</h2>
+            <p class="deck-card-desc">O poder do contra-posicionamento: como polarizar com elegância e construir defensores da marca.</p>
+            <div class="deck-card-footer">
+              <span class="deck-card-pages">📄 7 páginas • 7 min</span>
+              <span class="deck-card-action-hint">Liberar no form ↓</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Carta 2: Flávio Augusto (Inicialmente à esquerda / prev) -->
+        <article class="deck-card is-prev" data-index="2" onclick="handleCardClick(2)">
+          <div class="deck-card-cover">
+            <img src="biblioteca/assets/capa-edicao-01-flavio-augusto.png" alt="Flávio Augusto" class="deck-card-img">
+            <div class="deck-card-overlay">
+              <div class="deck-lock-pill">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                <span>BLOQUEADO • LIBERAÇÃO GRATUITA</span>
+              </div>
+            </div>
+          </div>
+          <div class="deck-card-body">
+            <div class="deck-card-meta">
+              <span>EDIÇÃO #01</span>
+              <span>Decisão & Valor</span>
+            </div>
+            <h2 class="deck-card-title">Flávio Augusto — O custo invisível</h2>
+            <p class="deck-card-desc">A matemática oculta das decisões empresariais e como construir relevância defensável.</p>
+            <div class="deck-card-footer">
+              <span class="deck-card-pages">📄 7 páginas • 6 min</span>
+              <span class="deck-card-action-hint">Liberar no form ↓</span>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- CONTROLES COM SETINHAS E BOLINHAS -->
+      <div class="deck-controls-bar">
+        <button type="button" class="deck-nav-btn" onclick="prevCard()" aria-label="Carta anterior">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        </button>
+
+        <div class="deck-dots-group">
+          <span class="deck-dot active" onclick="goToCard(0)"></span>
+          <span class="deck-dot" onclick="goToCard(1)"></span>
+          <span class="deck-dot" onclick="goToCard(2)"></span>
+        </div>
+
+        <button type="button" class="deck-nav-btn" onclick="nextCard()" aria-label="Próxima carta">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- FORMULÁRIO DE DESBLOQUEIO IMEDIATO -->
+    <section class="form-anchor-card" id="formDesbloqueio">
+      <div>
+        <h3 class="form-header-title">Libere o acesso agora</h3>
+        <p class="form-header-subtitle">Preencha abaixo para destravar todos os guias e acessar o acervo completo:</p>
+      </div>
+
+      <form id="leadForm" class="capture-form" onsubmit="handleLeadSubmit(event)">
+        <div class="form-group">
+          <label for="nome">Seu Nome</label>
+          <input type="text" id="nome" class="form-input" placeholder="Seu nome completo" required autocomplete="name">
+        </div>
+
+        <div class="form-group">
+          <label for="whatsapp">Seu WhatsApp</label>
+          <input type="tel" id="whatsapp" class="form-input" placeholder="(DDD) 90000-0000" required inputmode="numeric">
+        </div>
+
+        <div class="form-group">
+          <label for="empresa">Sua Empresa</label>
+          <input type="text" id="empresa" class="form-input" placeholder="Nome da sua empresa" required>
+        </div>
+
+        <button type="submit" id="submitBtn" class="btn-submit">
+          <span>Desbloquear os 3 Guias Gratuitamente</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </button>
+
+        <p class="form-caption">
+          Acesso instantâneo aos PDFs. Não fazemos disparo em massa.
+        </p>
+      </form>
+    </section>
+
+    <footer class="footer">
+      <p>© 2026 Marcas & Negócios by Legado Branding.</p>
+    </footer>
+  </div>
+
+  <script>
+    const ENDPOINT_URL = "https://script.google.com/macros/s/AKfycbw6B_XeVM4GTN96jwNZFtxqS_js8Y36e9US45TEFXye13DwXfERWJx80PAOp65otnez1Q/exec";
+
+    // LÓGICA DO CARROSSEL 3D EM CARTAS
+    let currentIndex = 0;
+    const cards = Array.from(document.querySelectorAll('.deck-card'));
+    const dots = Array.from(document.querySelectorAll('.deck-dot'));
+    const counterBadge = document.getElementById('deckCounterBadge');
+    const totalCards = cards.length;
+
+    function updateDeck() {
+      cards.forEach((card, i) => {
+        card.classList.remove('is-active', 'is-prev', 'is-next', 'is-hidden');
+        
+        if (i === currentIndex) {
+          card.classList.add('is-active');
+        } else if (i === (currentIndex - 1 + totalCards) % totalCards) {
+          card.classList.add('is-prev');
+        } else if (i === (currentIndex + 1) % totalCards) {
+          card.classList.add('is-next');
+        } else {
+          card.classList.add('is-hidden');
+        }
+      });
+
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentIndex);
+      });
+
+      if (counterBadge) {
+        counterBadge.textContent = `${currentIndex + 1} / ${totalCards}`;
+      }
+    }
+
+    function nextCard() {
+      currentIndex = (currentIndex + 1) % totalCards;
+      updateDeck();
+    }
+
+    function prevCard() {
+      currentIndex = (currentIndex - 1 + totalCards) % totalCards;
+      updateDeck();
+    }
+
+    function goToCard(idx) {
+      currentIndex = idx;
+      updateDeck();
+    }
+
+    function handleCardClick(idx) {
+      if (idx !== currentIndex) {
+        goToCard(idx);
+      } else {
+        // Se já está na carta ativa, rola suavemente até o formulário
+        const formEl = document.getElementById('formDesbloqueio');
+        if (formEl) {
+          formEl.scrollIntoView({ behavior: 'smooth' });
+          const nomeInput = document.getElementById('nome');
+          if (nomeInput) setTimeout(() => nomeInput.focus(), 400);
+        }
+      }
+    }
+
+    // Suporte a gesto de arrasto / swipe touch
+    const stage = document.getElementById('deckStage');
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    stage.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    stage.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      if (touchStartX - touchEndX > 45) {
+        nextCard();
+      } else if (touchEndX - touchStartX > 45) {
+        prevCard();
+      }
+    }, { passive: true });
+
+    // Máscara automática de telefone brasileiro
+    const whatsappInput = document.getElementById('whatsapp');
+    whatsappInput.addEventListener('input', function(e) {
+      let v = e.target.value.replace(/\D/g, '');
+      if (v.length > 11) v = v.slice(0, 11);
+      
+      if (v.length > 10) {
+        e.target.value = `(${v.slice(0, 2)}) ${v.slice(2, 7)}-${v.slice(7)}`;
+      } else if (v.length > 6) {
+        e.target.value = `(${v.slice(0, 2)}) ${v.slice(2, 6)}-${v.slice(6)}`;
+      } else if (v.length > 2) {
+        e.target.value = `(${v.slice(0, 2)}) ${v.slice(2)}`;
+      } else {
+        e.target.value = v;
+      }
+    });
+
+    async function handleLeadSubmit(e) {
+      e.preventDefault();
+      const submitBtn = document.getElementById('submitBtn');
+      const nome = document.getElementById('nome').value.trim();
+      const whatsapp = document.getElementById('whatsapp').value.trim();
+      const empresa = document.getElementById('empresa').value.trim();
+
+      const digits = whatsapp.replace(/\D/g, '');
+      if (digits.length < 10) {
+        alert('Por favor, informe seu WhatsApp completo com DDD.');
+        document.getElementById('whatsapp').focus();
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span>Destravando materiais...</span>';
+
+      const payload = {
+        nome: nome,
+        whatsapp: whatsapp,
+        empresa: empresa,
+        origem: 'isca-biblioteca-instagram',
+        timestamp: new Date().toISOString()
+      };
+
+      console.log('Enviando lead:', payload);
+
+      if (ENDPOINT_URL) {
+        try {
+          await fetch(ENDPOINT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: {
+              'Content-Type': 'text/plain'
+            },
+            body: JSON.stringify(payload)
+          });
+        } catch (err) {
+          console.warn('Erro na transmissão do webhook:', err);
+        }
+      }
+
+      try {
+        localStorage.setItem('biblioteca_acesso_liberado', '1');
+        localStorage.setItem('lead_nome', nome);
+      } catch (e) {}
+
+      window.location.href = '/biblioteca?origem=isca&desbloqueado=1';
+    }
+  </script>
+</body>
+</html>

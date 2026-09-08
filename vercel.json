@@ -24,11 +24,36 @@
     {
       "source": "/links/admin",
       "destination": "/links/admin.html"
+    },
+    {
+      "source": "/biblioteca",
+      "destination": "/biblioteca/index.html"
+    },
+    {
+      "source": "/isca",
+      "destination": "/isca.html"
     }
   ],
   "headers": [
     {
       "source": "/links/links-data.json",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate, max-age=0"
+        },
+        {
+          "key": "Pragma",
+          "value": "no-cache"
+        },
+        {
+          "key": "Expires",
+          "value": "0"
+        }
+      ]
+    },
+    {
+      "source": "/biblioteca/edicoes.json",
       "headers": [
         {
           "key": "Cache-Control",

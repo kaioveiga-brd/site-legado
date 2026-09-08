@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Biblioteca de Conteúdos | Marcas & Negócios</title>
+  <meta name="description" content="Acervo completo dos guias semanais, frameworks e análises estratégicas da comunidade Marcas & Negócios por Legado Branding.">
+  <link rel="icon" href="assets/favicon.png" type="image/png">
+  <script>
+    if (location.pathname === '/biblioteca') {
+      const b = document.createElement('base');
+      b.href = '/biblioteca/';
+      document.head.appendChild(b);
+    }
+  </script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="page-wrapper">
+    <!-- TOP NAVIGATION -->
+    <header class="top-nav">
+      <a href="https://legadobranding.com.br" class="brand-logo-wrap" title="Marcas & Negócios by Legado">
+        <img src="assets/logo-marcas-negocios.png" alt="Marcas & Negócios by Legado" class="official-top-logo">
+      </a>
+
+      <!-- Botão da comunidade apontando para o formulário oficial de qualificação -->
+      <a href="/marcas-negocios" class="group-badge-link" title="Faça parte da comunidade">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+        <span>Entrar no Grupo</span>
+      </a>
+    </header>
+
+    <!-- HERO INTRO -->
+    <section class="hero-card">
+      <div class="hero-pill">
+        <span class="hero-pill-dot"></span>
+        <span>Acervo da Comunidade</span>
+      </div>
+
+      <h1 class="hero-title">
+        Biblioteca de <span class="accent">Conteúdos</span>
+      </h1>
+
+      <p class="hero-subtitle">
+        Guias semanais, análises e frameworks práticos sobre branding, posicionamento e negócios — reunidos em um só lugar.
+      </p>
+
+      <div class="hero-stats-row">
+        <span class="hero-stat-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+          <strong id="totalEdicoesCount">3</strong> edições publicadas
+        </span>
+        <span style="opacity: 0.3;">•</span>
+        <span class="hero-stat-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          PDFs de leitura rápida
+        </span>
+      </div>
+    </section>
+
+    <!-- NAVEGAÇÃO & FILTROS INTELIGENTES -->
+    <section class="navigation-bar-container" id="navFilterSection">
+      <!-- Linha de Controles: Filtros por Botões + Alternador de Visualização -->
+      <div class="filter-controls-row">
+        <div class="filter-pills-group">
+          <!-- Botão Todos -->
+          <button type="button" class="filter-btn-pill active" id="btnFilterAll" onclick="resetAllFilters()">
+            <span>Todos</span>
+            <span class="item-count" id="countAllBadge">3</span>
+          </button>
+
+          <!-- Dropdown Experts -->
+          <div style="position: relative;">
+            <button type="button" class="filter-btn-pill" id="btnFilterExperts" onclick="toggleDropdown('expertsDropdown')">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              <span id="expertBtnLabel">Experts</span>
+              <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+
+            <!-- Menu Flutuante Experts -->
+            <div class="filter-dropdown-menu" id="expertsDropdown">
+              <div class="dropdown-header-title">Filtrar por Especialista</div>
+              <div id="expertsListItems">
+                <!-- Preenchido dinamicamente via JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Dropdown Temas -->
+          <div style="position: relative;">
+            <button type="button" class="filter-btn-pill" id="btnFilterTemas" onclick="toggleDropdown('temasDropdown')">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+              <span id="temaBtnLabel">Temas</span>
+              <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+
+            <!-- Menu Flutuante Temas -->
+            <div class="filter-dropdown-menu" id="temasDropdown">
+              <div class="dropdown-header-title">Filtrar por Tema</div>
+              <div id="temasListItems">
+                <!-- Preenchido dinamicamente via JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Alternador de Visualização: Expandido vs Grade/Compacto -->
+        <div class="view-mode-toggle" title="Alterar modo de visualização">
+          <button type="button" class="view-mode-btn active" id="viewExpandedBtn" onclick="setViewMode('expanded')" title="Visualização Completa com Banners">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          </button>
+          <button type="button" class="view-mode-btn" id="viewCompactBtn" onclick="setViewMode('compact')" title="Visualização em Grade Compacta">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Banner de Filtro Ativo -->
+      <div class="active-filter-banner" id="activeFilterBanner">
+        <span id="activeFilterText">Filtro ativo:</span>
+        <button type="button" class="active-filter-clear-btn" onclick="resetAllFilters()">
+          <span>Limpar</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+
+      <!-- Campo de Busca Rápida -->
+      <div class="search-box">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input 
+          type="text" 
+          id="searchInput" 
+          class="search-input" 
+          placeholder="Ou busque por palavra-chave..."
+          aria-label="Buscar edições"
+        >
+        <button id="searchClearBtn" class="search-clear-btn" aria-label="Limpar busca" type="button">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- LIST OF EDITIONS (DYNAMIC + STATIC INITIAL FALLBACK) -->
+    <main class="edicoes-container" id="edicoesList">
+      <!-- Edição 03 (Destaque) -->
+      <article class="edition-card featured-card" id="edicao-03" data-expert="Alfredo Soares" data-tema="Vendas & Posicionamento">
+        <div class="card-cover-wrapper" onclick="openPdfModal('assets/edicao-03-alfredo-soares-o-canal-e-voce.pdf', 'Alfredo Soares — O canal é você')">
+          <img src="assets/capa-edicao-03-alfredo-soares.png" alt="Alfredo Soares — O canal é você" class="card-cover-img">
+          <div class="card-cover-overlay"></div>
+          <div class="card-top-badges">
+            <span class="badge-edicao destaque">NOVO • GUIA DA SEMANA</span>
+            <span class="badge-tema">Vendas & Posicionamento</span>
+          </div>
+          <div class="cover-quick-view">
+            <div class="cover-quick-view-btn">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              <span>Visualizar Guia</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-content">
+          <div class="card-title-row">
+            <h2 class="card-title">Alfredo Soares — O canal é você</h2>
+            <p class="card-subtitle">Como transformar a voz do fundador no maior ativo de diferenciação, autoridade e tração de negócios.</p>
+          </div>
+          <div class="card-meta-row">
+            <span class="card-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              6 min
+            </span>
+            <span class="card-meta-dot">•</span>
+            <span class="card-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+              7 páginas
+            </span>
+            <span class="card-meta-dot">•</span>
+            <span class="card-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+              08 Set 2026
+            </span>
+          </div>
+          <div class="card-actions">
+            <button type="button" class="btn-read-pdf" onclick="openPdfModal('assets/edicao-03-alfredo-soares-o-canal-e-voce.pdf', 'Alfredo Soares — O canal é você')">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+              <span>Ler Guia Completo</span>
+            </button>
+            <a href="assets/edicao-03-alfredo-soares-o-canal-e-voce.pdf" download class="btn-download-pdf" title="Baixar PDF">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Edição 02 -->
+      <article class="edition-card" id="edicao-02" data-expert="Cristina Junqueira" data-tema="Branding & Narrativa">
+        <div class="card-cover-wrapper" onclick="openPdfModal('assets/edicao-02-cris-junqueira-inimigo-comum.pdf', 'Cristina Junqueira — Inimigo comum')">
+          <img src="assets/capa-edicao-02-cris-junqueira.png" alt="Cristina Junqueira — Inimigo comum" class="card-cover-img">
+          <div class="card-cover-overlay"></div>
+          <div class="card-top-badges">
+            <span class="badge-edicao">EDIÇÃO #02</span>
+            <span class="badge-tema">Branding & Narrativa</span>
+          </div>
+          <div class="cover-quick-view">
+            <div class="cover-quick-view-btn">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              <span>Visualizar Guia</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-content">
+          <div class="card-title-row">
+            <h2 class="card-title">Cristina Junqueira — Inimigo comum</h2>
+            <p class="card-subtitle">O poder do contra-posicionamento: como polarizar com elegância e construir um exército de defensores da marca.</p>
+          </div>
+          <div class="card-meta-row">
+            <span class="card-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              7 min
+            </span>
+            <span class="card-meta-dot">•</span>
+            <span class="card-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+              7 páginas
+            </span>
+            <span class="card-meta-dot">•</span>
+            <span class="card-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+              04 Set 2026
+            </span>
+          </div>
+          <div class="card-actions">
+            <button type="button" class="btn-read-pdf" onclick="openPdfModal('assets/edicao-02-cris-junqueira-inimigo-comum.pdf', 'Cristina Junqueira — Inimigo comum')">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+              <span>Ler Guia Completo</span>
+            </button>
+            <a href="assets/edicao-02-cris-junqueira-inimigo-comum.pdf" download class="btn-download-pdf" title="Baixar PDF">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Edição 01 -->
+      <article class="edition-card" id="edicao-01" data-expert="Flávio Augusto" data-tema="Decisão & Valor">
+        <div class="card-cover-wrapper" onclick="openPdfModal('assets/edicao-01-flavio-augusto-o-custo-invisivel.pdf', 'Flávio Augusto — O custo invisível')">
+          <img src="assets/capa-edicao-01-flavio-augusto.png" alt="Flávio Augusto — O custo invisível" class="card-cover-img">
+          <div class="card-cover-overlay"></div>
+          <div class="card-top-badges">
+            <span class="badge-edicao">EDIÇÃO #01</span>
+            <span class="badge-tema">Decisão & Valor</span>
+          </div>
+          <div class="cover-quick-view">
+            <div class="cover-quick-view-btn">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              <span>Visualizar Guia</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-content">
+          <div class="card-title-row">
+            <h2 class="card-title">Flávio Augusto — O custo invisível</h2>
+            <p class="card-subtitle">A matemática oculta do que você deixa na mesa ao adiar decisões difíceis e como construir relevância defensável.</p>
+          </div>
+          <div class="card-meta-row">
+            <span class="card-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              6 min
+            </span>
+            <span class="card-meta-dot">•</span>
+            <span class="card-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+              7 páginas
+            </span>
+            <span class="card-meta-dot">•</span>
+            <span class="card-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+              02 Set 2026
+            </span>
+          </div>
+          <div class="card-actions">
+            <button type="button" class="btn-read-pdf" onclick="openPdfModal('assets/edicao-01-flavio-augusto-o-custo-invisivel.pdf', 'Flávio Augusto — O custo invisível')">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+              <span>Ler Guia Completo</span>
+            </button>
+            <a href="assets/edicao-01-flavio-augusto-o-custo-invisivel.pdf" download class="btn-download-pdf" title="Baixar PDF">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+    </main>
+
+    <!-- EMPTY STATE -->
+    <div id="emptyState" class="empty-state">
+      <svg class="empty-state-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        <line x1="8" y1="11" x2="14" y2="11"></line>
+      </svg>
+      <h3 class="empty-state-title">Nenhum guia encontrado</h3>
+      <p class="empty-state-desc">Tente alterar o filtro selecionado ou buscar por outro termo.</p>
+    </div>
+
+    <!-- COMMUNITY CTA (Aponta para o formulário oficial de qualificação) -->
+    <section class="community-cta-card">
+      <h3 class="community-cta-title">Quer receber o próximo guia na segunda?</h3>
+      <p class="community-cta-desc">
+        Toda segunda-feira sai uma nova edição exclusiva na comunidade fechada. Preencha a aplicação rápida para entrar.
+      </p>
+      <a href="/marcas-negocios" class="btn-whatsapp-community">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+        <span>Aplicar para o Grupo Oficial</span>
+      </a>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <a href="https://legadobranding.com.br" class="footer-brand" target="_blank" rel="noopener noreferrer">
+        <span>Uma iniciativa</span>
+        <strong style="color: var(--laranja);">Legado Branding</strong>
+      </a>
+      <p>© 2026 Marcas & Negócios. Todos os direitos reservados.</p>
+    </footer>
+  </div>
+
+  <!-- MODAL LEITOR DE PDF (DESKTOP / TABLET) -->
+  <div id="pdfModal" class="pdf-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="pdfModalTitle">
+    <div class="pdf-modal-window">
+      <div class="pdf-modal-header">
+        <div class="pdf-modal-title-wrap">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--laranja); flex-shrink: 0;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          <span id="pdfModalTitle" class="pdf-modal-title">Título do Guia</span>
+        </div>
+
+        <div class="pdf-modal-actions">
+          <a id="pdfExternalBtn" href="#" target="_blank" class="pdf-modal-btn" title="Abrir em aba cheia">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            <span>Aba cheia</span>
+          </a>
+          <a id="pdfDownloadBtn" href="#" download class="pdf-modal-btn primary" title="Baixar arquivo">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            <span>Baixar</span>
+          </a>
+          <button id="pdfModalClose" class="pdf-modal-close" aria-label="Fechar leitor" type="button">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="pdf-modal-body">
+        <iframe id="pdfIframe" class="pdf-iframe" src="" title="Visualizador de PDF"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
