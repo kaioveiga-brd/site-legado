@@ -15,6 +15,20 @@ const DEFAULT_CONFIG = {
   },
   blocks: [
     {
+      id: "block-raiox",
+      active: true,
+      featured: true,
+      badge: "DIAGNÓSTICO GRATUITO",
+      icon: "target",
+      title: "Raio-X de Marca",
+      description: "Avalie sua marca em 4 pilares estratégicos e receba um diagnóstico visual imediato.",
+      buttonText: "Fazer teste gratuito",
+      buttonType: "arrow",
+      url: "https://legadobranding.com.br/raiox",
+      bgImage: "assets/3d-destaque.jpg",
+      logoImg: "assets/logo-raiox.png"
+    },
+    {
       id: "block-agenda",
       active: true,
       featured: true,
@@ -53,6 +67,19 @@ const DEFAULT_CONFIG = {
       buttonType: "circle-arrow",
       url: "https://legadobranding.com.br",
       bgImage: "assets/3d-destaque.jpg"
+    },
+    {
+      id: "block-cases",
+      active: true,
+      featured: false,
+      badge: "PORTFÓLIO",
+      icon: "briefcase",
+      title: "Cases",
+      description: "Projetos de identidade e estratégia desenvolvidos pela Legado.",
+      buttonText: "Ver no Behance",
+      buttonType: "arrow",
+      url: "https://www.behance.net/kaioveiga1",
+      bgImage: "assets/3d-card-agenda.jpg"
     },
     {
       id: "block-contato",
@@ -102,7 +129,9 @@ const ICONS = {
   "instagram": `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>`,
   "linkedin": `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>`,
   "mail": `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>`,
-  "lock": `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>`
+  "lock": `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>`,
+  "target": `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>`,
+  "briefcase": `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>`
 };
 
 /**
@@ -257,7 +286,7 @@ function createFeaturedCard(block) {
         ${block.badge ? `<div class="badge-destaque">${escapeHtml(block.badge)}</div>` : ''}
         <div class="featured-header-row" style="${block.badge ? 'margin-top: 10px;' : ''}">
           ${block.logoImg ? `
-            <img src="${escapeHtml(block.logoImg)}" alt="${escapeHtml(block.title)}" style="height: 32px; width: auto; max-width: 230px; object-fit: contain; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));">
+            <img src="${escapeHtml(block.logoImg)}" alt="${escapeHtml(block.title)}" style="height: 36px; width: auto; max-width: 230px; object-fit: contain; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));">
           ` : `
             <h2 class="featured-title">${escapeHtml(block.title)}</h2>
           `}

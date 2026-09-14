@@ -15,6 +15,20 @@ const DEFAULT_CONFIG = {
   },
   blocks: [
     {
+      id: "block-raiox",
+      active: true,
+      featured: true,
+      badge: "DIAGNÓSTICO GRATUITO",
+      icon: "target",
+      title: "Raio-X de Marca",
+      description: "Avalie sua marca em 4 pilares estratégicos e receba um diagnóstico visual imediato.",
+      buttonText: "Fazer teste gratuito",
+      buttonType: "arrow",
+      url: "https://legadobranding.com.br/raiox",
+      bgImage: "assets/3d-destaque.jpg",
+      logoImg: "assets/logo-raiox.png"
+    },
+    {
       id: "block-agenda",
       active: true,
       featured: true,
@@ -53,6 +67,19 @@ const DEFAULT_CONFIG = {
       buttonType: "circle-arrow",
       url: "https://legadobranding.com.br",
       bgImage: "assets/3d-destaque.jpg"
+    },
+    {
+      id: "block-cases",
+      active: true,
+      featured: false,
+      badge: "PORTFÓLIO",
+      icon: "briefcase",
+      title: "Cases",
+      description: "Projetos de identidade e estratégia desenvolvidos pela Legado.",
+      buttonText: "Ver no Behance",
+      buttonType: "arrow",
+      url: "https://www.behance.net/kaioveiga1",
+      bgImage: "assets/3d-card-agenda.jpg"
     },
     {
       id: "block-contato",
@@ -110,6 +137,8 @@ const ICON_OPTIONS = [
   { label: "Comunidade / Pessoas", value: "users" },
   { label: "Livro / Artigos", value: "book-open" },
   { label: "Calendário / Agenda", value: "calendar" },
+  { label: "Alvo / Raio-X", value: "target" },
+  { label: "Maleta / Cases", value: "briefcase" },
   { label: "Seta Direita", value: "arrow-right" }
 ];
 
@@ -154,15 +183,9 @@ async function loadInitialData() {
   if (localSaved) {
     try {
       const parsed = JSON.parse(localSaved);
-      if (parsed && parsed.blocks) {
-        const grupo = parsed.blocks.find(b => b.id === 'block-grupo');
-        if (grupo) {
-          grupo.logoImg = 'assets/logo-marcas-negocios.png';
-        }
-        const agenda = parsed.blocks.find(b => b.id === 'block-agenda');
-        if (agenda && (!agenda.url || agenda.url === 'https://calendar.google.com')) {
-          agenda.url = 'https://calendar.app.google/TMKVBqm6VCWdFixg6';
-        }
+      const hasRaiox = parsed && parsed.blocks && parsed.blocks.some(b => b.id === 'block-raiox');
+      const hasCases = parsed && parsed.blocks && parsed.blocks.some(b => b.id === 'block-cases');
+      if (hasRaiox && hasCases) {
         currentConfig = parsed;
         return;
       }
