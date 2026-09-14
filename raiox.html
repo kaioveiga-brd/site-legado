@@ -1,0 +1,3316 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Raio-X de Marca | Diagnóstico Estratégico em 4 Pilares · Legado Branding</title>
+  <meta name="description" content="Descubra onde sua marca está forte e onde está perdendo dinheiro. Diagnóstico visual nos 4 pilares da Legado Branding.">
+  <link rel="icon" href="favicon.png" type="image/png">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Raio-X de Marca — Legado Branding">
+  <meta property="og:description" content="Avalie sua marca em 4 pilares: Posicionamento, Comunicação, Visual e Conversão. Diagnóstico imediato.">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts: Petrona (Serifada Elegante) & DM Sans / Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       DESIGN SYSTEM & TOKENS — LEGADO BRANDING (ATMOSFERA ESCURA PREMIUM)
+       Fiel ao Link Tree e ao Formulário Marcas & Negócios
+       ========================================================================== */
+    :root {
+      --bg-primary: #121212;
+      --bg-surface: #181818;
+      --bg-surface-elevated: #222222;
+      --bg-card: #191919;
+      --bg-card-hover: #202020;
+
+      --laranja: #E05A1C;
+      --laranja-hover: #F47340;
+      --laranja-glow: rgba(224, 90, 28, 0.35);
+      --laranja-glow-subtle: rgba(224, 90, 28, 0.12);
+      --laranja-border: rgba(224, 90, 28, 0.45);
+
+      /* Cores dos 4 Pilares */
+      --pilar-posicionamento: #E05A1C;
+      --pilar-comunicacao: #F59E0B;
+      --pilar-visual: #FF7A45;
+      --pilar-conversao: #EA580C;
+
+      --branco: #F5F1EB;
+      --branco-suave: rgba(245, 241, 235, 0.85);
+      --branco-mutado: rgba(245, 241, 235, 0.55);
+      --branco-raro: rgba(245, 241, 235, 0.28);
+      --linha: rgba(255, 255, 255, 0.08);
+      --linha-forte: rgba(255, 255, 255, 0.16);
+
+      --font-serif: 'Petrona', Georgia, serif;
+      --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+      --radius-card: 20px;
+      --radius-badge: 100px;
+      --radius-btn: 14px;
+      --transition-smooth: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      background-color: var(--bg-primary);
+      color: var(--branco);
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      min-height: 100dvh;
+      position: relative;
+      background-color: var(--bg-primary);
+      background-image:
+        radial-gradient(circle at 50% 0%, rgba(224, 90, 28, 0.22) 0%, transparent 46%),
+        radial-gradient(circle at 10% 90%, rgba(224, 90, 28, 0.12) 0%, transparent 40%),
+        linear-gradient(180deg, #101010 0%, #151515 50%, #0c0c0c 100%);
+      background-attachment: fixed;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 16px 40px;
+      overflow-x: hidden;
+    }
+
+    /* Textura física sutil de grão */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Barra de progresso linear no topo */
+    .top-progress-line {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.06);
+      z-index: 1000;
+    }
+    .top-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #E05A1C, #F59E0B);
+      box-shadow: 0 0 10px rgba(224, 90, 28, 0.6);
+      transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Container Central (Uma janela por vez — igual Marcas & Negócios) */
+    .app-container {
+      width: 100%;
+      max-width: 560px;
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      min-height: 100dvh;
+    }
+
+    /* Header Superior Fixo */
+    .header-nav {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 4px 10px;
+      flex-shrink: 0;
+    }
+
+    .brand-logo-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--branco);
+      transition: opacity 0.2s ease;
+    }
+    .brand-logo-link:hover {
+      opacity: 0.85;
+    }
+
+    .official-logo-img {
+      height: 26px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .header-badge {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--laranja);
+      background: rgba(224, 90, 28, 0.12);
+      border: 1px solid rgba(224, 90, 28, 0.28);
+      padding: 4px 10px;
+      border-radius: var(--radius-badge);
+    }
+
+    /* Indicador de 4 Passos (Bolinhas estilo Marcas & Negócios) */
+    .steps-nav-container {
+      width: 100%;
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 4px 16px;
+      margin-bottom: 6px;
+    }
+    .steps-nav-container.visible {
+      display: flex;
+    }
+
+    .step-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: default;
+    }
+
+    .step-dot {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 1px solid var(--linha);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--branco-mutado);
+      background-color: var(--bg-surface);
+      transition: all 0.25s ease;
+      flex-shrink: 0;
+    }
+
+    .step-item.active .step-dot {
+      border-color: var(--laranja);
+      color: var(--branco);
+      background-color: rgba(224, 90, 28, 0.2);
+      box-shadow: 0 0 10px rgba(224, 90, 28, 0.5);
+      border-width: 2px;
+    }
+
+    .step-item.completed .step-dot {
+      background-color: var(--laranja);
+      border-color: var(--laranja);
+      color: #FFFFFF;
+    }
+
+    .step-label {
+      font-size: 11px;
+      color: var(--branco-mutado);
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+    .step-item.active .step-label {
+      color: var(--branco);
+      font-weight: 700;
+    }
+
+    .step-divider-line {
+      flex: 1;
+      height: 1px;
+      background-color: var(--linha);
+      margin: 0 8px;
+      min-width: 8px;
+      transition: background-color 0.25s ease;
+    }
+    .step-divider-line.completed {
+      background-color: var(--laranja);
+    }
+
+    @media (max-width: 440px) {
+      .step-label {
+        display: none;
+      }
+      .step-divider-line {
+        min-width: 12px;
+      }
+    }
+
+    /* ==========================================================================
+       SISTEMA DE TELAS (UMA JANELA POR VEZ)
+       ========================================================================== */
+    .screen {
+      width: 100%;
+      display: none !important;
+      flex-direction: column;
+      flex: 1;
+      animation: fadeInScreen 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .screen.active {
+      display: flex !important;
+    }
+
+    @keyframes fadeInScreen {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ==========================================================================
+       TELA 1: ABERTURA / HERO
+       ========================================================================== */
+    .hero-view {
+      text-align: center;
+      padding: 16px 4px 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+      margin: auto 0;
+    }
+
+    .raiox-logo-badge {
+      max-width: 200px;
+      height: auto;
+      margin: 0 auto;
+      display: block;
+      filter: drop-shadow(0 4px 20px rgba(224, 90, 28, 0.25));
+    }
+
+    .hero-headline {
+      font-family: var(--font-serif);
+      font-size: clamp(1.9rem, 5.5vw, 2.5rem);
+      font-weight: 500;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: var(--branco);
+      margin-top: 4px;
+    }
+    .hero-headline span.accent {
+      color: var(--laranja);
+      font-style: italic;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(0.95rem, 2.8vw, 1.05rem);
+      line-height: 1.55;
+      color: var(--branco-suave);
+      max-width: 440px;
+      margin: 0 auto;
+    }
+
+    .pillars-preview-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      width: 100%;
+      margin: 8px 0;
+    }
+
+    .pillar-preview-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--linha);
+      border-radius: 16px;
+      padding: 12px 14px;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: var(--transition-smooth);
+    }
+    .pillar-preview-card:hover {
+      border-color: rgba(255, 255, 255, 0.16);
+      background: var(--bg-surface-elevated);
+      transform: translateY(-2px);
+    }
+
+    .pillar-preview-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      box-shadow: 0 0 8px currentColor;
+    }
+
+    .pillar-preview-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--branco);
+      line-height: 1.2;
+    }
+    .pillar-preview-sub {
+      font-size: 0.72rem;
+      color: var(--branco-mutado);
+    }
+
+    .hero-meta-strip {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+      color: var(--branco-mutado);
+      font-size: 0.82rem;
+      font-weight: 500;
+    }
+    .hero-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Botão Principal Legado */
+    .btn-primary {
+      width: 100%;
+      background: linear-gradient(135deg, #E05A1C 0%, #EA580C 100%);
+      color: #FFFFFF;
+      font-family: var(--font-sans);
+      font-size: 1.05rem;
+      font-weight: 600;
+      padding: 17px 24px;
+      border-radius: var(--radius-btn);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 8px 24px rgba(224, 90, 28, 0.35);
+      transition: var(--transition-smooth);
+      margin-top: 6px;
+      text-decoration: none;
+    }
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #F47340 0%, #E05A1C 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(224, 90, 28, 0.5);
+    }
+    .btn-primary:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      transform: none !important;
+      box-shadow: none !important;
+    }
+
+    .hero-confidential-note {
+      font-size: 0.78rem;
+      color: var(--branco-raro);
+      margin-top: -6px;
+    }
+
+    /* ==========================================================================
+       TELAS DE PERGUNTAS (1 PILAR POR JANELA · 5 AFIRMAÇÕES)
+       Com opacidade baixa nas respondidas e capacidade de alterar resposta
+       ========================================================================== */
+    .pillar-stage-view {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 100%;
+      padding: 6px 0 24px;
+      flex: 1;
+    }
+
+    .pillar-stage-header {
+      margin-bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .pillar-stage-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--current-pillar-color, var(--laranja));
+      background: rgba(224, 90, 28, 0.1);
+      border: 1px solid rgba(224, 90, 28, 0.25);
+      padding: 4px 12px;
+      border-radius: var(--radius-badge);
+      align-self: flex-start;
+    }
+
+    .pillar-stage-title {
+      font-family: var(--font-serif);
+      font-size: 1.55rem;
+      font-weight: 600;
+      color: var(--branco);
+      line-height: 1.25;
+      margin-top: 4px;
+    }
+
+    .pillar-stage-desc {
+      font-size: 0.88rem;
+      color: var(--branco-mutado);
+    }
+
+    /* Stack de Perguntas na Janela */
+    .questions-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 100%;
+      margin: 8px 0 24px;
+    }
+
+    /* Card Individual de Cada Pergunta */
+    .question-block {
+      background: var(--bg-card);
+      border: 1px solid var(--linha);
+      border-radius: 18px;
+      padding: 16px 16px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+
+    /* Estado Ativo (Pergunta em foco) */
+    .question-block.active-focus {
+      opacity: 1;
+      border-color: rgba(224, 90, 28, 0.5);
+      background: #1c1a18;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 16px rgba(224, 90, 28, 0.15);
+      transform: scale(1.01);
+    }
+
+    /* Estado Respondido (Opacidade reduzida conforme solicitado pelo Kaio) */
+    .question-block.answered {
+      opacity: 0.45;
+      border-color: rgba(255, 255, 255, 0.05);
+      background: var(--bg-surface);
+    }
+    .question-block.answered:hover,
+    .question-block.answered:focus-within {
+      opacity: 1;
+      border-color: rgba(255, 255, 255, 0.18);
+      background: #1e1e1e;
+    }
+
+    /* Estado Pendente (Abaixo da ativa) */
+    .question-block.pending {
+      opacity: 0.65;
+      border-color: rgba(255, 255, 255, 0.04);
+    }
+
+    .question-header-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .question-num-badge {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--laranja);
+      background: rgba(224, 90, 28, 0.12);
+      border: 1px solid rgba(224, 90, 28, 0.25);
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .question-text-title {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      font-weight: 500;
+      line-height: 1.45;
+      color: var(--branco);
+      flex: 1;
+    }
+
+    /* Escala 16Personalities Compacta */
+    .scale-inline-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      width: 100%;
+      user-select: none;
+    }
+
+    .scale-text-ends {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.76rem;
+      font-weight: 600;
+      padding: 0 4px;
+    }
+    .scale-text-ends .end-disagree { color: #FF6B6B; }
+    .scale-text-ends .end-agree { color: #E05A1C; }
+
+    .scale-buttons-track {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      padding: 6px 4px;
+    }
+
+    /* Linha de fundo dos botões */
+    .scale-buttons-track::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 12px;
+      right: 12px;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-50%);
+      z-index: 1;
+    }
+
+    .scale-disc-btn {
+      position: relative;
+      z-index: 2;
+      border-radius: 50%;
+      background: var(--bg-surface);
+      border: 2px solid rgba(255, 255, 255, 0.18);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      outline: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Tamanhos 16Personalities */
+    .scale-disc-btn[data-val="1"] { width: 44px; height: 44px; border-color: rgba(255, 107, 107, 0.45); }
+    .scale-disc-btn[data-val="2"] { width: 36px; height: 36px; border-color: rgba(255, 107, 107, 0.35); }
+    .scale-disc-btn[data-val="3"] { width: 28px; height: 28px; border-color: rgba(255, 255, 255, 0.2); }
+    .scale-disc-btn[data-val="4"] { width: 36px; height: 36px; border-color: rgba(224, 90, 28, 0.45); }
+    .scale-disc-btn[data-val="5"] { width: 44px; height: 44px; border-color: rgba(224, 90, 28, 0.65); }
+
+    .scale-disc-btn:hover {
+      transform: scale(1.15);
+    }
+    .scale-disc-btn[data-val="1"]:hover, .scale-disc-btn[data-val="2"]:hover {
+      border-color: #FF6B6B; background: rgba(255, 107, 107, 0.18);
+    }
+    .scale-disc-btn[data-val="3"]:hover {
+      border-color: #FFFFFF; background: rgba(255, 255, 255, 0.12);
+    }
+    .scale-disc-btn[data-val="4"]:hover, .scale-disc-btn[data-val="5"]:hover {
+      border-color: #E05A1C; background: rgba(224, 90, 28, 0.25);
+    }
+
+    /* Estados Selecionados */
+    .scale-disc-btn.selected {
+      transform: scale(1.16);
+    }
+    .scale-disc-btn[data-val="1"].selected {
+      background: #FF6B6B; border-color: #FF6B6B; box-shadow: 0 0 14px rgba(255, 107, 107, 0.5);
+    }
+    .scale-disc-btn[data-val="2"].selected {
+      background: #FF8787; border-color: #FF8787; box-shadow: 0 0 12px rgba(255, 135, 135, 0.4);
+    }
+    .scale-disc-btn[data-val="3"].selected {
+      background: #A8A29E; border-color: #D6D3D1; box-shadow: 0 0 10px rgba(214, 211, 209, 0.4);
+    }
+    .scale-disc-btn[data-val="4"].selected {
+      background: #F47340; border-color: #F47340; box-shadow: 0 0 14px rgba(244, 115, 64, 0.5);
+    }
+    .scale-disc-btn[data-val="5"].selected {
+      background: #E05A1C; border-color: #FF8A50; box-shadow: 0 0 18px rgba(224, 90, 28, 0.65);
+    }
+
+    .selected-tag-info {
+      font-size: 0.74rem;
+      color: var(--branco-mutado);
+      min-height: 16px;
+      text-align: center;
+      transition: color 0.2s ease;
+    }
+    .selected-tag-info strong {
+      color: var(--branco);
+    }
+
+    /* Botões de Ação no Rodapé de cada Janela */
+    .stage-actions-row {
+      display: flex;
+      gap: 12px;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .btn-nav-back {
+      background: transparent;
+      border: 1px solid var(--linha);
+      color: var(--branco-mutado);
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: 16px 20px;
+      border-radius: var(--radius-btn);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: var(--transition-smooth);
+      flex-shrink: 0;
+    }
+    .btn-nav-back:hover {
+      color: var(--branco);
+      border-color: rgba(255, 255, 255, 0.25);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .btn-stage-next {
+      flex: 1;
+    }
+
+    /* ==========================================================================
+       TELA DE CÁLCULO (PROGRESSO EM 5 SEGUNDOS COM CONTAGEM REGRESSIVA)
+       Exatamente como solicitado pelo Kaio
+       ========================================================================== */
+    .calculating-view {
+      margin: auto 0;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 22px;
+      padding: 30px 10px;
+      width: 100%;
+    }
+
+    .calculating-radar-wrap {
+      position: relative;
+      width: 130px;
+      height: 130px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .radar-pulse-ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 2px solid var(--laranja);
+      opacity: 0.8;
+      animation: radarPulse 2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+    }
+
+    .radar-pulse-ring:nth-child(2) {
+      animation-delay: 0.6s;
+    }
+
+    .radar-center-x {
+      font-family: var(--font-serif);
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--laranja);
+      position: relative;
+      z-index: 2;
+      filter: drop-shadow(0 0 14px rgba(224, 90, 28, 0.7));
+    }
+
+    @keyframes radarPulse {
+      0% {
+        transform: scale(0.6);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1.35);
+        opacity: 0;
+      }
+    }
+
+    .calculating-title {
+      font-family: var(--font-serif);
+      font-size: 1.7rem;
+      font-weight: 600;
+      color: var(--branco);
+    }
+
+    .countdown-sentence {
+      font-size: 1.15rem;
+      color: var(--branco-suave);
+      font-weight: 500;
+    }
+    .countdown-number-highlight {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--laranja);
+      display: inline-block;
+      min-width: 24px;
+      text-shadow: 0 0 10px rgba(224, 90, 28, 0.5);
+    }
+
+    /* Barra de Progresso de 5 segundos */
+    .countdown-bar-container {
+      width: 100%;
+      max-width: 380px;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 4px;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.6);
+    }
+
+    .countdown-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #E05A1C 0%, #F59E0B 100%);
+      box-shadow: 0 0 12px rgba(224, 90, 28, 0.8);
+      border-radius: 10px;
+    }
+
+    .calculating-sub-status {
+      font-size: 0.88rem;
+      color: var(--branco-mutado);
+      min-height: 22px;
+      transition: opacity 0.2s ease;
+    }
+
+    /* ==========================================================================
+       TELA FINAL: DASHBOARD DE RESULTADO COM ANÉIS APPLE QUALIDADE DO SONO
+       Preenchimento animado no círculo conforme solicitado pelo Kaio
+       ========================================================================== */
+    .result-view {
+      width: 100%;
+      padding: 10px 0 50px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .result-header {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .result-badge-top {
+      font-size: 0.76rem;
+      color: var(--laranja);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: rgba(224, 90, 28, 0.12);
+      border: 1px solid rgba(224, 90, 28, 0.3);
+      padding: 3px 12px;
+      border-radius: var(--radius-badge);
+    }
+
+    .result-main-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.85rem, 5.5vw, 2.3rem);
+      font-weight: 600;
+      line-height: 1.2;
+      color: var(--branco);
+    }
+
+    .result-subtitle {
+      font-size: 0.92rem;
+      color: var(--branco-mutado);
+      max-width: 440px;
+    }
+
+    /* GRÁFICO DE ANÉIS ESTILO APPLE QUALIDADE DO SONO */
+    .apple-ring-container {
+      position: relative;
+      width: 290px;
+      height: 290px;
+      margin: 4px 0 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .apple-ring-svg {
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 8px 30px rgba(0, 0, 0, 0.5));
+    }
+
+    /* Trilhas de Fundo dos 4 Segmentos */
+    .ring-track {
+      fill: none;
+      stroke-width: 16;
+      stroke-linecap: round;
+      opacity: 0.16;
+    }
+
+    /* Segmentos com animação de preenchimento suave */
+    .ring-segment {
+      fill: none;
+      stroke-width: 16;
+      stroke-linecap: round;
+      cursor: pointer;
+    }
+
+    /* Centro do Anel (Nota Geral + Faixa) */
+    .ring-center-content {
+      position: absolute;
+      inset: 42px;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      pointer-events: none;
+      background: radial-gradient(circle, rgba(26, 26, 26, 0.95) 0%, rgba(18, 18, 18, 0.8) 100%);
+      box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.7);
+    }
+
+    .ring-score-number {
+      font-family: var(--font-serif);
+      font-size: 3.5rem;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--branco);
+      letter-spacing: -0.03em;
+    }
+
+    .ring-score-max {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--branco-mutado);
+      margin-top: 2px;
+      letter-spacing: 0.05em;
+    }
+
+    .ring-badge-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 6px;
+      padding: 3px 12px;
+      border-radius: var(--radius-badge);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .badge-forte { background: rgba(46, 204, 113, 0.15); border: 1px solid rgba(46, 204, 113, 0.4); color: #2ECC71; }
+    .badge-boa { background: rgba(224, 90, 28, 0.15); border: 1px solid rgba(224, 90, 28, 0.4); color: #E05A1C; }
+    .badge-construcao { background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.4); color: #F59E0B; }
+    .badge-fragil { background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.4); color: #EF4444; }
+
+    /* Lista dos 4 Pilares */
+    .pillars-breakdown-list {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .pillar-row-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--linha);
+      border-radius: 16px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      transition: var(--transition-smooth);
+      cursor: pointer;
+    }
+    .pillar-row-card:hover {
+      background: var(--bg-surface-elevated);
+      border-color: rgba(255, 255, 255, 0.18);
+      transform: translateY(-2px);
+    }
+    .pillar-row-card.highlighted {
+      border-color: var(--laranja);
+      box-shadow: 0 0 16px rgba(224, 90, 28, 0.25);
+    }
+
+    .pillar-row-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .pillar-color-bullet {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      box-shadow: 0 0 10px currentColor;
+    }
+    .pillar-row-title {
+      font-size: 0.94rem;
+      font-weight: 600;
+      color: var(--branco);
+    }
+    .pillar-row-pts {
+      font-size: 0.78rem;
+      color: var(--branco-mutado);
+    }
+
+    .pillar-row-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
+    }
+    .pillar-row-pct {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--branco);
+    }
+    .pillar-row-badge {
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: var(--radius-badge);
+    }
+
+    /* Leitura Detalhada & 1º Passo Prático */
+    .detailed-value-section {
+      width: 100%;
+      margin-top: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .section-title-wrap {
+      text-align: left;
+      width: 100%;
+    }
+    .section-title-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--laranja);
+      margin-bottom: 2px;
+      display: block;
+    }
+    .section-main-title {
+      font-family: var(--font-serif);
+      font-size: 1.45rem;
+      font-weight: 600;
+      color: var(--branco);
+    }
+
+    .deep-dive-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--linha);
+      border-radius: var(--radius-card);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition-smooth);
+    }
+    .deep-dive-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--pilar-accent, var(--laranja));
+    }
+
+    .deep-dive-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .deep-dive-title-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .deep-dive-pillar-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--branco);
+    }
+    .deep-dive-status-pill {
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 2px 10px;
+      border-radius: var(--radius-badge);
+    }
+    .deep-dive-diagnosis {
+      font-size: 0.92rem;
+      line-height: 1.55;
+      color: var(--branco-suave);
+    }
+
+    .deep-dive-action-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .deep-dive-action-box.action-weak {
+      border-left: 3px solid var(--laranja);
+      background: rgba(224, 90, 28, 0.06);
+    }
+    .deep-dive-action-box.action-strong {
+      border-left: 3px solid #2ECC71;
+      background: rgba(46, 204, 113, 0.05);
+    }
+    .action-box-tag {
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .action-weak .action-box-tag { color: var(--laranja); }
+    .action-strong .action-box-tag { color: #2ECC71; }
+    .action-box-content {
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: var(--branco);
+    }
+
+    /* Bloco CTA Final da Legado */
+    .cta-final-card {
+      width: 100%;
+      background: linear-gradient(180deg, #201b17 0%, #171412 100%);
+      border: 1px solid var(--laranja-border);
+      border-radius: var(--radius-card);
+      padding: 28px 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 12px 40px rgba(224, 90, 28, 0.18);
+      margin-top: 8px;
+    }
+    .cta-final-badge {
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--laranja);
+      background: rgba(224, 90, 28, 0.15);
+      padding: 4px 12px;
+      border-radius: var(--radius-badge);
+    }
+    .cta-final-quote {
+      font-family: var(--font-serif);
+      font-size: clamp(1.15rem, 3.8vw, 1.35rem);
+      font-weight: 500;
+      line-height: 1.45;
+      color: var(--branco);
+    }
+    .cta-final-desc {
+      font-size: 0.9rem;
+      color: var(--branco-suave);
+      line-height: 1.5;
+      max-width: 440px;
+    }
+
+    .btn-whatsapp {
+      width: 100%;
+      background: #25D366;
+      color: #0b2212;
+      font-family: var(--font-sans);
+      font-size: 1.05rem;
+      font-weight: 700;
+      padding: 16px 22px;
+      border-radius: var(--radius-btn);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 8px 24px rgba(37, 211, 102, 0.3);
+      text-decoration: none;
+      transition: var(--transition-smooth);
+    }
+    .btn-whatsapp:hover {
+      background: #2ee672;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(37, 211, 102, 0.45);
+    }
+
+    .secondary-actions-row {
+      display: flex;
+      gap: 10px;
+      width: 100%;
+      margin-top: 4px;
+    }
+    .btn-secondary-action {
+      flex: 1;
+      background: transparent;
+      border: 1px solid var(--linha);
+      color: var(--branco-mutado);
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 12px 8px;
+      border-radius: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: var(--transition-smooth);
+    }
+    .btn-secondary-action:hover {
+      color: var(--branco);
+      border-color: rgba(255, 255, 255, 0.25);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    /* ==========================================================================
+       JANELA DE IDENTIFICAÇÃO PRÉVIA (LEAD CAPTURE)
+       Estilo Marcas & Negócios — Captura prévia antes do teste
+       ========================================================================== */
+    .lead-capture-view {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      padding: 10px 0 30px;
+      margin: auto 0;
+    }
+
+    .lead-form-card {
+      width: 100%;
+      background: var(--bg-surface);
+      border: 1px solid var(--linha);
+      border-radius: var(--radius-card);
+      padding: 26px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      margin-top: 8px;
+    }
+
+    .lead-input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      text-align: left;
+    }
+
+    .lead-input-label {
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--branco-suave);
+    }
+
+    .lead-text-input,
+    .lead-select-input {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--linha);
+      border-radius: 12px;
+      padding: 14px 16px;
+      color: var(--branco);
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      outline: none;
+      transition: var(--transition-smooth);
+    }
+    .lead-select-input {
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='rgba(245,241,235,0.6)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      background-size: 16px;
+      cursor: pointer;
+    }
+    .lead-select-input option {
+      background: #1c1c1c;
+      color: #FFFFFF;
+      padding: 10px;
+    }
+    .lead-text-input:focus,
+    .lead-select-input:focus {
+      border-color: var(--laranja);
+      background-color: rgba(224, 90, 28, 0.05);
+      box-shadow: 0 0 0 3px rgba(224, 90, 28, 0.18);
+    }
+    .lead-text-input::placeholder {
+      color: var(--branco-raro);
+    }
+
+    .lead-input-error {
+      font-size: 0.78rem;
+      color: #FF6B6B;
+      min-height: 16px;
+      display: none;
+    }
+    .lead-input-group.invalid .lead-text-input,
+    .lead-input-group.invalid .lead-select-input {
+      border-color: #FF6B6B;
+    }
+    .lead-input-group.invalid .lead-input-error {
+      display: block;
+    }
+
+    .lead-security-note {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 0.76rem;
+      color: var(--branco-mutado);
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    /* ==========================================================================
+       TABS DE NAVEGAÇÃO NO RESULTADO (ESTILO INSTAGRAM FEED VS DM)
+       ========================================================================== */
+    .result-tabs-nav {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--linha);
+      padding: 5px;
+      border-radius: 100px;
+      margin: 6px 0 16px;
+      position: relative;
+    }
+
+    .result-tab-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 14px;
+      background: transparent;
+      border: none;
+      border-radius: 100px;
+      color: var(--branco-mutado);
+      font-family: var(--font-sans);
+      font-size: 0.92rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      outline: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .result-tab-btn:hover {
+      color: var(--branco);
+    }
+    .result-tab-btn.active {
+      background: var(--bg-surface-elevated);
+      color: #FFFFFF;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 0 10px rgba(224, 90, 28, 0.2);
+      border: 1px solid rgba(224, 90, 28, 0.35);
+    }
+
+    .tab-pane {
+      width: 100%;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      animation: tabFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .tab-pane.active {
+      display: flex;
+    }
+
+    @keyframes tabFadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ==========================================================================
+       CARD DE VITÓRIA / BÔNUS: AGENDAR REUNIÃO COM O KAIO
+       Texto oficial conforme solicitado pelo cliente
+       ========================================================================== */
+    .victory-card {
+      width: 100%;
+      background: linear-gradient(180deg, rgba(245, 158, 11, 0.12) 0%, rgba(224, 90, 28, 0.08) 100%);
+      border: 1.5px solid rgba(245, 158, 11, 0.45);
+      border-radius: var(--radius-card);
+      padding: 20px 18px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 12px 35px rgba(224, 90, 28, 0.15), inset 0 0 20px rgba(245, 158, 11, 0.06);
+      position: relative;
+      overflow: hidden;
+      margin: 8px 0;
+    }
+
+    .victory-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #F59E0B;
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      padding: 3px 10px;
+      border-radius: var(--radius-badge);
+    }
+
+    .victory-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.15rem, 3.5vw, 1.35rem);
+      font-weight: 600;
+      line-height: 1.3;
+      color: #FFFFFF;
+    }
+
+    .victory-desc {
+      font-size: 0.86rem;
+      line-height: 1.45;
+      color: var(--branco-suave);
+      max-width: 440px;
+    }
+
+    .btn-agendar-reuniao {
+      width: 100%;
+      background: linear-gradient(135deg, #E05A1C 0%, #EA580C 100%);
+      color: #FFFFFF;
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 14px 20px;
+      border-radius: var(--radius-btn);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 8px 25px rgba(224, 90, 28, 0.4);
+      transition: var(--transition-smooth);
+      text-decoration: none;
+      margin-top: 2px;
+    }
+    .btn-agendar-reuniao:hover {
+      background: linear-gradient(135deg, #F47340 0%, #E05A1C 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(224, 90, 28, 0.55);
+    }
+
+    .victory-sub-caption {
+      font-size: 0.74rem;
+      color: var(--branco-mutado);
+    }
+
+    /* ==========================================================================
+       ANÉIS INTERATIVOS & CALLOUT FLUTUANTE DOS PILARES
+       ========================================================================== */
+    .ring-track {
+      cursor: pointer;
+      transition: stroke-width 0.2s ease, opacity 0.2s ease;
+    }
+    .ring-track:hover {
+      opacity: 0.35;
+      stroke-width: 19;
+    }
+
+    .ring-segment {
+      cursor: pointer;
+      transition: stroke-width 0.25s ease, filter 0.25s ease;
+    }
+    .ring-segment:hover, .ring-segment.focused {
+      stroke-width: 22 !important;
+      filter: drop-shadow(0 0 16px currentColor) !important;
+    }
+
+    .ring-legend-chips {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      margin: 4px 0 2px;
+    }
+
+    .ring-chip-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: var(--radius-badge);
+      background: var(--bg-surface);
+      border: 1px solid var(--linha);
+      color: var(--branco-suave);
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+    .ring-chip-btn:hover, .ring-chip-btn.active {
+      border-color: var(--chip-color, var(--laranja));
+      background: rgba(255, 255, 255, 0.08);
+      color: #FFFFFF;
+      transform: translateY(-1px);
+    }
+    .ring-chip-btn.active {
+      box-shadow: 0 0 12px var(--chip-glow, rgba(224, 90, 28, 0.3));
+    }
+    .ring-chip-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    /* ==========================================================================
+       POP-UP FLUTUANTE EM CIMA DO GRÁFICO (TOOLTIP INTERATIVO HUD)
+       Zero impacto na altura da página
+       ========================================================================== */
+    .ring-floating-tooltip {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.92);
+      width: 226px;
+      background: rgba(18, 18, 18, 0.96);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1.5px solid var(--tooltip-border, var(--laranja));
+      border-radius: 18px;
+      padding: 14px 12px 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 5px;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.85), 0 0 22px var(--tooltip-glow, rgba(224, 90, 28, 0.25));
+      z-index: 25;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.22s;
+    }
+
+    .ring-floating-tooltip.visible {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .tooltip-close-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--branco-mutado);
+      font-size: 10px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+    .tooltip-close-btn:hover {
+      background: rgba(255, 255, 255, 0.22);
+      color: #FFFFFF;
+    }
+
+    .tooltip-header-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 2px;
+    }
+
+    .tooltip-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--tooltip-border, var(--laranja));
+      box-shadow: 0 0 8px var(--tooltip-border, var(--laranja));
+    }
+
+    .tooltip-title {
+      font-family: var(--font-sans);
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: #FFFFFF;
+    }
+
+    .tooltip-badge {
+      font-size: 0.70rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: var(--radius-badge);
+    }
+
+    .tooltip-desc {
+      font-size: 0.76rem;
+      line-height: 1.35;
+      color: var(--branco-suave);
+      margin: 2px 0;
+    }
+
+    .tooltip-link-btn {
+      background: none;
+      border: none;
+      color: var(--tooltip-border, var(--laranja));
+      font-size: 0.76rem;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 2px 4px;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      transition: opacity 0.2s;
+    }
+    .tooltip-link-btn:hover {
+      opacity: 0.8;
+    }
+
+    /* ==========================================================================
+       REVEAL "O QUE FAZER" / 1º PASSO PRÁTICO (ACCORDION INTERATIVO)
+       ========================================================================== */
+    .btn-reveal-action {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--branco);
+      font-family: var(--font-sans);
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      margin-top: 4px;
+    }
+    .btn-reveal-action:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.18);
+    }
+    .reveal-btn-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .reveal-arrow {
+      font-size: 0.75rem;
+      color: var(--laranja);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-reveal-action.open .reveal-arrow {
+      transform: rotate(180deg);
+    }
+
+    .deep-dive-action-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, padding 0.3s ease, margin-top 0.3s ease;
+    }
+    .deep-dive-action-box.collapsed {
+      max-height: 0;
+      opacity: 0;
+      padding: 0 16px;
+      margin-top: 0;
+      border-width: 0;
+      pointer-events: none;
+    }
+    .deep-dive-action-box.expanded {
+      max-height: 320px;
+      opacity: 1;
+      padding: 14px 16px;
+      margin-top: 8px;
+      pointer-events: auto;
+    }
+
+    /* Toast */
+    .toast-popup {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(50px);
+      background: #1F1F1F;
+      border: 1px solid var(--laranja);
+      color: var(--branco);
+      font-size: 0.88rem;
+      font-weight: 500;
+      padding: 12px 20px;
+      border-radius: var(--radius-badge);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .toast-popup.visible {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .app-footer {
+      width: 100%;
+      text-align: center;
+      padding: 24px 0 12px;
+      color: var(--branco-raro);
+      font-size: 0.78rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+    .app-footer a {
+      color: var(--branco-mutado);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BARRA DE PROGRESSO NO TOPO -->
+  <div class="top-progress-line">
+    <div class="top-progress-fill" id="topProgressFill"></div>
+  </div>
+
+  <div class="app-container">
+
+    <!-- HEADER SUPERIOR -->
+    <header class="header-nav">
+      <a href="https://legadobranding.com.br" class="brand-logo-link" title="Legado Branding">
+        <img src="links/assets/logo-legado.png" alt="Legado Branding" class="official-logo-img">
+      </a>
+      <span class="header-badge">Raio-X de Marca</span>
+    </header>
+
+    <!-- INDICADOR DE ETAPAS (ESTILO MARCAS & NEGÓCIOS) -->
+    <div class="steps-nav-container" id="stepsNavContainer">
+      <div class="step-item active" id="stepIndicator1">
+        <div class="step-dot">1</div>
+        <span class="step-label">Posicionamento</span>
+      </div>
+      <div class="step-divider-line" id="stepLine1"></div>
+
+      <div class="step-item" id="stepIndicator2">
+        <div class="step-dot">2</div>
+        <span class="step-label">Comunicação</span>
+      </div>
+      <div class="step-divider-line" id="stepLine2"></div>
+
+      <div class="step-item" id="stepIndicator3">
+        <div class="step-dot">3</div>
+        <span class="step-label">Visual</span>
+      </div>
+      <div class="step-divider-line" id="stepLine3"></div>
+
+      <div class="step-item" id="stepIndicator4">
+        <div class="step-dot">4</div>
+        <span class="step-label">Conversão</span>
+      </div>
+    </div>
+
+    <!-- ====================================================================
+         JANELA 1: ABERTURA / HERO
+         ==================================================================== -->
+    <section class="screen hero-view active" id="screenHero">
+      <img src="assets/logo-raiox-dark.png" alt="Raio-X de Marca by Legado" class="raiox-logo-badge">
+
+      <h1 class="hero-headline">
+        Descubra onde sua marca está forte e onde está <span class="accent">perdendo dinheiro</span>.
+      </h1>
+
+      <p class="hero-subtitle">
+        Um diagnóstico visual rápido em 4 pilares estratégicos para avaliar se sua empresa sustenta margem alta ou compete por preço.
+      </p>
+
+      <div class="pillars-preview-grid">
+        <div class="pillar-preview-card">
+          <span class="pillar-preview-dot" style="background: #E05A1C; color: #E05A1C;"></span>
+          <div>
+            <div class="pillar-preview-title">1. Posicionamento</div>
+            <div class="pillar-preview-sub">Por que te escolhem</div>
+          </div>
+        </div>
+        <div class="pillar-preview-card">
+          <span class="pillar-preview-dot" style="background: #F59E0B; color: #F59E0B;"></span>
+          <div>
+            <div class="pillar-preview-title">2. Comunicação</div>
+            <div class="pillar-preview-sub">Identidade verbal</div>
+          </div>
+        </div>
+        <div class="pillar-preview-card">
+          <span class="pillar-preview-dot" style="background: #FF7A45; color: #FF7A45;"></span>
+          <div>
+            <div class="pillar-preview-title">3. Identidade Visual</div>
+            <div class="pillar-preview-sub">Percepção de valor</div>
+          </div>
+        </div>
+        <div class="pillar-preview-card">
+          <span class="pillar-preview-dot" style="background: #EA580C; color: #EA580C;"></span>
+          <div>
+            <div class="pillar-preview-title">4. Conversão</div>
+            <div class="pillar-preview-sub">Ativação & vendas</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-meta-strip">
+        <div class="hero-meta-item"><span>⏱️</span> 4 minutos</div>
+        <div class="hero-meta-item"><span>⚡</span> 4 pilares práticos</div>
+        <div class="hero-meta-item"><span>🎯</span> Gráfico de anéis imediato</div>
+      </div>
+
+      <button type="button" class="btn-primary" id="btnStartQuiz" onclick="goToLeadCapture();">
+        <span>Começar Diagnóstico</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </button>
+
+      <p class="hero-confidential-note">
+        Suas respostas geram o gráfico na hora com entrega de valor imediata.
+      </p>
+    </section>
+
+    <!-- ====================================================================
+         JANELA DE IDENTIFICAÇÃO PRÉVIA (LEAD CAPTURE)
+         Estilo Marcas & Negócios — Captura prévia antes de iniciar o quiz
+         ==================================================================== -->
+    <section class="screen lead-capture-view" id="screenLeadCapture">
+      <div class="pillar-stage-header" style="text-align: center; align-items: center; margin-bottom: 8px;">
+        <span class="header-badge" style="margin-bottom: 6px;">Identificação Prévia</span>
+        <h2 class="pillar-stage-title" style="font-size: 1.65rem; text-align: center;">Antes de começar o Raio-X...</h2>
+        <p class="pillar-stage-desc" style="text-align: center; max-width: 440px;">
+          Personalize o seu diagnóstico e garanta o envio do seu relatório estratégico.
+        </p>
+      </div>
+
+      <div class="lead-form-card">
+        <form id="leadCaptureForm" onsubmit="handleLeadSubmit(event);" novalidate>
+          <div class="lead-input-group" id="groupLeadNome">
+            <label for="leadNome" class="lead-input-label">Seu Nome Completo *</label>
+            <input type="text" id="leadNome" class="lead-text-input" placeholder="Ex: Rodrigo Silva" autocomplete="name" required>
+            <span class="lead-input-error" id="errorLeadNome">Falta preencher seu nome.</span>
+          </div>
+
+          <div class="lead-input-group" id="groupLeadEmpresa" style="margin-top: 14px;">
+            <label for="leadEmpresa" class="lead-input-label">Nome da Sua Empresa *</label>
+            <input type="text" id="leadEmpresa" class="lead-text-input" placeholder="Ex: Studio Alpha ou Marca Própria" required>
+            <span class="lead-input-error" id="errorLeadEmpresa">Falta preencher o nome da empresa.</span>
+          </div>
+
+          <div class="lead-input-group" id="groupLeadWhatsapp" style="margin-top: 14px;">
+            <label for="leadWhatsapp" class="lead-input-label">Seu WhatsApp *</label>
+            <input type="tel" id="leadWhatsapp" class="lead-text-input" placeholder="(00) 00000-0000" inputmode="numeric" autocomplete="tel" required>
+            <span class="lead-input-error" id="errorLeadWhatsapp">Informe seu WhatsApp com DDD.</span>
+          </div>
+
+          <div class="lead-input-group" id="groupLeadSetor" style="margin-top: 14px;">
+            <label for="leadSetor" class="lead-input-label">Qual o setor da sua empresa? *</label>
+            <select id="leadSetor" class="lead-select-input" required>
+              <option value="" disabled selected>Selecione o setor...</option>
+              <option value="Serviço B2B">Serviço B2B / Consultoria</option>
+              <option value="Comércio / Varejo">Comércio / Varejo / E-commerce</option>
+              <option value="Tecnologia">Tecnologia / Software</option>
+              <option value="Saúde & Bem-estar">Saúde, Estética & Bem-estar</option>
+              <option value="Indústria">Indústria & Fabricação</option>
+              <option value="Educação">Educação / Treinamentos</option>
+              <option value="Gastronomia">Gastronomia / Alimentação</option>
+              <option value="Franquia">Franquia</option>
+              <option value="Outro">Outro setor</option>
+            </select>
+            <span class="lead-input-error" id="errorLeadSetor">Selecione o setor da sua empresa.</span>
+          </div>
+
+          <div class="lead-input-group" id="groupLeadTamanho" style="margin-top: 14px;">
+            <label for="leadTamanho" class="lead-input-label">Quantas pessoas trabalham na empresa? *</label>
+            <select id="leadTamanho" class="lead-select-input" required>
+              <option value="" disabled selected>Selecione o tamanho da equipe...</option>
+              <option value="Só eu">Só eu (autônomo / individual)</option>
+              <option value="2 a 4">2 a 4 pessoas</option>
+              <option value="5 a 20">5 a 20 pessoas</option>
+              <option value="Mais de 20">Mais de 20 pessoas</option>
+            </select>
+            <span class="lead-input-error" id="errorLeadTamanho">Selecione o tamanho da equipe.</span>
+          </div>
+
+          <button type="submit" class="btn-primary" id="btnSubmitLead" style="margin-top: 20px;">
+            <span>Avançar para o Raio-X</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+
+          <button type="button" class="btn-nav-back" style="margin: 12px auto 0; align-self: center;" onclick="goToHero();">
+            ← Voltar ao início
+          </button>
+
+          <div class="lead-security-note">
+            <span>🔒</span>
+            <span>Seus dados são confidenciais e usados exclusivamente para este diagnóstico.</span>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         JANELA 2: PILAR 1 — POSICIONAMENTO (5 AFIRMAÇÕES)
+         ==================================================================== -->
+    <section class="screen pillar-stage-view" id="screenPillar1">
+      <div class="pillar-stage-header">
+        <div class="pillar-stage-tag" style="color: #E05A1C;">
+          <span style="display:inline-block; width:7px; height:7px; border-radius:50%; background:#E05A1C;"></span>
+          Pilar 1 de 4 · Posicionamento
+        </div>
+        <h2 class="pillar-stage-title">Por que os clientes te escolhem?</h2>
+        <p class="pillar-stage-desc">Avalie a clareza do espaço que sua marca ocupa na mente do mercado.</p>
+      </div>
+
+      <div class="questions-stack" id="stackPillar1">
+        <!-- Inserido dinamicamente via JS -->
+      </div>
+
+      <div class="stage-actions-row">
+        <button type="button" class="btn-nav-back" onclick="goToLeadCapture();">
+          ← Voltar
+        </button>
+        <button type="button" class="btn-primary btn-stage-next" id="btnNextPillar1" onclick="nextStage(1);">
+          <span>Próximo: Comunicação →</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         JANELA 3: PILAR 2 — COMUNICAÇÃO (5 AFIRMAÇÕES)
+         ==================================================================== -->
+    <section class="screen pillar-stage-view" id="screenPillar2">
+      <div class="pillar-stage-header">
+        <div class="pillar-stage-tag" style="color: #F59E0B;">
+          <span style="display:inline-block; width:7px; height:7px; border-radius:50%; background:#F59E0B;"></span>
+          Pilar 2 de 4 · Comunicação
+        </div>
+        <h2 class="pillar-stage-title">Identidade Verbal & Mensagem</h2>
+        <p class="pillar-stage-desc">Avalie a consistência e o poder de atração da sua voz no mercado.</p>
+      </div>
+
+      <div class="questions-stack" id="stackPillar2">
+        <!-- Inserido dinamicamente via JS -->
+      </div>
+
+      <div class="stage-actions-row">
+        <button type="button" class="btn-nav-back" onclick="prevStage(2);">
+          ← Voltar
+        </button>
+        <button type="button" class="btn-primary btn-stage-next" id="btnNextPillar2" onclick="nextStage(2);">
+          <span>Próximo: Identidade Visual →</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         JANELA 3: PILAR 3 — IDENTIDADE VISUAL (5 AFIRMAÇÕES)
+         ==================================================================== -->
+    <section class="screen pillar-stage-view" id="screenPillar3">
+      <div class="pillar-stage-header">
+        <div class="pillar-stage-tag" style="color: #FF7A45;">
+          <span style="display:inline-block; width:7px; height:7px; border-radius:50%; background:#FF7A45;"></span>
+          Pilar 3 de 4 · Identidade Visual
+        </div>
+        <h2 class="pillar-stage-title">Percepção de Valor & Estilo</h2>
+        <p class="pillar-stage-desc">Avalie se o acabamento visual da sua marca sustenta preços premium.</p>
+      </div>
+
+      <div class="questions-stack" id="stackPillar3">
+        <!-- Inserido dinamicamente via JS -->
+      </div>
+
+      <div class="stage-actions-row">
+        <button type="button" class="btn-nav-back" onclick="prevStage(3);">
+          ← Voltar
+        </button>
+        <button type="button" class="btn-primary btn-stage-next" id="btnNextPillar3" onclick="nextStage(3);">
+          <span>Próximo: Conversão →</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         JANELA 4: PILAR 4 — CONVERSÃO (5 AFIRMAÇÕES)
+         ==================================================================== -->
+    <section class="screen pillar-stage-view" id="screenPillar4">
+      <div class="pillar-stage-header">
+        <div class="pillar-stage-tag" style="color: #EA580C;">
+          <span style="display:inline-block; width:7px; height:7px; border-radius:50%; background:#EA580C;"></span>
+          Pilar 4 de 4 · Conversão
+        </div>
+        <h2 class="pillar-stage-title">Ativação Comercial & Vendas</h2>
+        <p class="pillar-stage-desc">Avalie a capacidade da marca de transformar interesse em receita real.</p>
+      </div>
+
+      <div class="questions-stack" id="stackPillar4">
+        <!-- Inserido dinamicamente via JS -->
+      </div>
+
+      <div class="stage-actions-row">
+        <button type="button" class="btn-nav-back" onclick="prevStage(4);">
+          ← Voltar
+        </button>
+        <button type="button" class="btn-primary btn-stage-next" id="btnNextPillar4" onclick="nextStage(4);">
+          <span>Calcular Meu Raio-X ⚡</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         JANELA DE CÁLCULO (PROGRESSO EM 5 SEGUNDOS COM CONTAGEM REGRESSIVA)
+         ==================================================================== -->
+    <section class="screen calculating-view" id="screenCalculating">
+      <div class="calculating-radar-wrap">
+        <div class="radar-pulse-ring"></div>
+        <div class="radar-pulse-ring"></div>
+        <div class="radar-center-x">X</div>
+      </div>
+
+      <h2 class="calculating-title">Calculando seu Raio-X de Marca...</h2>
+
+      <p class="countdown-sentence">
+        O seu resultado aparecerá em <span class="countdown-number-highlight" id="countdownSecDisplay">5</span> segundos...
+      </p>
+
+      <!-- Barra de progresso animando ao longo de 5 segundos -->
+      <div class="countdown-bar-container">
+        <div class="countdown-bar-fill" id="countdownBarFill"></div>
+      </div>
+
+      <p class="calculating-sub-status" id="calculatingSubText">
+        Cruzando consistência de Posicionamento e Comunicação...
+      </p>
+    </section>
+
+    <!-- ====================================================================
+         JANELA FINAL: DASHBOARD DE RESULTADO
+         Com anéis estilo Apple Sono com animação de preenchimento
+         ==================================================================== -->
+    <section class="screen result-view" id="screenResult">
+      <div class="result-header">
+        <span class="result-badge-top">Diagnóstico Estratégico</span>
+        <h2 class="result-main-title">Raio-X da Sua Marca</h2>
+        <p class="result-subtitle">
+          Análise visual nos 4 pilares essenciais da Legado Branding.
+        </p>
+      </div>
+
+      <!-- TABS DE NAVEGAÇÃO NO RESULTADO (ESTILO INSTAGRAM FEED VS DM) -->
+      <div class="result-tabs-nav" role="tablist">
+        <button type="button" class="result-tab-btn active" id="tabBtnRaiox" onclick="switchResultTab('raiox');" role="tab" aria-selected="true">
+          <span class="tab-icon">🎯</span>
+          <span>Raio-X Geral</span>
+        </button>
+        <button type="button" class="result-tab-btn" id="tabBtnAnalise" onclick="switchResultTab('analise');" role="tab" aria-selected="false">
+          <span class="tab-icon">🔍</span>
+          <span>Análise Aprofundada</span>
+        </button>
+      </div>
+
+      <!-- ================================================================
+           ABA 1: RAIO-X GERAL (ANEL APPLE COM POP-UP + PILARES + BÔNUS)
+           ================================================================ -->
+      <div class="tab-pane active" id="tabPaneRaiox">
+        <!-- GRÁFICO DE ANÉIS ESTILO APPLE QUALIDADE DO SONO (INTERATIVO) -->
+        <div class="apple-ring-container" id="appleRingContainer">
+          <svg class="apple-ring-svg" viewBox="0 0 320 320" id="appleRingSvg">
+            <!-- Trilhas de Fundo dos 4 Quadrantes (Cinza sutil) com clique e hover interativos -->
+            <circle id="ringTrackPosicionamento" cx="160" cy="160" r="120" class="ring-track" stroke="#E05A1C" stroke-dasharray="170.5 583.5" transform="rotate(-85.7 160 160)" onclick="selectRingPillar('posicionamento', true);" onmouseenter="onRingArcHover('posicionamento');" onmouseleave="onRingArcLeave();" />
+            <circle id="ringTrackComunicacao" cx="160" cy="160" r="120" class="ring-track" stroke="#F59E0B" stroke-dasharray="170.5 583.5" transform="rotate(4.3 160 160)" onclick="selectRingPillar('comunicacao', true);" onmouseenter="onRingArcHover('comunicacao');" onmouseleave="onRingArcLeave();" />
+            <circle id="ringTrackVisual" cx="160" cy="160" r="120" class="ring-track" stroke="#FF7A45" stroke-dasharray="170.5 583.5" transform="rotate(94.3 160 160)" onclick="selectRingPillar('visual', true);" onmouseenter="onRingArcHover('visual');" onmouseleave="onRingArcLeave();" />
+            <circle id="ringTrackConversao" cx="160" cy="160" r="120" class="ring-track" stroke="#EA580C" stroke-dasharray="170.5 583.5" transform="rotate(184.3 160 160)" onclick="selectRingPillar('conversao', true);" onmouseenter="onRingArcHover('conversao');" onmouseleave="onRingArcLeave();" />
+
+            <!-- Segmentos Dinâmicos Preenchidos com clique e hover interativos -->
+            <circle id="ringArcPosicionamento" cx="160" cy="160" r="120" class="ring-segment" stroke="#E05A1C" stroke-dasharray="0 754" transform="rotate(-85.7 160 160)" filter="drop-shadow(0 0 8px rgba(224, 90, 28, 0.7))" onclick="selectRingPillar('posicionamento', true);" onmouseenter="onRingArcHover('posicionamento');" onmouseleave="onRingArcLeave();" />
+            <circle id="ringArcComunicacao" cx="160" cy="160" r="120" class="ring-segment" stroke="#F59E0B" stroke-dasharray="0 754" transform="rotate(4.3 160 160)" filter="drop-shadow(0 0 8px rgba(245, 158, 11, 0.7))" onclick="selectRingPillar('comunicacao', true);" onmouseenter="onRingArcHover('comunicacao');" onmouseleave="onRingArcLeave();" />
+            <circle id="ringArcVisual" cx="160" cy="160" r="120" class="ring-segment" stroke="#FF7A45" stroke-dasharray="0 754" transform="rotate(94.3 160 160)" filter="drop-shadow(0 0 8px rgba(255, 122, 69, 0.7))" onclick="selectRingPillar('visual', true);" onmouseenter="onRingArcHover('visual');" onmouseleave="onRingArcLeave();" />
+            <circle id="ringArcConversao" cx="160" cy="160" r="120" class="ring-segment" stroke="#EA580C" stroke-dasharray="0 754" transform="rotate(184.3 160 160)" filter="drop-shadow(0 0 8px rgba(234, 88, 12, 0.7))" onclick="selectRingPillar('conversao', true);" onmouseenter="onRingArcHover('conversao');" onmouseleave="onRingArcLeave();" />
+          </svg>
+
+          <!-- Centro do Anel (Exibição da Nota Geral quando pop-up inativo) -->
+          <div class="ring-center-content" id="ringCenterContent">
+            <div class="ring-score-number" id="overallScoreDisplay">0</div>
+            <div class="ring-score-max">de 100 pontos</div>
+            <div class="ring-badge-status" id="overallBadgeDisplay">Forte</div>
+          </div>
+
+          <!-- Pop-up Flutuante em cima do gráfico (Zero impacto na altura da página) -->
+          <div class="ring-floating-tooltip" id="ringFloatingTooltip">
+            <button type="button" class="tooltip-close-btn" onclick="closeRingTooltip(event);" aria-label="Fechar pop-up">✕</button>
+            <div class="tooltip-header-row">
+              <span class="tooltip-dot" id="tooltipDot"></span>
+              <span class="tooltip-title" id="tooltipTitle">Posicionamento</span>
+            </div>
+            <div class="tooltip-badge" id="tooltipBadge">80% · BOA</div>
+            <p class="tooltip-desc" id="tooltipDesc">Mede a clareza do diferencial e se a marca compete por valor ou por preço.</p>
+            <button type="button" class="tooltip-link-btn" onclick="jumpToPillarDetail();">
+              <span>Ver análise aprofundada →</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Mini-chips / Legenda interativa dos 4 arcos -->
+        <div class="ring-legend-chips">
+          <button type="button" class="ring-chip-btn" id="chip_posicionamento" style="--chip-color: #E05A1C; --chip-glow: rgba(224,90,28,0.35);" onclick="selectRingPillar('posicionamento', true);" onmouseenter="onRingArcHover('posicionamento');" onmouseleave="onRingArcLeave();">
+            <span class="ring-chip-dot" style="background: #E05A1C;"></span>
+            <span>1. Posicionamento</span>
+          </button>
+          <button type="button" class="ring-chip-btn" id="chip_comunicacao" style="--chip-color: #F59E0B; --chip-glow: rgba(245,158,11,0.35);" onclick="selectRingPillar('comunicacao', true);" onmouseenter="onRingArcHover('comunicacao');" onmouseleave="onRingArcLeave();">
+            <span class="ring-chip-dot" style="background: #F59E0B;"></span>
+            <span>2. Comunicação</span>
+          </button>
+          <button type="button" class="ring-chip-btn" id="chip_visual" style="--chip-color: #FF7A45; --chip-glow: rgba(255,122,69,0.35);" onclick="selectRingPillar('visual', true);" onmouseenter="onRingArcHover('visual');" onmouseleave="onRingArcLeave();">
+            <span class="ring-chip-dot" style="background: #FF7A45;"></span>
+            <span>3. Identidade Visual</span>
+          </button>
+          <button type="button" class="ring-chip-btn" id="chip_conversao" style="--chip-color: #EA580C; --chip-glow: rgba(234,88,12,0.35);" onclick="selectRingPillar('conversao', true);" onmouseenter="onRingArcHover('conversao');" onmouseleave="onRingArcLeave();">
+            <span class="ring-chip-dot" style="background: #EA580C;"></span>
+            <span>4. Conversão</span>
+          </button>
+        </div>
+
+        <!-- LISTA DOS 4 PILARES -->
+        <div class="pillars-breakdown-list" id="pillarsBreakdownList">
+          <!-- Renderizado dinamicamente via JS -->
+        </div>
+
+        <!-- CARD DE VITÓRIA (BÔNUS EXCLUSIVO - POSICIONADO ABAIXO DOS PILARES COM TEXTO OBJETIVO) -->
+        <div class="victory-card">
+          <div class="victory-badge">
+            <span>🎉</span>
+            <span>BÔNUS EXCLUSIVO</span>
+          </div>
+          <h3 class="victory-title">
+            Reunião Estratégica Individual com o Kaio
+          </h3>
+          <p class="victory-desc">
+            30 minutos para analisar os gargalos do seu Raio-X e traçar o plano de ação prático para a sua marca.
+          </p>
+          <a href="https://calendar.app.google/TMKVBqm6VCWdFixg6" target="_blank" rel="noopener noreferrer" class="btn-agendar-reuniao" id="btnAgendarReuniaoTab1">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <span>Agendar Reunião com o Kaio</span>
+          </a>
+          <span class="victory-sub-caption">⚡ Vagas limitadas · Agenda oficial Google Calendar</span>
+        </div>
+      </div>
+
+      <!-- ================================================================
+           ABA 2: ANÁLISE APROFUNDADA (4 CARDS COM ACCORDION + VITÓRIA)
+           ================================================================ -->
+      <div class="tab-pane" id="tabPaneAnalise">
+        <div class="section-title-wrap" style="text-align: center; margin-bottom: 4px;">
+          <span class="section-title-badge">Diagnóstico Aprofundado</span>
+          <h3 class="section-main-title">Análise Estratégica & 1º Passo Prático</h3>
+          <p class="result-subtitle" style="margin: 4px auto 0;">
+            Entenda o impacto de cada pilar nas suas vendas e veja o que fazer para destravar sua marca.
+          </p>
+        </div>
+
+        <!-- Botão de retorno ao Raio-X -->
+        <button type="button" class="btn-nav-back" style="padding: 10px 18px; font-size: 0.88rem; align-self: flex-start;" onclick="switchResultTab('raiox');">
+          ← Voltar ao Gráfico do Raio-X
+        </button>
+
+        <div id="deepDiveCardsContainer" style="display: flex; flex-direction: column; gap: 14px; width: 100%;">
+          <!-- Renderizado dinamicamente com botões clicáveis para revelar o 1º Passo Prático -->
+        </div>
+
+        <!-- CARD DE VITÓRIA TAMBÉM PRESENTE NA ABA APROFUNDADA -->
+        <div class="victory-card" style="margin-top: 10px;">
+          <div class="victory-badge">
+            <span>🎉</span>
+            <span>BÔNUS EXCLUSIVO</span>
+          </div>
+          <h3 class="victory-title">
+            Reunião Estratégica Individual com o Kaio
+          </h3>
+          <p class="victory-desc">
+            30 minutos para analisar os gargalos do seu Raio-X e traçar o plano de ação prático para a sua marca.
+          </p>
+          <a href="https://calendar.app.google/TMKVBqm6VCWdFixg6" target="_blank" rel="noopener noreferrer" class="btn-agendar-reuniao" id="btnAgendarReuniaoTab2">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <span>Agendar Reunião com o Kaio</span>
+          </a>
+          <span class="victory-sub-caption">⚡ Vagas limitadas · Agenda oficial Google Calendar</span>
+        </div>
+      </div>
+
+      <!-- BLOCO DE AÇÕES SECUNDÁRIAS COMPARTILHADAS -->
+      <div style="width: 100%; display: flex; flex-direction: column; gap: 12px; margin-top: 10px;">
+        <div class="secondary-actions-row">
+          <button type="button" class="btn-secondary-action" onclick="copyDiagnosticSummary();">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            <span>Copiar Diagnóstico</span>
+          </button>
+
+          <button type="button" class="btn-secondary-action" onclick="restartQuiz();">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="1 4 1 10 7 10"></polyline>
+              <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+            </svg>
+            <span>Refazer Teste</span>
+          </button>
+        </div>
+      </div>
+
+
+      <footer class="app-footer">
+        <p><strong>Legado Branding</strong> · Estratégia, Identidade & Ativação</p>
+        <p><a href="https://legadobranding.com.br" target="_blank">legadobranding.com.br</a></p>
+      </footer>
+    </section>
+
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div class="toast-popup" id="toastPopup">
+    <span>✓</span>
+    <span id="toastMsg">Copiado com sucesso!</span>
+  </div>
+
+  <!-- ==========================================================================
+       JAVASCRIPT: DADOS, PONTUAÇÃO E FLUXO POR ETAPAS
+       ========================================================================== -->
+  <script>
+    const CONFIG = {
+      whatsappNumber: '5519989808383',
+      googleCalendarUrl: 'https://calendar.app.google/TMKVBqm6VCWdFixg6',
+      endpointUrl: 'https://script.google.com/macros/s/AKfycbw6B_XeVM4GTN96jwNZFtxqS_js8Y36e9US45TEFXye13DwXfERWJx80PAOp65otnez1Q/exec',
+      calculationSeconds: 5
+    };
+
+    // Os 4 Pilares da Legado e as 20 afirmações exatas
+    const PILLARS_CONFIG = [
+      {
+        num: 1,
+        id: 'posicionamento',
+        name: 'Posicionamento',
+        subtitle: 'Por que te escolhem',
+        color: '#E05A1C',
+        arcId: 'ringArcPosicionamento',
+        questions: [
+          { id: 1, text: 'É fácil explicar em uma frase o que minha marca faz de diferente dos concorrentes.', inverted: false },
+          { id: 2, text: 'Meus clientes me escolhem por um motivo claro, não só pelo preço.', inverted: false },
+          { id: 3, text: 'Quando alguém me compara com um concorrente, a decisão quase sempre vai pro mais barato.', inverted: true },
+          { id: 4, text: 'Minha marca ocupa um espaço específico no mercado, não tenta agradar todo mundo.', inverted: false },
+          { id: 5, text: 'Eu sei exatamente quem é meu cliente ideal e comunico pensando nele.', inverted: false }
+        ],
+        texts: {
+          weak: {
+            diagnosis: 'Sua marca está vulnerável à comoditização. Quando o cliente não enxerga com clareza o motivo exclusivo para te escolher, a negociação quase sempre recai sobre quem faz mais barato.',
+            action: 'Defina sua tese em uma frase âncora: "Ajudamos [público específico] a alcançar [resultado tangível] sem [o maior incômodo do setor]". Teste essa frase na bio do seu perfil e na primeira linha da sua próxima proposta comercial.'
+          },
+          strong: {
+            diagnosis: 'Posicionamento sólido. Sua marca ocupa um espaço nítido no mercado e os clientes te escolhem pelo valor específico que você entrega, reduzindo o atrito de preço.',
+            action: 'Mantenha a firmeza do seu não: marcas fortes são tão reconhecidas pelo que recusam quanto pelo que entregam. Não dilua sua especialidade para tentar abraçar tudo.'
+          }
+        }
+      },
+      {
+        num: 2,
+        id: 'comunicacao',
+        name: 'Comunicação',
+        subtitle: 'Identidade verbal',
+        color: '#F59E0B',
+        arcId: 'ringArcComunicacao',
+        questions: [
+          { id: 6, text: 'Minha marca tem um jeito próprio de falar, reconhecível.', inverted: false },
+          { id: 7, text: 'Quem vê minha comunicação entende rápido o valor do que eu ofereço.', inverted: false },
+          { id: 8, text: 'Sinto que falo do meu produto de um jeito parecido com todo mundo do meu setor.', inverted: true },
+          { id: 9, text: 'Minhas legendas, textos e falas passam uma mensagem consistente.', inverted: false },
+          { id: 10, text: 'Eu comunico a transformação que entrego, não só as características técnicas.', inverted: false }
+        ],
+        texts: {
+          weak: {
+            diagnosis: 'Sua mensagem está focada em processos e especificações técnicas, em vez do desfecho real. O público ouve o que você faz, mas não conecta com a urgência do que ele ganha.',
+            action: 'Aplique a regra da transformação: para cada característica do seu serviço, escreva a consequência prática no caixa ou na vida do cliente. Corte pela metade os jargões técnicos dos seus textos.'
+          },
+          strong: {
+            diagnosis: 'Comunicação assertiva e proprietária. Sua narrativa transmite valor de forma intuitiva, criando consistência entre o que você promete e a percepção do público.',
+            action: 'Crie termos proprietários: dê nomes exclusivos às etapas do seu método de trabalho para consolidar autoridade e impedir que concorrentes copiem sua linguagem.'
+          }
+        }
+      },
+      {
+        num: 3,
+        id: 'visual',
+        name: 'Identidade Visual',
+        subtitle: 'Percepção de valor',
+        color: '#FF7A45',
+        arcId: 'ringArcVisual',
+        questions: [
+          { id: 11, text: 'Minha marca parece profissional na primeira olhada.', inverted: false },
+          { id: 12, text: 'Minha identidade visual é consistente em todos os canais (perfil, site, material).', inverted: false },
+          { id: 13, text: 'Acho que minha marca parece amadora perto dos concorrentes que admiro.', inverted: true },
+          { id: 14, text: 'O visual da minha marca combina com o preço que eu quero cobrar.', inverted: false },
+          { id: 15, text: 'Alguém reconheceria minha marca só pelas cores e pelo estilo, sem ver o nome.', inverted: false }
+        ],
+        texts: {
+          weak: {
+            diagnosis: 'O visual da sua marca comunica um valor inferior à qualidade real da sua entrega. Essa assimetria gera desconfiança imediata e trava a sua capacidade de cobrar tickets mais altos.',
+            action: 'Padronize os pontos de contato: use apenas 1 família tipográfica para títulos, 1 para corpo e limite sua paleta a 2 cores principais em orçamentos, apresentações e perfil. Elimine designs amadores.'
+          },
+          strong: {
+            diagnosis: 'Identidade visual madura e profissional. O acabamento dos seus materiais sustenta o posicionamento premium e transmite segurança antes mesmo da primeira conversa.',
+            action: 'Proteja o Brand System: garanta que qualquer novo material ou canal siga rigorosamente as diretrizes visuais, mantendo o reconhecimento imediato mesmo sem o logotipo.'
+          }
+        }
+      },
+      {
+        num: 4,
+        id: 'conversao',
+        name: 'Conversão',
+        subtitle: 'Ativação & vendas',
+        color: '#EA580C',
+        arcId: 'ringArcConversao',
+        questions: [
+          { id: 16, text: 'Tenho uma forma clara de transformar seguidor/interessado em cliente.', inverted: false },
+          { id: 17, text: 'Consigo atrair clientes sem depender só de baixar preço ou dar desconto.', inverted: false },
+          { id: 18, text: 'Atraio bastante gente, mas poucos viram venda de verdade.', inverted: true },
+          { id: 19, text: 'Tenho estratégias para reativar clientes antigos e gerar recompra.', inverted: false },
+          { id: 20, text: 'Sei o que fazer para lançar algo e gerar procura, não só postar e esperar.', inverted: false }
+        ],
+        texts: {
+          weak: {
+            diagnosis: 'Você até atrai olhares e interessados, mas o funil vaza antes da venda. A jornada entre o primeiro contato e a decisão de compra tem barreiras demais ou falta de direcionamento ativo.',
+            action: 'Crie uma chamada de baixa fricção: em vez de pedir para o cliente "conhecer os serviços" ou pedir orçamento genérico, convide para uma análise pontual ou diagnóstico direto de 15 minutos.'
+          },
+          strong: {
+            diagnosis: 'Motor de tração eficiente. Você tem clareza de como transformar atenção em vendas reais, sem depender de liquidações ou promoções forçadas de preço.',
+            action: 'Ative a máquina de recompra e indicações: estruture um processo periódico de check-in com clientes ativos e crie um incentivo para que seus melhores clientes te apresentem novos contratos.'
+          }
+        }
+      }
+    ];
+
+    const SCALE_LABELS = {
+      1: 'Discordo totalmente',
+      2: 'Discordo',
+      3: 'Neutro / Indeciso',
+      4: 'Concordo',
+      5: 'Concordo totalmente'
+    };
+
+    // Estado da aplicação
+    const state = {
+      currentStage: 0, // 0 = Hero, 0.5 = Lead, 1..4 = Pilares, 5 = Calc, 6 = Result
+      lead: {
+        nome: '',
+        empresa: '',
+        whatsapp: ''
+      },
+      answers: {},     // { questionId: 1..5 }
+      computedScores: null,
+      activeResultTab: 'raiox',
+      selectedRingPillar: null
+    };
+
+    // Elementos de tela
+    const screenHero = document.getElementById('screenHero');
+    const screenLeadCapture = document.getElementById('screenLeadCapture');
+    const screenPillar1 = document.getElementById('screenPillar1');
+    const screenPillar2 = document.getElementById('screenPillar2');
+    const screenPillar3 = document.getElementById('screenPillar3');
+    const screenPillar4 = document.getElementById('screenPillar4');
+    const screenCalculating = document.getElementById('screenCalculating');
+    const screenResult = document.getElementById('screenResult');
+
+    const topProgressFill = document.getElementById('topProgressFill');
+    const stepsNavContainer = document.getElementById('stepsNavContainer');
+
+    /* ==========================================================================
+       CONSTRUÇÃO DAS 4 JANELAS DE PERGUNTAS (ESTILO 16PERSONALITIES)
+       Com visualização das perguntas respondidas em opacidade reduzida (0.45)
+       ========================================================================== */
+    function buildAllQuestionStacks() {
+      PILLARS_CONFIG.forEach(pillar => {
+        const stackEl = document.getElementById(`stackPillar${pillar.num}`);
+        if (!stackEl) return;
+        stackEl.innerHTML = '';
+
+        pillar.questions.forEach((q, qIndex) => {
+          const qCard = document.createElement('div');
+          qCard.className = `question-block ${qIndex === 0 ? 'active-focus' : 'pending'}`;
+          qCard.id = `qCard_${q.id}`;
+          qCard.setAttribute('data-qid', q.id);
+
+          qCard.innerHTML = `
+            <div class="question-header-row">
+              <span class="question-num-badge">${q.id}</span>
+              <h3 class="question-text-title">${q.text}</h3>
+            </div>
+
+            <div class="scale-inline-wrap">
+              <div class="scale-text-ends">
+                <span class="end-disagree">Discordo totalmente</span>
+                <span class="end-agree">Concordo totalmente</span>
+              </div>
+
+              <div class="scale-buttons-track" role="radiogroup">
+                <button type="button" class="scale-disc-btn" data-qid="${q.id}" data-val="1" title="Discordo totalmente"></button>
+                <button type="button" class="scale-disc-btn" data-qid="${q.id}" data-val="2" title="Discordo"></button>
+                <button type="button" class="scale-disc-btn" data-qid="${q.id}" data-val="3" title="Neutro"></button>
+                <button type="button" class="scale-disc-btn" data-qid="${q.id}" data-val="4" title="Concordo"></button>
+                <button type="button" class="scale-disc-btn" data-qid="${q.id}" data-val="5" title="Concordo totalmente"></button>
+              </div>
+
+              <div class="selected-tag-info" id="qFeedback_${q.id}">
+                Selecione o seu nível de concordância
+              </div>
+            </div>
+          `;
+
+          stackEl.appendChild(qCard);
+        });
+      });
+
+      // Bind de clique nos botões das escalas
+      document.querySelectorAll('.scale-disc-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const qid = parseInt(btn.getAttribute('data-qid'), 10);
+          const val = parseInt(btn.getAttribute('data-val'), 10);
+          handleAnswerSelect(qid, val);
+        });
+      });
+
+      // Permitir clicar em qualquer pergunta já respondida para reativar e alterar resposta
+      document.querySelectorAll('.question-block').forEach(card => {
+        card.addEventListener('click', () => {
+          const qid = parseInt(card.getAttribute('data-qid'), 10);
+          focusQuestionInPillar(qid);
+        });
+      });
+    }
+
+    /* ==========================================================================
+       MANIPULAÇÃO DE RESPOSTAS & TRANSIÇÃO VISUAL ENTRE PERGUNTAS
+       ========================================================================== */
+    function handleAnswerSelect(qid, val) {
+      state.answers[qid] = val;
+
+      const card = document.getElementById(`qCard_${qid}`);
+      const feedbackEl = document.getElementById(`qFeedback_${qid}`);
+
+      // Atualizar botões selecionados
+      card.querySelectorAll('.scale-disc-btn').forEach(b => {
+        const bVal = parseInt(b.getAttribute('data-val'), 10);
+        if (bVal === val) {
+          b.classList.add('selected');
+        } else {
+          b.classList.remove('selected');
+        }
+      });
+
+      if (feedbackEl) {
+        feedbackEl.innerHTML = `Marcado: <strong>${SCALE_LABELS[val]}</strong>`;
+      }
+
+      // Marcar card como respondido (baixa opacidade para manter legibilidade)
+      card.classList.remove('active-focus', 'pending');
+      card.classList.add('answered');
+
+      // Encontrar a próxima pergunta do pilar atual ainda não respondida
+      const pillarNum = getPillarNumByQuestionId(qid);
+      const pillar = PILLARS_CONFIG[pillarNum - 1];
+      const nextUnanswered = pillar.questions.find(q => !state.answers[q.id]);
+
+      if (nextUnanswered) {
+        // Ativar a próxima pergunta e rolar suavemente até ela
+        const nextCard = document.getElementById(`qCard_${nextUnanswered.id}`);
+        if (nextCard) {
+          nextCard.classList.remove('pending');
+          nextCard.classList.add('active-focus');
+          setTimeout(() => {
+            nextCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }, 150);
+        }
+      }
+
+      // Atualizar botão de avanço do pilar
+      updateNextButtonState(pillarNum);
+      updateTopProgressBar();
+    }
+
+    function focusQuestionInPillar(qid) {
+      const pillarNum = getPillarNumByQuestionId(qid);
+      const pillar = PILLARS_CONFIG[pillarNum - 1];
+
+      // Remove foco de todas as perguntas do pilar
+      pillar.questions.forEach(q => {
+        const c = document.getElementById(`qCard_${q.id}`);
+        if (c) c.classList.remove('active-focus');
+      });
+
+      // Ativa a selecionada
+      const targetCard = document.getElementById(`qCard_${qid}`);
+      if (targetCard) {
+        targetCard.classList.add('active-focus');
+        targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+
+    function getPillarNumByQuestionId(qid) {
+      if (qid <= 5) return 1;
+      if (qid <= 10) return 2;
+      if (qid <= 15) return 3;
+      return 4;
+    }
+
+    function isPillarComplete(pillarNum) {
+      const pillar = PILLARS_CONFIG[pillarNum - 1];
+      return pillar.questions.every(q => state.answers[q.id] !== undefined);
+    }
+
+    function updateNextButtonState(pillarNum) {
+      const btn = document.getElementById(`btnNextPillar${pillarNum}`);
+      if (!btn) return;
+      const complete = isPillarComplete(pillarNum);
+      btn.disabled = !complete;
+      if (complete) {
+        btn.style.boxShadow = '0 8px 24px rgba(224, 90, 28, 0.45)';
+      } else {
+        btn.style.boxShadow = 'none';
+      }
+    }
+
+    function updateTopProgressBar() {
+      const answeredCount = Object.keys(state.answers).length;
+      const pct = (answeredCount / 20) * 100;
+      topProgressFill.style.width = `${pct}%`;
+    }
+
+    /* ==========================================================================
+       NAVEGAÇÃO POR JANELAS (MARCAS & NEGÓCIOS STYLE)
+       ========================================================================== */
+    function setWindowScreen(screenEl) {
+      [screenHero, screenLeadCapture, screenPillar1, screenPillar2, screenPillar3, screenPillar4, screenCalculating, screenResult].forEach(s => {
+        if (s) s.classList.remove('active');
+      });
+      if (screenEl) screenEl.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function updateStepIndicators(activeStepNum) {
+      if (activeStepNum >= 1 && activeStepNum <= 4) {
+        stepsNavContainer.classList.add('visible');
+      } else {
+        stepsNavContainer.classList.remove('visible');
+      }
+
+      for (let i = 1; i <= 4; i++) {
+        const itemEl = document.getElementById(`stepIndicator${i}`);
+        const lineEl = document.getElementById(`stepLine${i}`);
+        if (!itemEl) continue;
+
+        if (i < activeStepNum) {
+          itemEl.className = 'step-item completed';
+          itemEl.querySelector('.step-dot').innerHTML = '✓';
+          if (lineEl) lineEl.className = 'step-divider-line completed';
+        } else if (i === activeStepNum) {
+          itemEl.className = 'step-item active';
+          itemEl.querySelector('.step-dot').innerHTML = i;
+          if (lineEl) lineEl.className = 'step-divider-line';
+        } else {
+          itemEl.className = 'step-item';
+          itemEl.querySelector('.step-dot').innerHTML = i;
+          if (lineEl) lineEl.className = 'step-divider-line';
+        }
+      }
+    }
+
+    // Tela de Identificação Prévia (Lead Capture)
+    function goToLeadCapture() {
+      state.currentStage = 0.5;
+      updateStepIndicators(0);
+      topProgressFill.style.width = '5%';
+
+      try {
+        const savedLead = localStorage.getItem('legado_raiox_lead');
+        if (savedLead) {
+          const parsed = JSON.parse(savedLead);
+          if (parsed.nome) document.getElementById('leadNome').value = parsed.nome;
+          if (parsed.empresa) document.getElementById('leadEmpresa').value = parsed.empresa;
+          if (parsed.whatsapp) document.getElementById('leadWhatsapp').value = parsed.whatsapp;
+          if (parsed.setor) document.getElementById('leadSetor').value = parsed.setor;
+          if (parsed.tamanho) document.getElementById('leadTamanho').value = parsed.tamanho;
+        }
+      } catch (err) {}
+
+      setWindowScreen(screenLeadCapture);
+    }
+
+    function setupLeadMasks() {
+      const whatsappInput = document.getElementById('leadWhatsapp');
+      if (!whatsappInput) return;
+
+      whatsappInput.addEventListener('input', (e) => {
+        let v = e.target.value.replace(/\D/g, '').slice(0, 11);
+        if (v.length > 10) {
+          v = v.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
+        } else if (v.length > 6) {
+          v = v.replace(/^(\d{2})(\d{4,5})(\d{0,4})$/, '($1) $2-$3');
+        } else if (v.length > 2) {
+          v = v.replace(/^(\d{2})(\d{0,5})$/, '($1) $2');
+        } else if (v.length > 0) {
+          v = v.replace(/^(\d*)$/, '($1');
+        }
+        e.target.value = v;
+      });
+    }
+
+    function handleLeadSubmit(e) {
+      if (e) e.preventDefault();
+
+      const nomeInput = document.getElementById('leadNome');
+      const empresaInput = document.getElementById('leadEmpresa');
+      const whatsappInput = document.getElementById('leadWhatsapp');
+      const setorInput = document.getElementById('leadSetor');
+      const tamanhoInput = document.getElementById('leadTamanho');
+
+      const nomeVal = nomeInput ? nomeInput.value.trim() : '';
+      const empresaVal = empresaInput ? empresaInput.value.trim() : '';
+      const whatsappVal = whatsappInput ? whatsappInput.value.trim() : '';
+      const setorVal = setorInput ? setorInput.value.trim() : '';
+      const tamanhoVal = tamanhoInput ? tamanhoInput.value.trim() : '';
+      const whatsappDigits = whatsappVal.replace(/\D/g, '');
+
+      let isValid = true;
+
+      ['groupLeadNome', 'groupLeadEmpresa', 'groupLeadWhatsapp', 'groupLeadSetor', 'groupLeadTamanho'].forEach(gid => {
+        const el = document.getElementById(gid);
+        if (el) el.classList.remove('invalid');
+      });
+
+      if (nomeVal.length < 2) {
+        document.getElementById('groupLeadNome').classList.add('invalid');
+        isValid = false;
+      }
+      if (empresaVal.length < 2) {
+        document.getElementById('groupLeadEmpresa').classList.add('invalid');
+        isValid = false;
+      }
+      if (whatsappDigits.length < 10) {
+        document.getElementById('groupLeadWhatsapp').classList.add('invalid');
+        isValid = false;
+      }
+      if (!setorVal) {
+        document.getElementById('groupLeadSetor').classList.add('invalid');
+        isValid = false;
+      }
+      if (!tamanhoVal) {
+        document.getElementById('groupLeadTamanho').classList.add('invalid');
+        isValid = false;
+      }
+
+      if (!isValid) {
+        const firstInvalid = document.querySelector('.lead-input-group.invalid input, .lead-input-group.invalid select');
+        if (firstInvalid) firstInvalid.focus();
+        return;
+      }
+
+      state.lead = {
+        nome: nomeVal,
+        empresa: empresaVal,
+        whatsapp: whatsappVal,
+        setor: setorVal,
+        tamanho: tamanhoVal
+      };
+
+      try {
+        localStorage.setItem('legado_raiox_lead', JSON.stringify(state.lead));
+      } catch (err) {}
+
+      // Disparo em background sem travar o usuário
+      sendLeadPayload();
+
+      // Inicia as perguntas imediatamente
+      startQuiz();
+    }
+
+    async function sendLeadPayload() {
+      if (!CONFIG.endpointUrl) return;
+      const payload = {
+        nome: state.lead.nome,
+        empresa: state.lead.empresa,
+        whatsapp: state.lead.whatsapp,
+        setor: state.lead.setor,
+        tamanho: state.lead.tamanho,
+        source: 'raio-x-marca',
+        timestamp: new Date().toISOString()
+      };
+
+      try {
+        fetch(CONFIG.endpointUrl, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain' },
+          body: JSON.stringify(payload)
+        }).catch(err => console.warn('Lead enviado em background:', err));
+      } catch (err) {}
+    }
+
+    // Iniciar perguntas do teste
+    function startQuiz() {
+      state.currentStage = 1;
+      updateStepIndicators(1);
+      updateNextButtonState(1);
+      setWindowScreen(screenPillar1);
+    }
+
+    function goToHero() {
+      state.currentStage = 0;
+      updateStepIndicators(0);
+      topProgressFill.style.width = '0%';
+      setWindowScreen(screenHero);
+    }
+
+    function prevStage(currentNum) {
+      if (currentNum === 1) {
+        goToLeadCapture();
+        return;
+      }
+      const targetNum = currentNum - 1;
+      state.currentStage = targetNum;
+      updateStepIndicators(targetNum);
+      const screenMap = { 1: screenPillar1, 2: screenPillar2, 3: screenPillar3, 4: screenPillar4 };
+      setWindowScreen(screenMap[targetNum]);
+    }
+
+    function nextStage(currentNum) {
+      if (!isPillarComplete(currentNum)) {
+        showToast('Por favor, responda todas as 5 afirmações deste pilar para prosseguir.');
+        return;
+      }
+
+      if (currentNum < 4) {
+        const targetNum = currentNum + 1;
+        state.currentStage = targetNum;
+        updateStepIndicators(targetNum);
+        updateNextButtonState(targetNum);
+        const screenMap = { 2: screenPillar2, 3: screenPillar3, 4: screenPillar4 };
+        setWindowScreen(screenMap[targetNum]);
+      } else {
+        // Terminou o Pilar 4 -> Iniciar Tela de Cálculo de 5 Segundos
+        start5SecondCalculation();
+      }
+    }
+
+    /* ==========================================================================
+       TELA DE CÁLCULO DE 5 SEGUNDOS COM CONTAGEM REGRESSIVA (5, 4, 3, 2, 1)
+       Fiel à solicitação do Kaio
+       ========================================================================== */
+    function start5SecondCalculation() {
+      state.currentStage = 5;
+      updateStepIndicators(0);
+      setWindowScreen(screenCalculating);
+
+      const countdownSecDisplay = document.getElementById('countdownSecDisplay');
+      const countdownBarFill = document.getElementById('countdownBarFill');
+      const calculatingSubText = document.getElementById('calculatingSubText');
+
+      countdownBarFill.style.transition = 'none';
+      countdownBarFill.style.width = '0%';
+      countdownSecDisplay.textContent = '5';
+
+      setTimeout(() => {
+        countdownBarFill.style.transition = 'width 5s linear';
+        countdownBarFill.style.width = '100%';
+      }, 50);
+
+      const subTexts = [
+        'Cruzando consistência de Posicionamento e diferenciação...',
+        'Avaliando alinhamento e clareza da Identidade Verbal...',
+        'Medindo percepção de valor e acabamento da Identidade Visual...',
+        'Processando capacidade de Conversão e tração de vendas...',
+        'Consolidando seu diagnóstico visual e primeiros passos...'
+      ];
+
+      let secondsLeft = 5;
+      calculatingSubText.textContent = subTexts[0];
+
+      const interval = setInterval(() => {
+        secondsLeft--;
+        if (secondsLeft > 0) {
+          countdownSecDisplay.textContent = secondsLeft;
+          calculatingSubText.textContent = subTexts[5 - secondsLeft] || subTexts[4];
+        } else {
+          clearInterval(interval);
+          countdownSecDisplay.textContent = '0';
+          calculateAndRenderResults();
+        }
+      }, 1000);
+    }
+
+    /* ==========================================================================
+       CÁLCULO MATEMÁTICO EXATO & INVERSÕES [INV] (3, 8, 13, 18)
+       ========================================================================== */
+    function calculateAndRenderResults() {
+      const pillarScores = [];
+
+      PILLARS_CONFIG.forEach(p => {
+        let sum = 0;
+        p.questions.forEach(q => {
+          const raw = state.answers[q.id] || 3;
+          const pts = q.inverted ? (6 - raw) : raw;
+          sum += pts;
+        });
+
+        // Normalização matemática: ((soma - 5) / 20) * 100
+        const normalized = Math.round(((sum - 5) / 20) * 100);
+        const clamped = Math.max(0, Math.min(100, normalized));
+
+        let faixaLabel = 'Frágil';
+        let faixaClass = 'badge-fragil';
+
+        if (clamped >= 81) {
+          faixaLabel = 'Forte';
+          faixaClass = 'badge-forte';
+        } else if (clamped >= 61) {
+          faixaLabel = 'Boa';
+          faixaClass = 'badge-boa';
+        } else if (clamped >= 41) {
+          faixaLabel = 'Em construção';
+          faixaClass = 'badge-construcao';
+        }
+
+        pillarScores.push({
+          num: p.num,
+          id: p.id,
+          name: p.name,
+          color: p.color,
+          arcId: p.arcId,
+          sum,
+          score: clamped,
+          faixaLabel,
+          faixaClass,
+          texts: p.texts
+        });
+      });
+
+      const overallScore = Math.round(pillarScores.reduce((acc, p) => acc + p.score, 0) / 4);
+
+      let overallFaixaLabel = 'Frágil';
+      let overallFaixaClass = 'badge-fragil';
+
+      if (overallScore >= 81) {
+        overallFaixaLabel = 'Forte';
+        overallFaixaClass = 'badge-forte';
+      } else if (overallScore >= 61) {
+        overallFaixaLabel = 'Boa';
+        overallFaixaClass = 'badge-boa';
+      } else if (overallScore >= 41) {
+        overallFaixaLabel = 'Em construção';
+        overallFaixaClass = 'badge-construcao';
+      }
+
+      state.computedScores = {
+        pillars: pillarScores,
+        overallScore,
+        overallFaixaLabel,
+        overallFaixaClass
+      };
+
+      renderResultDashboard();
+      sendDiagnosticResultsPayload();
+      setWindowScreen(screenResult);
+    }
+
+    async function sendDiagnosticResultsPayload() {
+      if (!CONFIG.endpointUrl || !state.computedScores) return;
+      const res = state.computedScores;
+      const payload = {
+        nome: state.lead ? state.lead.nome : '',
+        empresa: state.lead ? state.lead.empresa : '',
+        whatsapp: state.lead ? state.lead.whatsapp : '',
+        setor: state.lead ? state.lead.setor : '',
+        tamanho: state.lead ? state.lead.tamanho : '',
+        scoreGeral: res.overallScore,
+        faixaGeral: res.overallFaixaLabel,
+        posicionamento: res.pillars[0] ? res.pillars[0].score : 0,
+        comunicacao: res.pillars[1] ? res.pillars[1].score : 0,
+        visual: res.pillars[2] ? res.pillars[2].score : 0,
+        conversao: res.pillars[3] ? res.pillars[3].score : 0,
+        source: 'raio-x-marca-concluido',
+        timestamp: new Date().toISOString()
+      };
+
+      try {
+        fetch(CONFIG.endpointUrl, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain' },
+          body: JSON.stringify(payload)
+        }).catch(err => console.warn('Resultado enviado em background:', err));
+      } catch (err) {}
+    }
+
+    /* ==========================================================================
+       TABS DE NAVEGAÇÃO NO RESULTADO (ESTILO INSTAGRAM FEED VS DM)
+       ========================================================================== */
+    function switchResultTab(tabName) {
+      state.activeResultTab = tabName;
+      const tabBtnRaiox = document.getElementById('tabBtnRaiox');
+      const tabBtnAnalise = document.getElementById('tabBtnAnalise');
+      const tabPaneRaiox = document.getElementById('tabPaneRaiox');
+      const tabPaneAnalise = document.getElementById('tabPaneAnalise');
+
+      if (tabName === 'raiox') {
+        if (tabBtnRaiox) { tabBtnRaiox.classList.add('active'); tabBtnRaiox.setAttribute('aria-selected', 'true'); }
+        if (tabBtnAnalise) { tabBtnAnalise.classList.remove('active'); tabBtnAnalise.setAttribute('aria-selected', 'false'); }
+        if (tabPaneRaiox) tabPaneRaiox.classList.add('active');
+        if (tabPaneAnalise) tabPaneAnalise.classList.remove('active');
+      } else {
+        if (tabBtnAnalise) { tabBtnAnalise.classList.add('active'); tabBtnAnalise.setAttribute('aria-selected', 'true'); }
+        if (tabBtnRaiox) { tabBtnRaiox.classList.remove('active'); tabBtnRaiox.setAttribute('aria-selected', 'false'); }
+        if (tabPaneAnalise) tabPaneAnalise.classList.add('active');
+        if (tabPaneRaiox) tabPaneRaiox.classList.remove('active');
+      }
+
+      const resultEl = document.getElementById('screenResult');
+      if (resultEl) {
+        resultEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    /* ==========================================================================
+       INTERAÇÃO COM OS ARCOS DO ANEL APPLE & POP-UP FLUTUANTE
+       Mostra tooltip sobre o gráfico com zero aumento de altura na página
+       ========================================================================== */
+    let isTooltipLockedByClick = false;
+
+    function selectRingPillar(pillarId, fromClick = true) {
+      state.selectedRingPillar = pillarId;
+      const res = state.computedScores;
+      if (!res) return;
+
+      const pData = res.pillars.find(p => p.id === pillarId);
+      if (!pData) return;
+
+      if (fromClick) {
+        isTooltipLockedByClick = true;
+      }
+
+      // Destacar arcos SVG
+      const allArcs = ['ringArcPosicionamento', 'ringArcComunicacao', 'ringArcVisual', 'ringArcConversao'];
+      allArcs.forEach(aid => {
+        const el = document.getElementById(aid);
+        if (el) {
+          if (aid === pData.arcId) {
+            el.classList.add('focused');
+            el.style.filter = `drop-shadow(0 0 16px ${pData.color})`;
+          } else {
+            el.classList.remove('focused');
+            el.style.filter = '';
+          }
+        }
+      });
+
+      // Destacar chips da legenda
+      ['posicionamento', 'comunicacao', 'visual', 'conversao'].forEach(id => {
+        const chip = document.getElementById(`chip_${id}`);
+        if (chip) {
+          if (id === pillarId) chip.classList.add('active');
+          else chip.classList.remove('active');
+        }
+      });
+
+      // Atualizar Pop-up Flutuante em cima do gráfico
+      const tooltipEl = document.getElementById('ringFloatingTooltip');
+      const tooltipDot = document.getElementById('tooltipDot');
+      const tooltipTitle = document.getElementById('tooltipTitle');
+      const tooltipBadge = document.getElementById('tooltipBadge');
+      const tooltipDesc = document.getElementById('tooltipDesc');
+
+      if (tooltipEl && tooltipDot && tooltipTitle && tooltipBadge && tooltipDesc) {
+        tooltipEl.style.setProperty('--tooltip-border', pData.color);
+        tooltipEl.style.setProperty('--tooltip-glow', pData.glow);
+        tooltipDot.style.background = pData.color;
+        tooltipDot.style.boxShadow = `0 0 10px ${pData.color}`;
+        tooltipTitle.textContent = `${pData.num}. ${pData.name}`;
+        tooltipBadge.textContent = `${pData.score}% · ${pData.faixaLabel.toUpperCase()}`;
+        tooltipBadge.className = `tooltip-badge ${pData.faixaClass}`;
+
+        const roleMeanings = {
+          posicionamento: 'Mede por que os clientes te escolhem e se a sua marca compete por valor ou por preço.',
+          comunicacao: 'Mede a clareza da narrativa, voz de marca e consistência da mensagem comercial.',
+          visual: 'Mede se a estética e o acabamento dos seus materiais sustentam a cobrança de preços premium.',
+          conversao: 'Mede a capacidade ativa da marca de transformar seguidores e atenção em vendas e caixa real.'
+        };
+        tooltipDesc.textContent = roleMeanings[pData.id] || (pData.score <= 60 ? pData.texts.weak.diagnosis : pData.texts.strong.diagnosis);
+
+        tooltipEl.classList.add('visible');
+      }
+
+      // Destacar linha na lista
+      highlightPillarInResult(pillarId);
+    }
+
+    function closeRingTooltip(e) {
+      if (e) e.stopPropagation();
+      isTooltipLockedByClick = false;
+      const tooltipEl = document.getElementById('ringFloatingTooltip');
+      if (tooltipEl) {
+        tooltipEl.classList.remove('visible');
+      }
+      // Remove foco visual dos arcos
+      ['ringArcPosicionamento', 'ringArcComunicacao', 'ringArcVisual', 'ringArcConversao'].forEach(aid => {
+        const el = document.getElementById(aid);
+        if (el) {
+          el.classList.remove('focused');
+          el.style.filter = '';
+        }
+      });
+      // Remove foco dos chips
+      ['posicionamento', 'comunicacao', 'visual', 'conversao'].forEach(id => {
+        const chip = document.getElementById(`chip_${id}`);
+        if (chip) chip.classList.remove('active');
+      });
+      // Remove destaque da lista
+      highlightPillarInResult(null);
+    }
+
+    function onRingArcHover(pillarId) {
+      if (!isTooltipLockedByClick) {
+        selectRingPillar(pillarId, false);
+      }
+    }
+
+    function onRingArcLeave() {
+      if (!isTooltipLockedByClick) {
+        closeRingTooltip();
+      }
+    }
+
+    function jumpToPillarDetail() {
+      if (!state.selectedRingPillar) return;
+      const pid = state.selectedRingPillar;
+
+      switchResultTab('analise');
+
+      setTimeout(() => {
+        toggleActionReveal(pid, true);
+        const targetCard = document.getElementById(`deepDive_${pid}`);
+        if (targetCard) {
+          targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          targetCard.style.boxShadow = `0 0 24px rgba(224, 90, 28, 0.45)`;
+          setTimeout(() => { targetCard.style.boxShadow = ''; }, 2200);
+        }
+      }, 250);
+    }
+
+    /* ==========================================================================
+       REVELAÇÃO DO 1º PASSO PRÁTICO (ACCORDION INTERATIVO)
+       ========================================================================== */
+    function toggleActionReveal(pid, forceOpen) {
+      const box = document.getElementById(`actionBox_${pid}`);
+      const btn = document.getElementById(`revealBtn_${pid}`);
+      if (!box || !btn) return;
+
+      const isCollapsed = box.classList.contains('collapsed');
+      const shouldOpen = forceOpen !== undefined ? forceOpen : isCollapsed;
+
+      if (shouldOpen) {
+        box.classList.remove('collapsed');
+        box.classList.add('expanded');
+        btn.classList.add('open');
+      } else {
+        box.classList.remove('expanded');
+        box.classList.add('collapsed');
+        btn.classList.remove('open');
+      }
+    }
+
+    /* ==========================================================================
+       RENDERIZAÇÃO DO RESULTADO COM ANÉIS APPLE (ANIMAÇÃO DE PREENCHIMENTO)
+       ========================================================================== */
+    function renderResultDashboard() {
+      const res = state.computedScores;
+      if (!res) return;
+
+      // Nota Geral com contador animado
+      const overallScoreDisplay = document.getElementById('overallScoreDisplay');
+      animateCounter(overallScoreDisplay, 0, res.overallScore, 1400);
+
+      // Faixa Geral
+      const overallBadgeDisplay = document.getElementById('overallBadgeDisplay');
+      overallBadgeDisplay.textContent = res.overallFaixaLabel;
+      overallBadgeDisplay.className = `ring-badge-status ${res.overallFaixaClass}`;
+
+      // ANIMAÇÃO DE PREENCHIMENTO DOS 4 ANÉIS SEGMENTADOS ESTILO APPLE
+      const MAX_ARC = 170.5;
+      const CIRCUMFERENCE = 753.98;
+
+      res.pillars.forEach((p, index) => {
+        const arcEl = document.getElementById(p.arcId);
+        if (arcEl) {
+          arcEl.style.transition = 'none';
+          arcEl.style.strokeDasharray = `0 ${CIRCUMFERENCE}`;
+
+          const filled = Math.max(2, (p.score / 100) * MAX_ARC);
+
+          setTimeout(() => {
+            arcEl.style.transition = 'stroke-dasharray 1.6s cubic-bezier(0.16, 1, 0.3, 1)';
+            arcEl.style.strokeDasharray = `${filled.toFixed(1)} ${CIRCUMFERENCE.toFixed(1)}`;
+          }, 200 + index * 120);
+        }
+      });
+
+      // Lista dos 4 Pilares na Aba Raio-X
+      const pillarsBreakdownList = document.getElementById('pillarsBreakdownList');
+      pillarsBreakdownList.innerHTML = '';
+
+      res.pillars.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'pillar-row-card';
+        card.setAttribute('data-pid', p.id);
+        card.innerHTML = `
+          <div class="pillar-row-left">
+            <span class="pillar-color-bullet" style="background: ${p.color}; color: ${p.color};"></span>
+            <div class="pillar-row-texts">
+              <span class="pillar-row-title">${p.num}. ${p.name}</span>
+              <span class="pillar-row-pts">${p.sum}/25 pontos</span>
+            </div>
+          </div>
+          <div class="pillar-row-right">
+            <span class="pillar-row-pct">${p.score}%</span>
+            <span class="pillar-row-badge ${p.faixaClass}">${p.faixaLabel}</span>
+          </div>
+        `;
+
+        card.addEventListener('click', () => {
+          selectRingPillar(p.id, true);
+          const ring = document.getElementById('appleRingContainer');
+          if (ring) {
+            ring.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        });
+
+        pillarsBreakdownList.appendChild(card);
+      });
+
+      // Cards de Leitura Aprofundada com Botão de Revelação na Aba 2
+      const deepDiveCardsContainer = document.getElementById('deepDiveCardsContainer');
+      deepDiveCardsContainer.innerHTML = '';
+
+      res.pillars.forEach(p => {
+        const isWeak = p.score <= 60;
+        const textBlock = isWeak ? p.texts.weak : p.texts.strong;
+
+        const card = document.createElement('div');
+        card.className = 'deep-dive-card';
+        card.id = `deepDive_${p.id}`;
+        card.style.setProperty('--pilar-accent', p.color);
+
+        card.innerHTML = `
+          <div class="deep-dive-header">
+            <div class="deep-dive-title-group">
+              <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:${p.color}; box-shadow: 0 0 8px ${p.color};"></span>
+              <h4 class="deep-dive-pillar-name">${p.num}. ${p.name}</h4>
+            </div>
+            <span class="deep-dive-status-pill ${p.faixaClass}">${p.faixaLabel} · ${p.score}%</span>
+          </div>
+
+          <p class="deep-dive-diagnosis">${textBlock.diagnosis}</p>
+
+          <button type="button" class="btn-reveal-action" id="revealBtn_${p.id}" onclick="toggleActionReveal('${p.id}');">
+            <span class="reveal-btn-left">
+              <span>${isWeak ? '⚡' : '🎯'}</span>
+              <span>${isWeak ? 'O que fazer (1º Passo Prático Recomendado)' : 'Ponto Forte da Marca (Como Proteger)'}</span>
+            </span>
+            <span class="reveal-arrow" id="revealArrow_${p.id}">▼</span>
+          </button>
+
+          <div class="deep-dive-action-box ${isWeak ? 'action-weak' : 'action-strong'} collapsed" id="actionBox_${p.id}">
+            <p class="action-box-content">${textBlock.action}</p>
+          </div>
+        `;
+
+        deepDiveCardsContainer.appendChild(card);
+      });
+
+      // Garante que a aba Raio-X esteja ativa inicialmente
+      switchResultTab('raiox');
+
+      // Atualizar links do Google Calendar
+      updateCalendarLinks();
+    }
+
+    function updateCalendarLinks() {
+      const links = ['btnAgendarReuniaoTab1', 'btnAgendarReuniaoTab2'];
+      links.forEach(id => {
+        const btn = document.getElementById(id);
+        if (btn) btn.href = CONFIG.googleCalendarUrl;
+      });
+    }
+
+    function highlightPillarInResult(pid) {
+      document.querySelectorAll('.pillar-row-card').forEach(c => {
+        if (c.getAttribute('data-pid') === pid) {
+          c.classList.add('highlighted');
+        } else {
+          c.classList.remove('highlighted');
+        }
+      });
+    }
+
+    function animateCounter(el, start, end, duration) {
+      const startTime = performance.now();
+      function tick(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const ease = 1 - Math.pow(1 - progress, 3);
+        const current = Math.round(start + (end - start) * ease);
+        el.textContent = current;
+        if (progress < 1) requestAnimationFrame(tick);
+        else el.textContent = end;
+      }
+      requestAnimationFrame(tick);
+    }
+
+    function updateWhatsappLink(res) {
+      const btnWhatsapp = document.getElementById('btnWhatsappCta');
+      if (!btnWhatsapp) return;
+
+      const weakest = [...res.pillars].sort((a, b) => a.score - b.score)[0];
+      const strongest = [...res.pillars].sort((a, b) => b.score - a.score)[0];
+
+      let msg = `Olá Kaio! Acabei de fazer o Raio-X de Marca da Legado e minha nota geral foi ${res.overallScore}/100 (${res.overallFaixaLabel}).\n\n`;
+      if (state.lead.nome) msg = `Olá Kaio! Meu nome é ${state.lead.nome}${state.lead.empresa ? ' da empresa ' + state.lead.empresa : ''}. Acabei de fazer o Raio-X de Marca da Legado e minha nota geral foi ${res.overallScore}/100 (${res.overallFaixaLabel}).\n\n`;
+      msg += `Pilar mais forte: ${strongest.name} (${strongest.score}%)\n`;
+      msg += `Pilar mais frágil: ${weakest.name} (${weakest.score}%)\n\n`;
+      msg += `Gostaria de agendar a reunião estratégica gratuita para melhorar os pontos de defasagem da minha marca.`;
+
+      btnWhatsapp.href = `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(msg)}`;
+    }
+
+    function copyDiagnosticSummary() {
+      const res = state.computedScores;
+      if (!res) return;
+
+      let summary = `📊 RAIO-X DE MARCA · LEGADO BRANDING\n`;
+      if (state.lead.nome) summary += `Empresa: ${state.lead.empresa || state.lead.nome}\n`;
+      summary += `Pontuação Geral: ${res.overallScore}/100 (${res.overallFaixaLabel})\n\n`;
+      summary += `Desempenho por Pilar:\n`;
+      res.pillars.forEach(p => {
+        summary += `• ${p.name}: ${p.score}% (${p.faixaLabel})\n`;
+      });
+      summary += `\nFaça o teste da sua marca em: ${window.location.href}`;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(summary).then(() => {
+          showToast('Diagnóstico copiado para a área de transferência!');
+        }).catch(() => {
+          showToast('Resumo gerado!');
+        });
+      } else {
+        showToast('Resumo gerado!');
+      }
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toastPopup');
+      const toastMsg = document.getElementById('toastMsg');
+      toastMsg.textContent = msg;
+      toast.classList.add('visible');
+      setTimeout(() => {
+        toast.classList.remove('visible');
+      }, 2500);
+    }
+
+    function restartQuiz() {
+      state.currentStage = 0;
+      state.answers = {};
+      state.computedScores = null;
+      buildAllQuestionStacks();
+      topProgressFill.style.width = '0%';
+      goToHero();
+    }
+
+    // Inicialização segura ao carregar a página
+    function initApp() {
+      buildAllQuestionStacks();
+      setupLeadMasks();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initApp);
+    } else {
+      initApp();
+    }
+  </script>
+</body>
+</html>

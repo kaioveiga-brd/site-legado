@@ -32,6 +32,18 @@
     {
       "source": "/isca",
       "destination": "/isca.html"
+    },
+    {
+      "source": "/crm",
+      "destination": "/crm/index.html"
+    },
+    {
+      "source": "/raiox",
+      "destination": "/raiox.html"
+    },
+    {
+      "source": "/raio-x",
+      "destination": "/raiox.html"
     }
   ],
   "headers": [
