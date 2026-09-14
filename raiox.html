@@ -2704,13 +2704,19 @@
     async function sendLeadPayload() {
       if (!CONFIG.endpointUrl) return;
       const payload = {
-        nome: state.lead.nome,
-        empresa: state.lead.empresa,
-        whatsapp: state.lead.whatsapp,
-        setor: state.lead.setor,
-        tamanho: state.lead.tamanho,
-        source: 'raio-x-marca',
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
+        nome: state.lead ? state.lead.nome : '',
+        empresa: state.lead ? state.lead.empresa : '',
+        whatsapp: state.lead ? state.lead.whatsapp : '',
+        papel: 'Dono ou sócio',
+        tamanho_time: state.lead ? state.lead.tamanho : '',
+        tamanho: state.lead ? state.lead.tamanho : '',
+        setor: state.lead ? state.lead.setor : '',
+        setor_outro: '',
+        trava: 'Diagnóstico Raio-X Iniciado',
+        noventa_dias: 'Aguardando conclusão do teste',
+        origem: 'Raio-X',
+        source: 'raio-x-marca'
       };
 
       try {
@@ -2892,20 +2898,27 @@
     async function sendDiagnosticResultsPayload() {
       if (!CONFIG.endpointUrl || !state.computedScores) return;
       const res = state.computedScores;
+      const weakest = [...res.pillars].sort((a, b) => a.score - b.score)[0];
       const payload = {
+        timestamp: new Date().toISOString(),
         nome: state.lead ? state.lead.nome : '',
         empresa: state.lead ? state.lead.empresa : '',
         whatsapp: state.lead ? state.lead.whatsapp : '',
-        setor: state.lead ? state.lead.setor : '',
+        papel: 'Dono ou sócio',
+        tamanho_time: state.lead ? state.lead.tamanho : '',
         tamanho: state.lead ? state.lead.tamanho : '',
+        setor: state.lead ? state.lead.setor : '',
+        setor_outro: '',
+        trava: weakest ? `Gargalo: ${weakest.name} (${weakest.score}%)` : 'Diagnóstico Concluído',
+        noventa_dias: `Nota Geral: ${res.overallScore}/100 (${res.overallFaixaLabel})`,
+        origem: 'Raio-X',
         scoreGeral: res.overallScore,
         faixaGeral: res.overallFaixaLabel,
         posicionamento: res.pillars[0] ? res.pillars[0].score : 0,
         comunicacao: res.pillars[1] ? res.pillars[1].score : 0,
         visual: res.pillars[2] ? res.pillars[2].score : 0,
         conversao: res.pillars[3] ? res.pillars[3].score : 0,
-        source: 'raio-x-marca-concluido',
-        timestamp: new Date().toISOString()
+        source: 'raio-x-marca-concluido'
       };
 
       try {
