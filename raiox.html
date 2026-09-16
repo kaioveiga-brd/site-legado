@@ -1301,6 +1301,53 @@
       margin-top: 10px;
     }
 
+    /* Banner Anti-Atrito / Reassurance acima dos campos do formulário pós-loading */
+    .lead-reassurance-box {
+      width: 100%;
+      background: linear-gradient(135deg, rgba(224, 90, 28, 0.08) 0%, rgba(34, 197, 94, 0.06) 100%);
+      border: 1px solid rgba(224, 90, 28, 0.32);
+      border-radius: 14px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 2px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    }
+    .reassurance-icon-wrap {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: rgba(224, 90, 28, 0.15);
+      border: 1px solid rgba(224, 90, 28, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--laranja);
+    }
+    .reassurance-content {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      text-align: left;
+    }
+    .reassurance-title {
+      font-size: 0.90rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      letter-spacing: -0.01em;
+    }
+    .reassurance-text {
+      font-size: 0.81rem;
+      line-height: 1.45;
+      color: var(--branco-suave);
+    }
+    .reassurance-text strong {
+      color: #FFFFFF;
+      font-weight: 600;
+    }
+
     /* ==========================================================================
        TABS DE NAVEGAÇÃO NO RESULTADO (ESTILO INSTAGRAM FEED VS DM)
        ========================================================================== */
@@ -1813,7 +1860,7 @@
         <div class="hero-meta-item"><span>🎯</span> Gráfico de anéis imediato</div>
       </div>
 
-      <button type="button" class="btn-primary" id="btnStartQuiz" onclick="goToLeadCapture();">
+      <button type="button" class="btn-primary" id="btnStartQuiz" onclick="startQuiz();">
         <span>Começar Diagnóstico</span>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -1827,89 +1874,8 @@
     </section>
 
     <!-- ====================================================================
-         JANELA DE IDENTIFICAÇÃO PRÉVIA (LEAD CAPTURE)
-         Estilo Marcas & Negócios — Captura prévia antes de iniciar o quiz
-         ==================================================================== -->
-    <section class="screen lead-capture-view" id="screenLeadCapture">
-      <div class="pillar-stage-header" style="text-align: center; align-items: center; margin-bottom: 8px;">
-        <span class="header-badge" style="margin-bottom: 6px;">Identificação Prévia</span>
-        <h2 class="pillar-stage-title" style="font-size: 1.65rem; text-align: center;">Antes de começar o Raio-X...</h2>
-        <p class="pillar-stage-desc" style="text-align: center; max-width: 440px;">
-          Personalize o seu diagnóstico e garanta o envio do seu relatório estratégico.
-        </p>
-      </div>
-
-      <div class="lead-form-card">
-        <form id="leadCaptureForm" onsubmit="handleLeadSubmit(event);" novalidate>
-          <div class="lead-input-group" id="groupLeadNome">
-            <label for="leadNome" class="lead-input-label">Seu Nome Completo *</label>
-            <input type="text" id="leadNome" class="lead-text-input" placeholder="Ex: Rodrigo Silva" autocomplete="name" required>
-            <span class="lead-input-error" id="errorLeadNome">Falta preencher seu nome.</span>
-          </div>
-
-          <div class="lead-input-group" id="groupLeadEmpresa" style="margin-top: 14px;">
-            <label for="leadEmpresa" class="lead-input-label">Nome da Sua Empresa *</label>
-            <input type="text" id="leadEmpresa" class="lead-text-input" placeholder="Ex: Studio Alpha ou Marca Própria" required>
-            <span class="lead-input-error" id="errorLeadEmpresa">Falta preencher o nome da empresa.</span>
-          </div>
-
-          <div class="lead-input-group" id="groupLeadWhatsapp" style="margin-top: 14px;">
-            <label for="leadWhatsapp" class="lead-input-label">Seu WhatsApp *</label>
-            <input type="tel" id="leadWhatsapp" class="lead-text-input" placeholder="(00) 00000-0000" inputmode="numeric" autocomplete="tel" required>
-            <span class="lead-input-error" id="errorLeadWhatsapp">Informe seu WhatsApp com DDD.</span>
-          </div>
-
-          <div class="lead-input-group" id="groupLeadSetor" style="margin-top: 14px;">
-            <label for="leadSetor" class="lead-input-label">Qual o setor da sua empresa? *</label>
-            <select id="leadSetor" class="lead-select-input" required>
-              <option value="" disabled selected>Selecione o setor...</option>
-              <option value="Serviço B2B">Serviço B2B / Consultoria</option>
-              <option value="Comércio / Varejo">Comércio / Varejo / E-commerce</option>
-              <option value="Tecnologia">Tecnologia / Software</option>
-              <option value="Saúde & Bem-estar">Saúde, Estética & Bem-estar</option>
-              <option value="Indústria">Indústria & Fabricação</option>
-              <option value="Educação">Educação / Treinamentos</option>
-              <option value="Gastronomia">Gastronomia / Alimentação</option>
-              <option value="Franquia">Franquia</option>
-              <option value="Outro">Outro setor</option>
-            </select>
-            <span class="lead-input-error" id="errorLeadSetor">Selecione o setor da sua empresa.</span>
-          </div>
-
-          <div class="lead-input-group" id="groupLeadTamanho" style="margin-top: 14px;">
-            <label for="leadTamanho" class="lead-input-label">Quantas pessoas trabalham na empresa? *</label>
-            <select id="leadTamanho" class="lead-select-input" required>
-              <option value="" disabled selected>Selecione o tamanho da equipe...</option>
-              <option value="Só eu">Só eu (autônomo / individual)</option>
-              <option value="2 a 4">2 a 4 pessoas</option>
-              <option value="5 a 20">5 a 20 pessoas</option>
-              <option value="Mais de 20">Mais de 20 pessoas</option>
-            </select>
-            <span class="lead-input-error" id="errorLeadTamanho">Selecione o tamanho da equipe.</span>
-          </div>
-
-          <button type="submit" class="btn-primary" id="btnSubmitLead" style="margin-top: 20px;">
-            <span>Avançar para o Raio-X</span>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-              <polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
-          </button>
-
-          <button type="button" class="btn-nav-back" style="margin: 12px auto 0; align-self: center;" onclick="goToHero();">
-            ← Voltar ao início
-          </button>
-
-          <div class="lead-security-note">
-            <span>🔒</span>
-            <span>Seus dados são confidenciais e usados exclusivamente para este diagnóstico.</span>
-          </div>
-        </form>
-      </div>
-    </section>
-
-    <!-- ====================================================================
-         JANELA 2: PILAR 1 — POSICIONAMENTO (5 AFIRMAÇÕES)
+         JANELA 1: PILAR 1 — POSICIONAMENTO (5 AFIRMAÇÕES)
+         Inicia imediatamente ao clicar em Começar Diagnóstico
          ==================================================================== -->
     <section class="screen pillar-stage-view" id="screenPillar1">
       <div class="pillar-stage-header">
@@ -1926,7 +1892,7 @@
       </div>
 
       <div class="stage-actions-row">
-        <button type="button" class="btn-nav-back" onclick="goToLeadCapture();">
+        <button type="button" class="btn-nav-back" onclick="goToHero();">
           ← Voltar
         </button>
         <button type="button" class="btn-primary btn-stage-next" id="btnNextPillar1" onclick="nextStage(1);">
@@ -2040,6 +2006,106 @@
       <p class="calculating-sub-status" id="calculatingSubText">
         Cruzando consistência de Posicionamento e Comunicação...
       </p>
+    </section>
+
+    <!-- ====================================================================
+         JANELA DE IDENTIFICAÇÃO E DESBLOQUEIO (PÓS-CARREGAMENTO)
+         Com copy anti-atrito garantindo zero ligações/spam
+         ==================================================================== -->
+    <section class="screen lead-capture-view" id="screenLeadCapture">
+      <div class="pillar-stage-header" style="text-align: center; align-items: center; margin-bottom: 8px;">
+        <span class="header-badge" style="margin-bottom: 6px; background: rgba(34, 197, 94, 0.14); border-color: rgba(34, 197, 94, 0.35); color: #4ade80;">
+          ✓ Análise 100% Concluída
+        </span>
+        <h2 class="pillar-stage-title" style="font-size: 1.65rem; text-align: center;">Seu Raio-X de Marca está pronto!</h2>
+        <p class="pillar-stage-desc" style="text-align: center; max-width: 450px;">
+          Personalize seu gráfico com o nome da sua empresa e desbloqueie o diagnóstico completo na tela.
+        </p>
+      </div>
+
+      <div class="lead-form-card">
+        <!-- Banner Anti-Atrito em Destaque -->
+        <div class="lead-reassurance-box">
+          <div class="reassurance-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <polyline points="9 12 11 14 15 10"></polyline>
+            </svg>
+          </div>
+          <div class="reassurance-content">
+            <div class="reassurance-title">Sem ligações, sem reuniões forçadas e sem spam</div>
+            <p class="reassurance-text">
+              Fique 100% tranquilo: <strong>não usamos seus dados para ligações inconvenientes nem contatos comerciais insistentes</strong>. Solicitamos essas informações exclusivamente para estampar o nome da sua empresa no gráfico oficial e liberar a visualização imediata do seu resultado.
+            </p>
+          </div>
+        </div>
+
+        <form id="leadCaptureForm" onsubmit="handleLeadSubmit(event);" novalidate>
+          <div class="lead-input-group" id="groupLeadNome">
+            <label for="leadNome" class="lead-input-label">Seu Nome *</label>
+            <input type="text" id="leadNome" class="lead-text-input" placeholder="Como prefere ser chamado" autocomplete="name" required>
+            <span class="lead-input-error" id="errorLeadNome">Falta preencher seu nome.</span>
+          </div>
+
+          <div class="lead-input-group" id="groupLeadEmpresa" style="margin-top: 14px;">
+            <label for="leadEmpresa" class="lead-input-label">Nome da Sua Empresa / Marca *</label>
+            <input type="text" id="leadEmpresa" class="lead-text-input" placeholder="Ex: Studio Alpha ou Marca Própria" required>
+            <span class="lead-input-error" id="errorLeadEmpresa">Falta preencher o nome da empresa.</span>
+          </div>
+
+          <div class="lead-input-group" id="groupLeadWhatsapp" style="margin-top: 14px;">
+            <label for="leadWhatsapp" class="lead-input-label">Seu WhatsApp (para envio do seu relatório) *</label>
+            <input type="tel" id="leadWhatsapp" class="lead-text-input" placeholder="(00) 00000-0000" inputmode="numeric" autocomplete="tel" required>
+            <span class="lead-input-error" id="errorLeadWhatsapp">Informe seu WhatsApp com DDD.</span>
+          </div>
+
+          <div class="lead-input-group" id="groupLeadSetor" style="margin-top: 14px;">
+            <label for="leadSetor" class="lead-input-label">Qual o setor da sua empresa? *</label>
+            <select id="leadSetor" class="lead-select-input" required>
+              <option value="" disabled selected>Selecione o setor...</option>
+              <option value="Serviço B2B">Serviço B2B / Consultoria</option>
+              <option value="Comércio / Varejo">Comércio / Varejo / E-commerce</option>
+              <option value="Tecnologia">Tecnologia / Software</option>
+              <option value="Saúde & Bem-estar">Saúde, Estética & Bem-estar</option>
+              <option value="Indústria">Indústria & Fabricação</option>
+              <option value="Educação">Educação / Treinamentos</option>
+              <option value="Gastronomia">Gastronomia / Alimentação</option>
+              <option value="Franquia">Franquia</option>
+              <option value="Outro">Outro setor</option>
+            </select>
+            <span class="lead-input-error" id="errorLeadSetor">Selecione o setor da sua empresa.</span>
+          </div>
+
+          <div class="lead-input-group" id="groupLeadTamanho" style="margin-top: 14px;">
+            <label for="leadTamanho" class="lead-input-label">Quantas pessoas trabalham na empresa? *</label>
+            <select id="leadTamanho" class="lead-select-input" required>
+              <option value="" disabled selected>Selecione o tamanho da equipe...</option>
+              <option value="Só eu">Só eu (autônomo / individual)</option>
+              <option value="2 a 4">2 a 4 pessoas</option>
+              <option value="5 a 20">5 a 20 pessoas</option>
+              <option value="Mais de 20">Mais de 20 pessoas</option>
+            </select>
+            <span class="lead-input-error" id="errorLeadTamanho">Selecione o tamanho da equipe.</span>
+          </div>
+
+          <button type="submit" class="btn-primary" id="btnSubmitLead" style="margin-top: 20px;">
+            <span>Desbloquear Meu Raio-X Agora</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+
+          <button type="button" class="btn-nav-back" style="margin: 12px auto 0; align-self: center;" onclick="prevStage(5);">
+            ← Rever respostas do Pilar 4
+          </button>
+
+          <div class="lead-security-note">
+            <span>🔒</span>
+            <span>Acesso instantâneo. Seus dados são confidenciais e nunca serão compartilhados.</span>
+          </div>
+        </form>
+      </div>
     </section>
 
     <!-- ====================================================================
@@ -2592,11 +2658,11 @@
       }
     }
 
-    // Tela de Identificação Prévia (Lead Capture)
+    // Tela de Identificação e Desbloqueio (Lead Capture pós-carregamento)
     function goToLeadCapture() {
-      state.currentStage = 0.5;
+      state.currentStage = 5.5;
       updateStepIndicators(0);
-      topProgressFill.style.width = '5%';
+      topProgressFill.style.width = '100%';
 
       try {
         const savedLead = localStorage.getItem('legado_raiox_lead');
@@ -2694,11 +2760,29 @@
         localStorage.setItem('legado_raiox_lead', JSON.stringify(state.lead));
       } catch (err) {}
 
-      // Disparo em background sem travar o usuário
-      sendLeadPayload();
+      // Personaliza o título do resultado com o nome da empresa
+      const resultTitle = document.querySelector('.result-main-title');
+      if (resultTitle && empresaVal) {
+        resultTitle.textContent = `Raio-X de Marca · ${empresaVal}`;
+      }
 
-      // Inicia as perguntas imediatamente
-      startQuiz();
+      // Garante que os escores estão calculados
+      if (!state.computedScores) {
+        computeDiagnosticScores();
+      }
+
+      // Dispara payload completo (Lead + Diagnóstico) para a planilha em background
+      sendDiagnosticResultsPayload();
+
+      // Renderiza dashboard com os anéis Apple e link do WhatsApp
+      renderResultDashboard();
+      if (state.computedScores) {
+        updateWhatsappLink(state.computedScores);
+      }
+
+      // Transiciona para a tela de resultado final
+      state.currentStage = 6;
+      setWindowScreen(screenResult);
     }
 
     async function sendLeadPayload() {
@@ -2746,7 +2830,14 @@
 
     function prevStage(currentNum) {
       if (currentNum === 1) {
-        goToLeadCapture();
+        goToHero();
+        return;
+      }
+      if (currentNum === 5) {
+        // Voltar do formulário de desbloqueio para rever respostas do Pilar 4
+        state.currentStage = 4;
+        updateStepIndicators(4);
+        setWindowScreen(screenPillar4);
         return;
       }
       const targetNum = currentNum - 1;
@@ -2816,7 +2907,8 @@
         } else {
           clearInterval(interval);
           countdownSecDisplay.textContent = '0';
-          calculateAndRenderResults();
+          computeDiagnosticScores();
+          goToLeadCapture();
         }
       }, 1000);
     }
@@ -2824,7 +2916,7 @@
     /* ==========================================================================
        CÁLCULO MATEMÁTICO EXATO & INVERSÕES [INV] (3, 8, 13, 18)
        ========================================================================== */
-    function calculateAndRenderResults() {
+    function computeDiagnosticScores() {
       const pillarScores = [];
 
       PILLARS_CONFIG.forEach(p => {
@@ -2889,7 +2981,10 @@
         overallFaixaLabel,
         overallFaixaClass
       };
+    }
 
+    function calculateAndRenderResults() {
+      computeDiagnosticScores();
       renderResultDashboard();
       sendDiagnosticResultsPayload();
       setWindowScreen(screenResult);
@@ -3317,6 +3412,20 @@
     function initApp() {
       buildAllQuestionStacks();
       setupLeadMasks();
+
+      // Atalho de desenvolvedor/teste seguro no console
+      window.__devSkipToCalculation = function() {
+        for (let i = 1; i <= 20; i++) state.answers[i] = (i % 2 === 0 ? 4 : 5);
+        start5SecondCalculation();
+      };
+      window.__devFillFormAndUnlock = function(nome = 'Teste Kaio', empresa = 'Empresa Teste', whats = '19989808383') {
+        document.getElementById('leadNome').value = nome;
+        document.getElementById('leadEmpresa').value = empresa;
+        document.getElementById('leadWhatsapp').value = whats;
+        document.getElementById('leadSetor').value = 'Serviço B2B';
+        document.getElementById('leadTamanho').value = '2 a 4';
+        handleLeadSubmit();
+      };
     }
 
     if (document.readyState === 'loading') {
